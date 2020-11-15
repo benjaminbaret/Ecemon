@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2020-11-15T20:21:14.409Z" agent="5.0 (X11)" etag="d5RDuU3ao-VjQOqMYrBa" version="13.9.8" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-15T20:30:11.964Z" agent="5.0 (X11)" etag="Hk-kzL1l3Fin22-8L8LB" version="13.9.8" type="github">
   <diagram id="tCxo4tbXjTc1XCcc4NM_" name="Page-1">
     <mxGraphModel dx="870" dy="488" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="v6RGhNJLXxdwNNuoIsZI-1" value="User" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-          <mxGeometry x="111" y="50" width="179" height="300" as="geometry" />
+          <mxGeometry x="111" y="60" width="179" height="310" as="geometry" />
         </mxCell>
         <mxCell id="v6RGhNJLXxdwNNuoIsZI-2" value="- name: string &#xa;- collection: Vector &lt;Carte*&gt;&#xa;- pioche: Pile &lt;Carte*&gt;&#xa;-carteEnjeux: Carte*&#xa;-creatureActive: Carte*&#xa;-cimetière: Vector &lt;Carte*&gt;&#xa;-victoire: int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="v6RGhNJLXxdwNNuoIsZI-1" vertex="1">
           <mxGeometry y="26" width="179" height="144" as="geometry" />
@@ -13,8 +13,8 @@
         <mxCell id="v6RGhNJLXxdwNNuoIsZI-3" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" parent="v6RGhNJLXxdwNNuoIsZI-1" vertex="1">
           <mxGeometry y="170" width="179" height="8" as="geometry" />
         </mxCell>
-        <mxCell id="v6RGhNJLXxdwNNuoIsZI-4" value="+ User(string name)&#xa;+~User&#xa;+getName()&#xa;+setName()&#xa;+piochercarte(std pile) : Carte&#xa;+poserCarte(Carte)&#xa;+selectionnerDeck()&#xa;+" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="v6RGhNJLXxdwNNuoIsZI-1" vertex="1">
-          <mxGeometry y="178" width="179" height="122" as="geometry" />
+        <mxCell id="v6RGhNJLXxdwNNuoIsZI-4" value="+User()&#xa;+ User(string name)+~User&#xa;+getName()&#xa;+setName()&#xa;+piochercarte(std pile) : Carte&#xa;+poserCarte(Carte)&#xa;+selectionnerDeck()&#xa;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="v6RGhNJLXxdwNNuoIsZI-1" vertex="1">
+          <mxGeometry y="178" width="179" height="132" as="geometry" />
         </mxCell>
         <mxCell id="dLkF4w349v-ChZ6yu0cC-1" value="Carte" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
           <mxGeometry x="510" y="40" width="160" height="190" as="geometry" />
