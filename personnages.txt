@@ -1,0 +1,17 @@
+4 energy: 
+- Adventure
+- RPG : Role Playing Game
+- Sport / Race 
+- FPS : First Person Shooter
+
+
+Personnages: 
+- Zelda 
+- Nathan Drake
+- Sony
+- Mario 
+- Cloud Strife (Personnage avec Epée)
+
+
+
+Attaques Zelda : Breath of wild 
