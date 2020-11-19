@@ -19,7 +19,7 @@ protected :
     int m_cycleVie;
     std::string m_nom;
 public:
-    Carte();
+    //Carte();
     ~Carte()= default;
     void afficher()const;
 };

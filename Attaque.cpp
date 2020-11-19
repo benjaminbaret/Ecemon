@@ -4,5 +4,5 @@
 
 #include "Attaque.h"
 #include <iostream>
-
+#include <vector>
 #include "Energie.h"
