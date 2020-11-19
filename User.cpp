@@ -20,3 +20,4 @@ User User::getName() const {
 void User::setName(std::string name) {
     m_name = name;
 }
+

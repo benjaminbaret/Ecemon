@@ -6,7 +6,7 @@
 #define ECEMON_CARTE_H
 
 #include "User.h"
-#include <isotream>
+#include <iostream>
 #include <vector>
 
 
@@ -21,7 +21,7 @@ protected :
 public:
     Carte();
     ~Carte()= default;
-    void afficher;
+    void afficher()const;
 };
 
 
