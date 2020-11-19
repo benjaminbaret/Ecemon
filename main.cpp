@@ -10,3 +10,8 @@
 #include "Creature.h"
 #include "Speciale.h"
 #include "User.h"
+
+int main(){
+    std::cout<<"test"<<std::endl;
+    return 0;
+}
