@@ -8,7 +8,7 @@
 #include <vector>
 #include "Carte.h"
 
-class Speciale public : Carte{
+class Speciale : public Carte{
 private:
 public:
     ~Speciale()=default;

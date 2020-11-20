@@ -8,7 +8,7 @@
 #include <vector>
 #include "Carte.h"
 
-class Creature public : Carte {
+class Creature : public Carte {
 private:
     int m_ip;
 public:

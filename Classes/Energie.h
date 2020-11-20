@@ -8,7 +8,7 @@
 #include <vector>
 #include "Carte.h"
 
-class Energie public : Carte{
+class Energie : public Carte{
 private :
     std::string m_element;
 public :
