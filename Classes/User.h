@@ -5,11 +5,14 @@
 #ifndef ECEMON_USER_H
 #define ECEMON_USER_H
 
+
 #include <iostream>
 #include<vector>
-#include "Carte.h"
 #include "Creature.h"
 #include "queue"
+#include "Carte.h"
+
+
 
 class User {
 private:
@@ -18,8 +21,9 @@ private:
     std::vector<Carte> m_collection;
     std::queue<Carte *> m_pioche;
     std::vector<Creature *> m_cimetiere;
-    Carte *m_carteEnJeux;
-    Carte *m_creatureActive;
+    Carte* m_carteEnJeux;
+
+    Carte* m_creatureActive;
 public:
     User();
 

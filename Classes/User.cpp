@@ -4,12 +4,15 @@
 
 #include "User.h"
 #include <iostream>
-#include <vector>
+#include <string>
+#include "Carte.h"
+
+
+
 
 User::User() {};
 
-User::User(std::string nom) :
-        m_nom(nom){}
+User::User(std::string nom) :m_nom(nom){}
 
 
 std::string User::getNom() const {

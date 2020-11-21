@@ -7,6 +7,7 @@
 #include <vector>
 #include "Carte.h"
 
+
 Energie::Energie(std::string element,std::string nom)
         :m_element{std::move(element)},Carte(nom)
 {}

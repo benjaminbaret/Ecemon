@@ -7,6 +7,9 @@
 #include <iostream>
 #include <vector>
 #include "Carte.h"
+#include <iostream>
+#include <vector>
+
 
 
 class Energie : public Carte{

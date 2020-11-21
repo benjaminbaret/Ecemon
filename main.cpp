@@ -10,9 +10,10 @@
 #include "Classes/Creature.h"
 #include "Classes/Speciale.h"
 #include "Classes/User.h"
+#include "Classes/menu.h"
 
 int main(){
-    std::cout<<"test"<<std::endl;
+    affichageMenu();
 
     return 0;
 }

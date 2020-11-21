@@ -5,14 +5,16 @@
 #ifndef ECEMON_CARTE_H
 #define ECEMON_CARTE_H
 
-#include "User.h"
+
 #include <iostream>
 #include <vector>
 
 
+
+
 class Carte {
 protected :
-    User m_user;
+   // User m_user;
     std::string m_rarete;
     std::string m_nom;
     std::string m_description;
@@ -24,7 +26,7 @@ public:
     virtual ~Carte()=default;
     virtual std::string getNom();
     virtual void afficherCarte();
-    void afficher()const;
+    //void afficher()const;
 };
 
 

@@ -6,6 +6,9 @@
 #define ESSAISDIVERS_LECTUREECRITUREDONNEES_H
 #include <string>
 #include <vector>
+#include <iostream>
+#include <vector>
+
 
 struct structureInfoJoueurs {
     std::string pseudo;
