@@ -22,7 +22,7 @@ protected :
     int m_cycleVie;
 
 public:
-    Carte(std::string nom, bool actif= false);
+    Carte(std::string& nom, bool actif= false);
     virtual ~Carte()=default;
     virtual std::string getNom();
     virtual void afficherCarte();

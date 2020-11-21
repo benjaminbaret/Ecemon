@@ -11,14 +11,14 @@
 #include "Creature.h"
 #include "queue"
 #include "Carte.h"
-
+#include "lectureEcritureDonnees.h"
 
 
 class User {
 private:
     std::string m_nom;
     int m_victoire;
-    std::vector<Carte> m_collection;
+    std::vector<Carte*> m_collection;
     std::queue<Carte *> m_pioche;
     std::vector<Creature *> m_cimetiere;
     Carte* m_carteEnJeux;
@@ -26,10 +26,8 @@ private:
     Carte* m_creatureActive;
 public:
     User();
-
+    ~User();
     User(std::string nom);
-
-    ~User() = default;
 
     std::string getNom() const;
 
@@ -43,7 +41,7 @@ public:
 
     void afficherNom();
 
-    void remplirCollection(Carte maCarte);
+    void remplirCollection(Carte* maCarte);
 
     void afficheCollection();
 

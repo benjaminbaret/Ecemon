@@ -13,8 +13,12 @@
 struct structureInfoJoueurs {
     std::string pseudo;
     std::vector<int> donnees;
+    int positionFichier;
 };
 
-std::vector<structureInfoJoueurs> readFile(const std::string &path);
+std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path);
+
+std::string joueursCombattants(const std::vector<structureInfoJoueurs>& infoJoueurs, std::string& nomJoueurComparaison);
+
 
 #endif //ESSAISDIVERS_LECTUREECRITUREDONNEES_H

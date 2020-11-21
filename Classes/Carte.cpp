@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-Carte::Carte(std::string nom, bool active)
+Carte::Carte(std::string& nom, bool active)
         :m_nom{nom}
 {}
 std::string Carte::getNom() {
@@ -14,7 +14,6 @@ std::string Carte::getNom() {
 }
 
 void Carte::afficherCarte() {
-
     std::cout<<m_nom<<std::endl;
 }
 

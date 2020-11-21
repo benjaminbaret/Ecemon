@@ -6,13 +6,18 @@
 #include <iostream>
 #include <string>
 #include "Carte.h"
-
-
+#include "lectureEcritureDonnees.h"
 
 
 User::User() {};
 
-User::User(std::string nom) :m_nom(nom){}
+User::~User() {
+    for(auto it = m_collection.cbegin(); it!=m_collection.cend(); it++){
+        delete *it;
+    }
+}
+
+User::User(std::string nom) : m_nom(nom) {}
 
 
 std::string User::getNom() const {
@@ -25,17 +30,19 @@ void User::setNom(std::string nom) {
 }
 
 void User::afficherNom() {
-    std::cout<<"Name: "<<m_nom<<std::endl;
+    std::cout << "Name: " << m_nom << std::endl;
 }
 
-void User::remplirCollection(Carte maCarte) {
+void User::remplirCollection(Carte *maCarte) {
     m_collection.push_back(maCarte);
 }
 
 void User::afficheCollection() {
-    for(int i=0;i<m_collection.size();i++){
-        std::cout<<"Carte "<<i+1<<" ";
-        m_collection[i].afficherCarte();
+    for(auto i = 0; i<m_collection.size(); i++){
+        std::cout << "Carte " << i + 1 << " ";
+        m_collection[i]->afficherCarte();
     }
+
+    std::cout << std::endl;
 
 }

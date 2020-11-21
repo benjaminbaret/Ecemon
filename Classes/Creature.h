@@ -11,10 +11,9 @@
 class Creature : public Carte{
 private:
     std::string descritpion;
-    std::string m_nom;
     int m_ip;
 public:
-    Creature(int vie,std::string nom);
+    Creature(int vie, std::string nom);
     ~Creature()=default;
     void afficherDescription();
     int enleverPv();

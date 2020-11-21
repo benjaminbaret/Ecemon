@@ -8,7 +8,7 @@
 #include "Carte.h"
 
 Creature::Creature(int vie, std::string nom)
-        : Carte(nom), m_ip{vie} {
+        : Carte{nom}, m_ip{vie} {
 
 
 }

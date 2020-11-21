@@ -6,17 +6,60 @@
 #include <iostream>
 
 
+#include "lectureEcritureDonnees.h"
 
-
-
-
-void affichageMenu(){
+int affichageMenu() {
     int choix = 0;
     std::cout << "-------------------------------------------" << std::endl;
+    std::cout << "0) Quitter le jeu" << std::endl;
     std::cout << "1) Afficher les joueurs existants" << std::endl;
     std::cout << "2) Ajouter un joueur" << std::endl;
     std::cout << "3) Lancer un combat" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 
     std::cin >> choix;
+    return choix;
 }
+
+void lancerCombat(){
+
+}
+
+void afficherJoueurs(const std::vector<structureInfoJoueurs>& donneesJoueurs){
+    for(auto it = donneesJoueurs.cbegin(); it!=donneesJoueurs.cend(); it++){
+        std::cout << "Joueur : " << it->pseudo << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+
+int gestionMenu(std::vector<structureInfoJoueurs>& donneesJoueurs) {
+    int sortieBoucle = 0;
+    int choix = 0;
+    while (sortieBoucle==0) {
+        choix = affichageMenu();
+        switch (choix) {
+            case 0:{
+                sortieBoucle=1;
+            }
+            case 1: {
+                afficherJoueurs(donneesJoueurs);
+                sortieBoucle=1;
+                break;
+            }
+            case 2: {
+                sortieBoucle=1;
+                break;
+            }
+            case 3: {
+                sortieBoucle=1;
+                break;
+            }
+            default: {
+                std::cout << "Veuillez entrer un paramètre valide" << std::endl;
+            }
+        }
+    }
+    return choix;
+}
+
