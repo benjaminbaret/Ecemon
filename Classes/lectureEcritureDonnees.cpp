@@ -64,9 +64,10 @@ std::vector<structureInfoJoueurs> readFile(const std::string &path) {
 }
 
 
+/// Fonction qui sera utilisés dans une méthode de User pour écrire les données car accès en private aux données du User
 
-/*void writeFile(const std::string &path) {
-    // Ouverture fichier en mode "w"
+void writeFile(const std::string &path,const std::string& name, const int m_victoire, const std::vector<int> ) {
+
     // pour le mode append, utiliser std::ios::app
     std::ofstream ofs(path.c_str(), std::ios::out);
     if (ofs) {
@@ -77,4 +78,4 @@ std::vector<structureInfoJoueurs> readFile(const std::string &path) {
         ofs << flottant << std::endl;
         ofs.close(); // fermeture du flux
     }
-}*/     // Code à réviser car non modifié pour qu'il soit utilisable pour nous
+}

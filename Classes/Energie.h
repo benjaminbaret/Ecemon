@@ -8,10 +8,14 @@
 #include <vector>
 #include "Carte.h"
 
+
 class Energie : public Carte{
 private :
     std::string m_element;
 public :
+    Energie(std::string element, std::string nom);
+    virtual void afficherCarte();
+    std::string getNom();
     ~Energie()=default;
 };
 

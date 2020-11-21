@@ -5,6 +5,18 @@
 #include "Carte.h"
 #include <iostream>
 #include <vector>
-void Carte::afficher()const{
-    std::cout<<"test1";
+
+Carte::Carte(std::string nom, bool active)
+        :m_nom{nom}
+{}
+std::string Carte::getNom() {
+    return m_nom;
 }
+
+void Carte::afficherCarte() {
+
+    std::cout<<m_nom<<std::endl;
+}
+
+
+

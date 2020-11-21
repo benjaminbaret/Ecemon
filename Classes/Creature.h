@@ -8,13 +8,19 @@
 #include <vector>
 #include "Carte.h"
 
-class Creature : public Carte {
+class Creature : public Carte{
 private:
+    std::string descritpion;
+    std::string m_nom;
     int m_ip;
 public:
+    Creature(int vie,std::string nom);
     ~Creature()=default;
     void afficherDescription();
     int enleverPv();
+    int getIp();
+    virtual void afficherCarte();
+    std::string getNom();
 
 };
 

@@ -13,11 +13,15 @@ class Attaque {
 private:
     std::string m_nom;
     int m_hp;
+    int m_numero;
 public:
+    Attaque(std::string nom, int hp, int numero);
     ~Attaque()=default;
     void verificationEnergie();
     int lancerAttaque();
     void choixAttaque();
+    int getNumero();
+    std::string getNom();
 
 };
 

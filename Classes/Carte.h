@@ -5,22 +5,25 @@
 #ifndef ECEMON_CARTE_H
 #define ECEMON_CARTE_H
 
-#include "Classes/User.h"
+#include "User.h"
 #include <iostream>
 #include <vector>
 
 
 class Carte {
 protected :
-    bool m_active;
-    std::string m_rarete;
     User m_user;
-    std::string m_description;
-    int m_cycleVie;
+    std::string m_rarete;
     std::string m_nom;
+    std::string m_description;
+    bool m_active;
+    int m_cycleVie;
+
 public:
-    //Carte();
-    ~Carte()= default;
+    Carte(std::string nom, bool actif= false);
+    virtual ~Carte()=default;
+    virtual std::string getNom();
+    virtual void afficherCarte();
     void afficher()const;
 };
 
