@@ -22,6 +22,7 @@ private:
     std::queue<Carte *> m_pioche;
     std::vector<Creature *> m_cimetiere;
     Carte* m_carteEnJeux;
+    std::vector<Carte*>m_deck;
 
     Carte* m_creatureActive;
 public:
@@ -34,6 +35,10 @@ public:
     void setNom(std::string nom);
 
     void creerPioche();
+
+    void creerDeck();
+
+    void afficherDeck();
 
     void selectionnerDeck();
 
