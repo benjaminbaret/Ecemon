@@ -14,4 +14,32 @@ Personnages:
 
 
 
-Attaques Zelda : Breath of wild 
+Attaques Zelda : Breath of wild
+               : Charge attaque
+
+Attaque Nathan Drake : Knife throwing
+                     : Gun shot
+
+Attaque Sony : Homing attaque
+             : Spin dash
+
+Attaque Mario : Smash Meteor
+              : Fire Ball
+
+
+Attaque Cloud Strife : Ame Brave
+                     : Meteorain
+
+
+
+Special Card
+
+Increase PV
+Destroyer
+Trainer Power
+
+
+
+
+
+
