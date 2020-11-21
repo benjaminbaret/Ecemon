@@ -12,6 +12,7 @@
 
 class Speciale : public Carte{
 private:
+
 public:
     ~Speciale()=default;
 
