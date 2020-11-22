@@ -14,6 +14,7 @@
 #include "Classes/lectureEcritureDonnees.h"
 #include "Classes/initialisationJoueurs.h"
 
+
 // Penser à empecher la création d'un joueur avec le même pseudo
 
 
@@ -32,12 +33,21 @@ int main() {
 
     while (isEnd) {
         isEnd = gestionMenu(donneesJoueurs);
-        if (isEnd == 3) {
+        if (isEnd == 2){
+            // Création d'un nouveau joueur càd enregistrement en mémoire + recharger la variable "donneesJoueurs" afin qu'elles soient utilisables
+        }
+        else if (isEnd == 3) {
             initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
             initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
+
+            // On séléctionne le deck
+            // On lance la partie
         }
+       enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
         nomJoueurComparaison.clear();
     }
+
+
 
 
     joueur1.afficheCollection();

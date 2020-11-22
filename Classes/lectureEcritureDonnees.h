@@ -8,6 +8,7 @@
 #include <vector>
 #include <iostream>
 #include <vector>
+#include "Classes/User.h"
 
 
 struct structureInfoJoueurs {
@@ -15,6 +16,10 @@ struct structureInfoJoueurs {
     std::vector<int> donnees;
     int positionFichier;
 };
+
+void writeFile(const std::string &path, const std::vector<structureInfoJoueurs>& donneesJoueurs);
+
+void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,User &joueur2);
 
 std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path);
 

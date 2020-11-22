@@ -23,6 +23,7 @@ protected :
 
 public:
     Carte(std::string& nom, bool actif= false);
+    Carte(std::string& nom, std::string& description, bool active);
     virtual ~Carte()=default;
     virtual std::string getNom();
     virtual void afficherCarte();

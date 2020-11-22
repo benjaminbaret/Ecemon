@@ -9,9 +9,17 @@
 #include "lectureEcritureDonnees.h"
 #include <random>
 #include <algorithm>
+#include <vector>
+#include "Creature.h"
+#include "Energie.h"
+#include "Speciale.h"
 
 
-User::User() {};
+User::User() {
+    for(int i=0; i<16; i++){
+        nombreCartesCategories.push_back(0);
+    }
+};
 
 User::~User() {
     for(auto it = m_collection.cbegin(); it!=m_collection.cend(); it++){
@@ -44,9 +52,7 @@ void User::afficheCollection() {
         std::cout << "Carte " << i + 1 << " ";
         m_collection[i]->afficherCarte();
     }
-
     std::cout << std::endl;
-
 }
 
 
@@ -102,4 +108,49 @@ void User::creerPioche() {
         m_pioche.push(m_deck[i]);
     }
     /// Ici on a copier le vecteur melangé dans une queue
+}
+
+void User::setScore(int score){
+    m_score = score;
+}
+
+
+std::vector<int> User::getInfoCartesJoueur(){
+
+    for(auto i=0; i<m_collection.size(); i++){
+        if (m_collection[i]->getNom()=="Zelda"){
+            nombreCartesCategories[0]+=1;
+        }if (m_collection[i]->getNom()=="Nathan Drake"){
+            nombreCartesCategories[1]+=1;
+        }if (m_collection[i]->getNom()=="Sony"){
+            nombreCartesCategories[3]+=1;
+        }if (m_collection[i]->getNom()=="Mario"){
+            nombreCartesCategories[4]+=1;
+        }if (m_collection[i]->getNom()=="Cloud Strife"){
+            nombreCartesCategories[5]+=1;
+        }if (m_collection[i]->getNom()=="Adventure"){
+            nombreCartesCategories[6]+=1;
+        }if (m_collection[i]->getNom()=="RPG"){
+            nombreCartesCategories[7]+=1;
+        }if (m_collection[i]->getNom()=="Sport / Race"){
+            nombreCartesCategories[8]+=1;
+        }if (m_collection[i]->getNom()=="FPS"){
+            nombreCartesCategories[9]+=1;
+        }if (m_collection[i]->getNom()=="Increase IP"){
+            nombreCartesCategories[10]+=1;
+        }if (m_collection[i]->getNom()=="Destroyer"){
+            nombreCartesCategories[11]+=1;
+        }if (m_collection[i]->getNom()=="Trainer Power"){
+            nombreCartesCategories[12]+=1;
+        }if (m_collection[i]->getNom()=="Recover"){
+            nombreCartesCategories[13]+=1;
+        }if (m_collection[i]->getNom()=="Card thief"){
+            nombreCartesCategories[14]+=1;
+        }if (m_collection[i]->getNom()=="X-Ray"){
+            nombreCartesCategories[15]+=1;
+        }
+    }
+
+    nombreCartesCategories[16] = m_score;
+    return nombreCartesCategories;
 }

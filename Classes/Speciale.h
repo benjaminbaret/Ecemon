@@ -14,6 +14,7 @@ class Speciale : public Carte{
 private:
 
 public:
+    Speciale(std::string nom, std::string description);
     ~Speciale()=default;
 
 };

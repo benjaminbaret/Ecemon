@@ -29,7 +29,7 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
         std::string donneesString;
         std::vector<int> donnees;
         int nbIterations = 0;
-        int j=1;
+        int j = 1;
 
 
         while (std::getline(fichier, line)) // lecture ligne par ligne
@@ -43,7 +43,6 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
                     }
                 } else {
                     if (nbIterations == 1) {
-                        std::cout << donneesString << std::endl;
                         donnees.push_back(stoi(donneesString));
                         donneesString.clear();
                     }
@@ -61,7 +60,7 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
             name.clear();
             donnees.clear();
-            j+=1;
+            j += 1;
             nbIterations = 0;
         }
         fichier.close(); // fermeture du flux
@@ -69,7 +68,6 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
     {
         std::cout << "Erreur de lecture des données" << std::endl;
     }
-    std::cout << infoJoueurs[1].donnees.size() << std::endl;
 
     return infoJoueurs;
 }
@@ -77,36 +75,62 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
 /// Fonction qui sera utilisés dans une méthode de User pour écrire les données car accès en private aux données du User
 
-void writeFile(const std::string &path,const std::string& name, const int m_victoire, const std::vector<int> ) {
+void writeFile(const std::string &path, const std::vector<structureInfoJoueurs>& donneesJoueurs) {
 
     // pour le mode append, utiliser std::ios::app
     std::ofstream ofs(path.c_str(), std::ios::out);
     if (ofs) {
         // Ecriture dans le fichier
-        float flottant = 123.456;
-        ofs << "Coucou je suis une phrase" << std::endl;
-        ofs << 50 << std::endl;
-        ofs << flottant << std::endl;
-        ofs.close(); // fermeture du flux
+        ofs.clear();
+        for(auto it=donneesJoueurs.cbegin(); it!=donneesJoueurs.cend(); it++){
+            ofs << it->pseudo;
+            for(int i=0; i<it->donnees.size(); i++){
+                ofs << " " << it->donnees[i];
+            }
+            ofs << std::endl;
+        }
     }
+    ofs.close();
+}
+
+void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
+                             User &joueur2) {
+
+    std::vector<int> vecteurTransition;
+
+    for (auto it = donneesJoueurs.begin(); it != donneesJoueurs.end(); it++) {
+        if (it->pseudo == joueur1.getNom()) {
+            vecteurTransition = joueur1.getInfoCartesJoueur();
+            for (int i = 0; i < vecteurTransition.size(); i++) {
+                it->donnees[i] = vecteurTransition[i];
+            }
+        } else if (it->pseudo == joueur2.getNom()) {
+            vecteurTransition = joueur2.getInfoCartesJoueur();
+            for (int i = 0; i < vecteurTransition.size(); i++) {
+                it->donnees[i] = vecteurTransition[i];
+            }
+        }
+    }
+
+    writeFile(path, donneesJoueurs);
+
+
 }
 
 
-
-
-std::string joueursCombattants(const std::vector<structureInfoJoueurs>& donneesJoueurs, std::string &nomJoueurComparaison){
+std::string
+joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
     int isEnd = 1;
     std::string joueur;
 
-    while(isEnd){
+    while (isEnd) {
         afficherJoueurs(donneesJoueurs);
         std::cout << "Veuillez entrer le nom du Joueur que vous souhaitez séléctionner : " << std::endl;
         std::cin >> joueur;
         std::cout << std::endl;
-        if (nomJoueurComparaison == joueur){
+        if (nomJoueurComparaison == joueur) {
             std::cout << "Vous avez déjà sélectionné ce joueur," << std::endl;
-        }
-        else {
+        } else {
             nomJoueurComparaison = joueur;
             isEnd = 0;
         }

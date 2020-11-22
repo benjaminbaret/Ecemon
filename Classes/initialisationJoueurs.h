@@ -7,6 +7,7 @@
 
 #include <string>
 #include "Classes/User.h"
+#include "lectureEcritureDonnees.h"
 
 void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> &donneesJoueurs,
                           const std::string& nomJoueur);

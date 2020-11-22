@@ -9,6 +9,11 @@
 Carte::Carte(std::string& nom, bool active)
         :m_nom{nom}
 {}
+
+Carte::Carte(std::string& nom, std::string& description, bool active)
+        :m_nom{nom}, m_description(description)
+{}
+
 std::string Carte::getNom() {
     return m_nom;
 }

@@ -5,3 +5,6 @@
 #include "Speciale.h"
 #include <iostream>
 #include <vector>
+#include "Carte.h"
+
+Speciale::Speciale(std::string nom, std::string description): Carte(nom, description, false){}
