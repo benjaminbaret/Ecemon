@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <vector>
+
+
 #include "Classes/Energie.h"
 #include "Classes/Attaque.h"
 #include "Classes/Carte.h"
@@ -15,39 +17,48 @@
 #include "Classes/initialisationJoueurs.h"
 
 
-// Penser à empecher la création d'un joueur avec le même pseudo
-
-
 
 int main() {
 
     int isEnd = 1;
+    int nbCartes = 0;
     User joueur1;
     User joueur2;
     std::string nomJoueurComparaison;
     std::vector<structureInfoJoueurs> donneesJoueurs;
+    structureInfoJoueurs nouveauJoueur;
 
-    std::cout << "Chargement des données" << std::endl;
-    donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
+
 
     while (isEnd) {
+
+        donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
         isEnd = gestionMenu(donneesJoueurs);
+
         if (isEnd == 2){
-            // Création d'un nouveau joueur càd enregistrement en mémoire + recharger la variable "donneesJoueurs" afin qu'elles soient utilisables
+            ajoutJoueurEnMemoire("../Classes/fichier.csv", donneesJoueurs);
         }
         else if (isEnd == 3) {
-            initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
-            initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
+            if (donneesJoueurs.size()>=2){
+                initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
+                initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
+                initialisationDeckPiocheJoueur(joueur1);
+                initialisationDeckPiocheJoueur(joueur2);
 
-            initialisationDeckPiocheJoueur(joueur1);
-            initialisationDeckPiocheJoueur(joueur2);
+                // On lance la partie ici
 
-            // On lance la partie
+                enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
+            }
+            else {
+                std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;
+            }
+
         }
-        enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
+
         nomJoueurComparaison.clear();
+
     }
 
 

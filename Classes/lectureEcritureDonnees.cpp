@@ -75,16 +75,16 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
 /// Fonction qui sera utilisés dans une méthode de User pour écrire les données car accès en private aux données du User
 
-void writeFile(const std::string &path, const std::vector<structureInfoJoueurs>& donneesJoueurs) {
+void writeFile(const std::string &path, const std::vector<structureInfoJoueurs> &donneesJoueurs) {
 
     // pour le mode append, utiliser std::ios::app
     std::ofstream ofs(path.c_str(), std::ios::out);
     if (ofs) {
         // Ecriture dans le fichier
         ofs.clear();
-        for(auto it=donneesJoueurs.cbegin(); it!=donneesJoueurs.cend(); it++){
+        for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) {
             ofs << it->pseudo;
-            for(int i=0; i<it->donnees.size(); i++){
+            for (int i = 0; i < it->donnees.size(); i++) {
                 ofs << "," << it->donnees[i];
             }
             ofs << std::endl;
@@ -93,7 +93,8 @@ void writeFile(const std::string &path, const std::vector<structureInfoJoueurs>&
     ofs.close();
 }
 
-void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
+void
+enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
                              User &joueur2) {
 
     std::vector<int> vecteurTransition;
@@ -116,7 +117,8 @@ void enregistrementDonneesJoueurs(const std::string &path, std::vector<structure
 }
 
 
-std::string joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
+std::string
+joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
     int isEnd = 1;
     std::string joueur;
 
@@ -133,6 +135,47 @@ std::string joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJ
         }
     }
     return joueur;
+}
+
+
+void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs) {
+
+    int verification = 1;
+    int nonUtilise = 0;
+
+    structureInfoJoueurs nouveauJoueur;
+
+    std::cout << "Création d'un nouveau joueur" << std::endl;
+
+
+    while (verification) {
+        std::cout << "Veuillez entrer le pseudo du joueur" << std::endl;
+        std::cin >> nouveauJoueur.pseudo;
+        for (int i = 0; i < donneesJoueurs.size(); i++) {
+            if (donneesJoueurs[i].pseudo != nouveauJoueur.pseudo) {
+                nonUtilise+=1;
+            }
+            else{
+                std::cout << "Pseudo déjà utilisé" << std::endl;
+            }
+        }
+        if(nonUtilise==donneesJoueurs.size()){
+            verification = 0;
+        }
+    }
+
+    std::cout << "Piochage aléatoire de 21 cartes pour vous constituer une collection" << std::endl;
+
+    for (int i = 0; i < 5; i++) {
+        nouveauJoueur.donnees.push_back(2);
+    }
+    for (int i = 5; i < 15; i++) {
+        nouveauJoueur.donnees.push_back(1);
+    }
+    nouveauJoueur.donnees.push_back(0);
+    donneesJoueurs.push_back(nouveauJoueur);
+    writeFile(path, donneesJoueurs);
+    donneesJoueurs = lectureDonnees("../Classes/fichier.csv");
 }
 
 

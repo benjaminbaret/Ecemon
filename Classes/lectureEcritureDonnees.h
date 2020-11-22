@@ -25,5 +25,8 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path);
 
 std::string joueursCombattants(const std::vector<structureInfoJoueurs>& infoJoueurs, std::string& nomJoueurComparaison);
 
+void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoueurs>& donneesJoueurs);
+
+
 
 #endif //ESSAISDIVERS_LECTUREECRITUREDONNEES_H
