@@ -19,7 +19,6 @@
 
 
 
-
 int main() {
 
     int isEnd = 1;
@@ -40,10 +39,14 @@ int main() {
             initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
             initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
-            // On séléctionne le deck
+
+
+            initialisationDeckPiocheJoueur(joueur1);
+            initialisationDeckPiocheJoueur(joueur2);
+
             // On lance la partie
         }
-       enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
+        enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
         nomJoueurComparaison.clear();
     }
 

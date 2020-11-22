@@ -16,13 +16,13 @@
 
 
 User::User() {
-    for(int i=0; i<16; i++){
+    for (int i = 0; i < 16; i++) {
         nombreCartesCategories.push_back(0);
     }
 };
 
 User::~User() {
-    for(auto it = m_collection.cbegin(); it!=m_collection.cend(); it++){
+    for (auto it = m_collection.cbegin(); it != m_collection.cend(); it++) {
         delete *it;
     }
 }
@@ -48,7 +48,7 @@ void User::remplirCollection(Carte *maCarte) {
 }
 
 void User::afficheCollection() {
-    for(auto i = 0; i<m_collection.size(); i++){
+    for (auto i = 0; i < m_collection.size(); i++) {
         std::cout << "Carte " << i + 1 << " ";
         m_collection[i]->afficherCarte();
     }
@@ -65,35 +65,46 @@ void User::afficherDeck() {
 
 void User::creerDeck() {
     bool choix = false;
-    bool termine = false;
+    bool termine = true;
     int index = 0;
 
-    std::cout << "Creation de votre deck. Pour cela veuillez selectionner 21 cartes" << std::endl;
-    std::cout << "Voulez vous revoir votre collection ? 1 pour oui, 0 pour non" << std::endl;
+    std::cout << getNom() << " nous allons créer vôtre deck" << std::endl;
+
+    std::cout << "Votre collection :" << std::endl;
+    afficheCollection();
+
+    std::cout << "Voulez vous générer un deck aléatoire ? 1 pour oui, 0 pou non" << std::endl;
     std::cin >> choix;
 
+
+
     if (choix) {
-        afficheCollection();
-    } else
-        for (int i = 1; i <= 21; i++) {
-            std::cout << "Carte n " << i << "?" << std::endl;
+        for (int i = 0; i < 21; i++) {
+            index = rand() * (m_collection.size()) / RAND_MAX;
+            m_deck.push_back(m_collection[index]);
+
+        }
+    } else {
+        std::cout << "Veuillez entrer les index des cartes que vous souhaitez sélectionner" << std::endl;
+        for (int i = 0; i < 21; i++) {
+            std::cout << "Carte " << i << ") " << std::endl;
             std::cin >> index;
             m_deck.push_back(m_collection[index]);
         }
-
+    }
     do {
-        std::cout << "Voci votre Deck voulez vous le modifier ? 1 pour oui, 0 pour non" << std::endl;
+        std::cout << "Voici votre Deck, voulez vous le modifier ? 1 pour oui, 0 pour non" << std::endl;
         afficherDeck();
         std::cin >> choix;
         if (choix) {
             std::cout << "Quelle carte voulez voulez vous echanger ?" << std::endl;
             std::cin >> index;
             m_deck.erase(m_deck.begin() + index);
-            std::cout << "Par quelle carte voulez vous la remplacer ?" << std::endl;
+            std::cout << "Par quelle carte voulez vous la remplacer ? (voir collection pour l'index)" <<std::endl;
+            std::cin >>index;
             m_deck.push_back(m_collection[index]);
-
         } else
-            termine = true;
+            termine = false;
     } while (termine);
 
 }
@@ -101,53 +112,67 @@ void User::creerDeck() {
 void User::creerPioche() {
     std::random_device randomDevice;
     std::mt19937 mt19937(randomDevice());                                 //Code permettant de melanger le vector du deck il ne manque plus qu'a copier chaque case puisque le vector est aleatoir maintenant
-    std::shuffle(m_deck.begin(),m_deck.end(),mt19937);
+    std::shuffle(m_deck.begin(), m_deck.end(), mt19937);
     ///https://en.cppreference.com/w/cpp/algorithm/random_shuffle
 
-    for(int i=0;i<m_deck.size();i++){
+    for (int i = 0; i < m_deck.size(); i++) {
         m_pioche.push(m_deck[i]);
     }
-    /// Ici on a copier le vecteur melangé dans une queue
+    /// Ici on a copié le vecteur melangé dans une queue
 }
 
-void User::setScore(int score){
+void User::setScore(int score) {
     m_score = score;
 }
 
 
-std::vector<int> User::getInfoCartesJoueur(){
+std::vector<int> User::getInfoCartesJoueur() {
 
-    for(auto i=0; i<m_collection.size(); i++){
-        if (m_collection[i]->getNom()=="Zelda"){
-            nombreCartesCategories[0]+=1;
-        }if (m_collection[i]->getNom()=="Nathan Drake"){
-            nombreCartesCategories[1]+=1;
-        }if (m_collection[i]->getNom()=="Sony"){
-            nombreCartesCategories[3]+=1;
-        }if (m_collection[i]->getNom()=="Mario"){
-            nombreCartesCategories[4]+=1;
-        }if (m_collection[i]->getNom()=="Cloud Strife"){
-            nombreCartesCategories[5]+=1;
-        }if (m_collection[i]->getNom()=="Adventure"){
-            nombreCartesCategories[6]+=1;
-        }if (m_collection[i]->getNom()=="RPG"){
-            nombreCartesCategories[7]+=1;
-        }if (m_collection[i]->getNom()=="Sport / Race"){
-            nombreCartesCategories[8]+=1;
-        }if (m_collection[i]->getNom()=="FPS"){
-            nombreCartesCategories[9]+=1;
-        }if (m_collection[i]->getNom()=="Increase IP"){
-            nombreCartesCategories[10]+=1;
-        }if (m_collection[i]->getNom()=="Destroyer"){
-            nombreCartesCategories[11]+=1;
-        }if (m_collection[i]->getNom()=="Trainer Power"){
-            nombreCartesCategories[12]+=1;
-        }if (m_collection[i]->getNom()=="Recover"){
-            nombreCartesCategories[13]+=1;
-        }if (m_collection[i]->getNom()=="Card thief"){
-            nombreCartesCategories[14]+=1;
-        }if (m_collection[i]->getNom()=="X-Ray"){
-            nombreCartesCategories[15]+=1;
+    for (auto i = 0; i < m_collection.size(); i++) {
+        if (m_collection[i]->getNom() == "Zelda") {
+            nombreCartesCategories[0] += 1;
+        }
+        if (m_collection[i]->getNom() == "Nathan Drake") {
+            nombreCartesCategories[1] += 1;
+        }
+        if (m_collection[i]->getNom() == "Sony") {
+            nombreCartesCategories[3] += 1;
+        }
+        if (m_collection[i]->getNom() == "Mario") {
+            nombreCartesCategories[4] += 1;
+        }
+        if (m_collection[i]->getNom() == "Cloud Strife") {
+            nombreCartesCategories[5] += 1;
+        }
+        if (m_collection[i]->getNom() == "Adventure") {
+            nombreCartesCategories[6] += 1;
+        }
+        if (m_collection[i]->getNom() == "RPG") {
+            nombreCartesCategories[7] += 1;
+        }
+        if (m_collection[i]->getNom() == "Sport / Race") {
+            nombreCartesCategories[8] += 1;
+        }
+        if (m_collection[i]->getNom() == "FPS") {
+            nombreCartesCategories[9] += 1;
+        }
+        if (m_collection[i]->getNom() == "Increase IP") {
+            nombreCartesCategories[10] += 1;
+        }
+        if (m_collection[i]->getNom() == "Destroyer") {
+            nombreCartesCategories[11] += 1;
+        }
+        if (m_collection[i]->getNom() == "Trainer Power") {
+            nombreCartesCategories[12] += 1;
+        }
+        if (m_collection[i]->getNom() == "Recover") {
+            nombreCartesCategories[13] += 1;
+        }
+        if (m_collection[i]->getNom() == "Card thief") {
+            nombreCartesCategories[14] += 1;
+        }
+        if (m_collection[i]->getNom() == "X-Ray") {
+            nombreCartesCategories[15] += 1;
         }
     }
 

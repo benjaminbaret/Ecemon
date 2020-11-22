@@ -12,4 +12,6 @@
 void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> &donneesJoueurs,
                           const std::string& nomJoueur);
 
+void initialisationDeckPiocheJoueur(User& joueur);
+
 #endif //ECEMON_INITIALISATIONJOUEURS_H

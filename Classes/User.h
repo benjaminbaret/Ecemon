@@ -31,16 +31,15 @@ public:
     User(std::string nom);
 
     std::string getNom() const;
-
-    void setNom(std::string nom);
-
-    void creerPioche();
+    void afficherDeck();
+    void afficheCollection();
+    std::vector<int> getInfoCartesJoueur();
 
     void creerDeck();
 
-    void afficherDeck();
+    void creerPioche();
 
-    void selectionnerDeck();
+    void setNom(std::string nom);
 
     void verifierFile();
 
@@ -50,9 +49,7 @@ public:
 
     void remplirCollection(Carte* maCarte);
 
-    void afficheCollection();
 
-    std::vector<int> getInfoCartesJoueur();
 
 
 };

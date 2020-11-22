@@ -15,6 +15,7 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
 
     for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) {
         if (it->pseudo == nomJoueur) {
+            joueur.setNom(it->pseudo);
             for (auto i = 0; i < it->donnees.size(); i++) {
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
@@ -73,4 +74,10 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
             }
         }
     }
+}
+
+void initialisationDeckPiocheJoueur(User& joueur){
+    std::cout << joueur.getNom() << " veuillez prendre l'ordinateur" << std::endl;
+    joueur.creerDeck();
+    joueur.creerPioche();
 }

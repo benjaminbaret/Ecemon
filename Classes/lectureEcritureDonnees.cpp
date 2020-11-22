@@ -85,7 +85,7 @@ void writeFile(const std::string &path, const std::vector<structureInfoJoueurs>&
         for(auto it=donneesJoueurs.cbegin(); it!=donneesJoueurs.cend(); it++){
             ofs << it->pseudo;
             for(int i=0; i<it->donnees.size(); i++){
-                ofs << " " << it->donnees[i];
+                ofs << "," << it->donnees[i];
             }
             ofs << std::endl;
         }
@@ -113,13 +113,10 @@ void enregistrementDonneesJoueurs(const std::string &path, std::vector<structure
     }
 
     writeFile(path, donneesJoueurs);
-
-
 }
 
 
-std::string
-joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
+std::string joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
     int isEnd = 1;
     std::string joueur;
 
@@ -134,8 +131,6 @@ joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std:
             nomJoueurComparaison = joueur;
             isEnd = 0;
         }
-
-
     }
     return joueur;
 }
