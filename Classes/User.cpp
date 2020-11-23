@@ -79,13 +79,11 @@ void User::creerDeck() {
     std::cout << "Voulez vous générer un deck aléatoire ? 1 pour oui, 0 pou non" << std::endl;
     std::cin >> choix;
 
-
     if (choix) {
         for (int i = 0; i < 21; i++) {
             index = rand() % (m_collection.size());
             m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
-
         }
     } else {
         std::cout << "Veuillez entrer les index des cartes que vous souhaitez sélectionner" << std::endl;
@@ -174,43 +172,43 @@ std::vector<int> User::getInfoCartesJoueur() {
             nombreCartesCategories[1] += 1;
         }
         if (m_collection[i]->getNom() == "Sony") {
-            nombreCartesCategories[3] += 1;
+            nombreCartesCategories[2] += 1;
         }
         if (m_collection[i]->getNom() == "Mario") {
-            nombreCartesCategories[4] += 1;
+            nombreCartesCategories[3] += 1;
         }
         if (m_collection[i]->getNom() == "Cloud Strife") {
-            nombreCartesCategories[5] += 1;
+            nombreCartesCategories[4] += 1;
         }
         if (m_collection[i]->getNom() == "Adventure") {
-            nombreCartesCategories[6] += 1;
+            nombreCartesCategories[5] += 1;
         }
         if (m_collection[i]->getNom() == "RPG") {
-            nombreCartesCategories[7] += 1;
+            nombreCartesCategories[6] += 1;
         }
         if (m_collection[i]->getNom() == "Sport / Race") {
-            nombreCartesCategories[8] += 1;
+            nombreCartesCategories[7] += 1;
         }
         if (m_collection[i]->getNom() == "FPS") {
-            nombreCartesCategories[9] += 1;
+            nombreCartesCategories[8] += 1;
         }
         if (m_collection[i]->getNom() == "Increase IP") {
-            nombreCartesCategories[10] += 1;
+            nombreCartesCategories[9] += 1;
         }
         if (m_collection[i]->getNom() == "Destroyer") {
-            nombreCartesCategories[11] += 1;
+            nombreCartesCategories[10] += 1;
         }
         if (m_collection[i]->getNom() == "Trainer Power") {
-            nombreCartesCategories[12] += 1;
+            nombreCartesCategories[11] += 1;
         }
         if (m_collection[i]->getNom() == "Recover") {
-            nombreCartesCategories[13] += 1;
+            nombreCartesCategories[12] += 1;
         }
         if (m_collection[i]->getNom() == "Card thief") {
-            nombreCartesCategories[14] += 1;
+            nombreCartesCategories[13] += 1;
         }
         if (m_collection[i]->getNom() == "X-Ray") {
-            nombreCartesCategories[15] += 1;
+            nombreCartesCategories[14] += 1;
         }
     }
 

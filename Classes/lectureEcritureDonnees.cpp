@@ -54,6 +54,7 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
             tamponInfoJoueurs.pseudo = name;
             tamponInfoJoueurs.donnees = donnees;
+
             tamponInfoJoueurs.positionFichier = j;
 
             infoJoueurs.push_back(tamponInfoJoueurs);
@@ -93,8 +94,7 @@ void writeFile(const std::string &path, const std::vector<structureInfoJoueurs> 
     ofs.close();
 }
 
-void
-enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
+void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
                              User &joueur2) {
 
     std::vector<int> vecteurTransition;
