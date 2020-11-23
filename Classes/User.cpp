@@ -82,7 +82,7 @@ void User::creerDeck() {
 
     if (choix) {
         for (int i = 0; i < 21; i++) {
-            index = rand() % (m_collection.size() - 0) + 0;
+            index = rand() % (m_collection.size());
             m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
 
