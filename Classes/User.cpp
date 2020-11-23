@@ -13,7 +13,6 @@
 #include "Creature.h"
 #include "Energie.h"
 #include "Speciale.h"
-#include "console.h"
 
 
 User::User() {
@@ -59,7 +58,7 @@ void User::afficheCollection() {
 
 void User::afficherDeck() {
     for (int i = 0; i < m_deck.size(); i++) {
-        std::cout << "Carte " << i+1 << ": " << std::endl;
+        std::cout << "Carte " << i + 1 << ": " << std::endl;
         m_deck[i]->afficherCarte();
     }
 }
@@ -68,12 +67,10 @@ void User::creerDeck() {
     bool choix = false;
     bool termine = true;
     int index = 0;
-    int index2=0;
+    int index2 = 0;
     std::vector<int> indexMemoire;
-    bool efface=true;
+    bool efface = true;
     Carte *tampon;
-
-
 
 
     std::cout << getNom() << " nous allons créer vôtre deck" << std::endl;
@@ -83,10 +80,9 @@ void User::creerDeck() {
     std::cin >> choix;
 
 
-
     if (choix) {
         for (int i = 0; i < 21; i++) {
-            index = rand()%(m_collection.size()-0+1)+0;
+            index = rand() % (m_collection.size() - 0) + 0;
             m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
 
@@ -96,7 +92,7 @@ void User::creerDeck() {
         for (int i = 0; i < 21; i++) {
             std::cout << "Carte " << i << ") " << std::endl;
             std::cin >> index;
-            m_deck.push_back(m_collection[index-1]);
+            m_deck.push_back(m_collection[index - 1]);
             indexMemoire.push_back(index);
 
         }
@@ -110,25 +106,26 @@ void User::creerDeck() {
             do {
                 std::cout << "Quelle carte voulez voulez vous echanger ?" << std::endl;
                 std::cin >> index;
-                index-=1;
+                index -= 1;
 
-                if (index>m_deck.size()||index<0){
-                    std::cout<<"Veuillez recommencer la carte n'est pas dans votre deck"<<std::endl;  // Vérification que la carte  est bien dans le deck
+                if (index > m_deck.size() || index < 0) {
+                    std::cout << "Veuillez recommencer la carte n'est pas dans votre deck"
+                              << std::endl;  // Vérification que la carte  est bien dans le deck
                 }
 
-            }while (index>m_deck.size()||index<0);
-                //m_deck.erase(m_deck.begin() + index);
-                tampon=m_deck[index];
+            } while (index > m_deck.size() || index < 0);
+            //m_deck.erase(m_deck.begin() + index);
+            tampon = m_deck[index];
 
             do {
-                efface=true;
+                efface = true;
                 std::cout << "Par quelle carte voulez vous la remplacer ? (voir collection pour l'index)"
                           << std::endl;
                 std::cin >> index2;
-                index2-=1;
+                index2 -= 1;
 
-                if(index2>m_collection.size()||index2<0){
-                    std::cout<<"La carte n'est pas dans votre collection"<<std::endl;
+                if (index2 > m_collection.size() || index2 < 0) {
+                    std::cout << "La carte n'est pas dans votre collection" << std::endl;
                 }
 
                 for (int i = 0; i < indexMemoire.size(); i++) {
@@ -136,12 +133,12 @@ void User::creerDeck() {
                         efface = false;
                 }
 
-                if(!efface){
-                    std::cout<<"La carte est deja dans votre deck"<<std::endl;
+                if (!efface) {
+                    std::cout << "La carte est deja dans votre deck" << std::endl;
                 }
             } while (index2 < 0 || index2 > m_collection.size() || !efface);
-            m_deck[index]=m_collection[index2];
-            m_collection[index2]=tampon;
+            m_deck[index] = m_collection[index2];
+            m_collection[index2] = tampon;
 
         } else
             termine = false;
@@ -151,7 +148,8 @@ void User::creerDeck() {
 
 void User::creerPioche() {
     std::random_device randomDevice;
-    std::mt19937 mt19937(randomDevice());                                 //Code permettant de melanger le vector du deck il ne manque plus qu'a copier chaque case puisque le vector est aleatoir maintenant
+    std::mt19937 mt19937(
+            randomDevice());                                 //Code permettant de melanger le vector du deck il ne manque plus qu'a copier chaque case puisque le vector est aleatoir maintenant
     std::shuffle(m_deck.begin(), m_deck.end(), mt19937);
     ///https://en.cppreference.com/w/cpp/algorithm/random_shuffle
 
@@ -218,4 +216,8 @@ std::vector<int> User::getInfoCartesJoueur() {
 
     nombreCartesCategories[16] = m_score;
     return nombreCartesCategories;
+}
+
+void User::enleverPointsVie(int nbHp) {
+    m_pointsVie -= nbHp;
 }

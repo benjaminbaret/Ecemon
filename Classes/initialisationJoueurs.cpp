@@ -20,19 +20,19 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
                         case 0:
-                            joueur.remplirCollection(new Creature(15, "Zelda"));
+                            joueur.remplirCollection(new Creature(15, "Zelda", "nomAttaque1", "nomAttaque2", 10, 12));
                             break;
                         case 1:
-                            joueur.remplirCollection(new Creature(16, "Nathan Drake"));
+                            joueur.remplirCollection(new Creature(16, "Nathan Drake", "nomAttaque1", "nomAttaque2", 10, 12));
                             break;
                         case 2:
-                            joueur.remplirCollection(new Creature(10, "Sony"));
+                            joueur.remplirCollection(new Creature(10, "Sony", "nomAttaque1", "nomAttaque2", 10, 12));
                             break;
                         case 3:
-                            joueur.remplirCollection(new Creature(8, "Mario"));
+                            joueur.remplirCollection(new Creature(8, "Mario", "nomAttaque1", "nomAttaque2", 10, 12));
                             break;
                         case 4:
-                            joueur.remplirCollection(new Creature(8, "Cloud Strife"));
+                            joueur.remplirCollection(new Creature(8, "Cloud Strife", "nomAttaque1", "nomAttaque2", 10, 12));
                             break;
                         case 5:
                             joueur.remplirCollection(new Energie("Adventure", "Adventure"));

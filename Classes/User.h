@@ -16,6 +16,7 @@
 class User {
 private:
     std::string m_nom;
+    int m_pointsVie;
     int m_score;
     std::vector<Carte*> m_collection;
     std::queue<Carte *> m_pioche;
@@ -23,7 +24,6 @@ private:
     Carte* m_carteEnJeux;
     std::vector<Carte*>m_deck;
     std::vector<int> nombreCartesCategories;
-
     Carte* m_creatureActive;
 public:
     User();
@@ -49,8 +49,7 @@ public:
 
     void remplirCollection(Carte* maCarte);
 
-
-
+    void enleverPointsVie(int nbHp);
 
 };
 
