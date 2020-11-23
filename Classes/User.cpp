@@ -179,3 +179,11 @@ std::vector<int> User::getInfoCartesJoueur() {
     nombreCartesCategories[16] = m_score;
     return nombreCartesCategories;
 }
+
+std::vector<Carte*> User:: getDeck(){
+    return m_deck;
+}
+
+std::vector<Carte*> User:: getCollection(){
+    return m_collection;
+}

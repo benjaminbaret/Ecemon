@@ -49,6 +49,8 @@ public:
 
     void remplirCollection(Carte* maCarte);
 
+    std::vector<Carte*> getDeck();
+    std::vector<Carte*> getCollection();
 
 
 
