@@ -19,3 +19,7 @@ void Energie::afficherCarte() {
 std::string Energie::getNom() {
     return m_nom;
 }
+
+std::string Energie::getType() {
+    return "Energie";
+}

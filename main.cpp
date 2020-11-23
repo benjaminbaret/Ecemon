@@ -64,8 +64,5 @@ int main() {
 
 
 
-    joueur1.afficheCollection();
-    joueur2.afficheCollection();
-
     return 0;
 }

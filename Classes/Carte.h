@@ -27,6 +27,7 @@ public:
     virtual ~Carte()=default;
     virtual std::string getNom();
     virtual void afficherCarte();
+    virtual std::string getType();
     //void afficher()const;
 };
 

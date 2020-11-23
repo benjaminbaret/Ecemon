@@ -13,6 +13,7 @@
 #include "Creature.h"
 #include "Energie.h"
 #include "Speciale.h"
+#include "console.h"
 
 
 User::User() {
@@ -58,7 +59,7 @@ void User::afficheCollection() {
 
 void User::afficherDeck() {
     for (int i = 0; i < m_deck.size(); i++) {
-        std::cout << "Carte " << i << ": " << std::endl;
+        std::cout << "Carte " << i+1 << ": " << std::endl;
         m_deck[i]->afficherCarte();
     }
 }
@@ -67,12 +68,17 @@ void User::creerDeck() {
     bool choix = false;
     bool termine = true;
     int index = 0;
+    int index2=0;
+    std::vector<int> indexMemoire;
+    bool efface=true;
+    Carte *tampon;
+
+
+
 
     std::cout << getNom() << " nous allons créer vôtre deck" << std::endl;
-
     std::cout << "Votre collection :" << std::endl;
     afficheCollection();
-
     std::cout << "Voulez vous générer un deck aléatoire ? 1 pour oui, 0 pou non" << std::endl;
     std::cin >> choix;
 
@@ -80,8 +86,9 @@ void User::creerDeck() {
 
     if (choix) {
         for (int i = 0; i < 21; i++) {
-            index = rand() * (m_collection.size()) / RAND_MAX;
+            index = rand()%(m_collection.size()-0+1)+0;
             m_deck.push_back(m_collection[index]);
+            indexMemoire.push_back(index);
 
         }
     } else {
@@ -89,7 +96,9 @@ void User::creerDeck() {
         for (int i = 0; i < 21; i++) {
             std::cout << "Carte " << i << ") " << std::endl;
             std::cin >> index;
-            m_deck.push_back(m_collection[index]);
+            m_deck.push_back(m_collection[index-1]);
+            indexMemoire.push_back(index);
+
         }
     }
     do {
@@ -97,12 +106,43 @@ void User::creerDeck() {
         afficherDeck();
         std::cin >> choix;
         if (choix) {
-            std::cout << "Quelle carte voulez voulez vous echanger ?" << std::endl;
-            std::cin >> index;
-            m_deck.erase(m_deck.begin() + index);
-            std::cout << "Par quelle carte voulez vous la remplacer ? (voir collection pour l'index)" <<std::endl;
-            std::cin >>index;
-            m_deck.push_back(m_collection[index]);
+
+            do {
+                std::cout << "Quelle carte voulez voulez vous echanger ?" << std::endl;
+                std::cin >> index;
+                index-=1;
+
+                if (index>m_deck.size()||index<0){
+                    std::cout<<"Veuillez recommencer la carte n'est pas dans votre deck"<<std::endl;  // Vérification que la carte  est bien dans le deck
+                }
+
+            }while (index>m_deck.size()||index<0);
+                //m_deck.erase(m_deck.begin() + index);
+                tampon=m_deck[index];
+
+            do {
+                efface=true;
+                std::cout << "Par quelle carte voulez vous la remplacer ? (voir collection pour l'index)"
+                          << std::endl;
+                std::cin >> index2;
+                index2-=1;
+
+                if(index2>m_collection.size()||index2<0){
+                    std::cout<<"La carte n'est pas dans votre collection"<<std::endl;
+                }
+
+                for (int i = 0; i < indexMemoire.size(); i++) {
+                    if (index2 == indexMemoire[i])
+                        efface = false;
+                }
+
+                if(!efface){
+                    std::cout<<"La carte est deja dans votre deck"<<std::endl;
+                }
+            } while (index2 < 0 || index2 > m_collection.size() || !efface);
+            m_deck[index]=m_collection[index2];
+            m_collection[index2]=tampon;
+
         } else
             termine = false;
     } while (termine);

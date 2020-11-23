@@ -8,3 +8,7 @@
 #include "Carte.h"
 
 Speciale::Speciale(std::string nom, std::string description): Carte(nom, description, false){}
+
+std::string  Speciale::getType() {
+    return "Speciale";
+}

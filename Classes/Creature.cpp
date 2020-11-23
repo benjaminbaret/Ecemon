@@ -25,3 +25,7 @@ void Creature::afficherCarte() {
 std::string Creature::getNom() {
     return m_nom;
 }
+
+std::string Creature::getType() {
+    return "Creature";
+}

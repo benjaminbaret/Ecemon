@@ -164,14 +164,12 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
         }
     }
 
-    std::cout << "Piochage aléatoire de 21 cartes pour vous constituer une collection" << std::endl;
+    std::cout << "Piochage aléatoire de 30 cartes pour vous constituer une collection" << std::endl;
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 15; i++) {
         nouveauJoueur.donnees.push_back(2);
     }
-    for (int i = 5; i < 15; i++) {
-        nouveauJoueur.donnees.push_back(1);
-    }
+
     nouveauJoueur.donnees.push_back(0);
     donneesJoueurs.push_back(nouveauJoueur);
     writeFile(path, donneesJoueurs);

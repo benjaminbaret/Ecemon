@@ -19,6 +19,7 @@ public:
     int enleverPv();
     int getIp();
     virtual void afficherCarte();
+    std::string getType();
     std::string getNom();
 
 };

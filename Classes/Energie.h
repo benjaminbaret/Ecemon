@@ -19,6 +19,7 @@ public :
     Energie(std::string element, std::string nom);
     virtual void afficherCarte();
     std::string getNom();
+    std::string getType();
     ~Energie()=default;
 };
 

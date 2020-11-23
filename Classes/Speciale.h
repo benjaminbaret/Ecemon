@@ -16,6 +16,7 @@ private:
 public:
     Speciale(std::string nom, std::string description);
     ~Speciale()=default;
+    std::string getType();
 
 };
 
