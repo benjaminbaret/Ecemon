@@ -34,6 +34,8 @@ public:
     void afficherDeck();
     void afficheCollection();
     std::vector<int> getInfoCartesJoueur();
+    Carte *getCarteEnJeu() const;
+    void setCarteEnJeu();
 
     void creerDeck();
 
@@ -52,9 +54,9 @@ public:
     std::vector<Carte*> getDeck();
     std::vector<Carte*> getCollection();
 
+    Carte *piocherCarte();
 
-
-};
+    };
 
 
 #endif //ECEMON_USER_H

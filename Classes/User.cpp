@@ -187,3 +187,19 @@ std::vector<Carte*> User:: getDeck(){
 std::vector<Carte*> User:: getCollection(){
     return m_collection;
 }
+
+Carte *User::piocherCarte() {
+    Carte *carte = m_pioche.front();
+    m_pioche.pop();
+    return carte;
+}
+
+Carte *User::getCarteEnJeu() const
+{
+    return m_carteEnJeux;
+}
+
+void User::setCarteEnJeu()
+{
+    m_carteEnJeux = piocherCarte();
+}
