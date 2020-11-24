@@ -21,7 +21,6 @@ protected :
     bool m_active;
     int m_cycleVie;
     std::string m_rarete;
-    int valeur;
 
 public:
 

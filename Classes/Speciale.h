@@ -20,8 +20,15 @@ public:
    // void choisir_carte_picohe() const ;
     void ressusiter_carte_cimetiere() const ;
     void jouer_deux_fois_de_suite() const;
-    void voir_les_cartes_adverses(User adversaire);
+
     void echange(User adversaire, User me);
+
+
+    int increaseIP(Creature C1);
+    int destroyerIP(Creature C1);
+    int trainerPower(Attaque A1);
+    void x_ray(User adversaire); // voir_les_cartes_adverses
+    void card_thief(User adversaire, Creature C);
 
 
 };

@@ -11,19 +11,25 @@
 
 class Attaque {
 private:
-    std::string m_nom;
-    int m_hp;
-    int m_numero;
+    std::string m_nomAttaque1;
+    std::string m_nomAttaque2;
+    int m_hpAttaque1;
+    int m_hpAttaque2;
+    int m_numeroAttaque;
 public:
-    Attaque(std::string nom, int hp, int numero);
+    Attaque(std::string nomAttaque1, std::string nomAttaque2, int hpAttaque1, int hpAttaque2);
     ~Attaque()=default;
     void verificationEnergie();
     int lancerAttaque();
     void choixAttaque();
-    int getNumero();
-    std::string getNom();
+    int getNumeroAttaque() const;
+    std::string getNom(const int& numeroAttaque) const;
 
-};
+    /////////////////////////////////
+    int ajouterPV(int nbHp);
+
+
+    };
 
 
 #endif //ECEMON_ATTAQUE_H

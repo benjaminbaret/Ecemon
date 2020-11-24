@@ -34,12 +34,12 @@ Attaque Cloud Strife : Ame Brave
 
 Special Card
 
-Increase IP         Augmente x IP de la carte posée
-Destroyer           Enleve x IP¨adversaire
-Trainer Power       Augmente x PV de l'attaque en cours
-Recover             Récupere la derniere carte du cimetiere
-Card thief          Vole une carte a l'adversaire mais enleve 3 IP à la carte posée
-X-Ray               Permet de voir intégralement la pioche de l'adversaire
+Increase IP         Augmente x IP de la carte posée /
+Destroyer           Enleve x IP¨adversaire /
+Trainer Power       Augmente x PV de l'attaque en cours /
+Recover             Récupere la derniere carte du cimetiere ???
+Card thief          Vole une carte a l'adversaire mais enleve 3 IP à la carte posée  ???
+X-Ray               Permet de voir intégralement la pioche de l'adversaire /
 
 
 

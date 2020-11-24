@@ -36,7 +36,30 @@ void Speciale:: echange(User adversaire, User me)
   //  ct=stock;
 }
 
-void Speciale:: voir_les_cartes_adverses(User adversaire){
+
+void Speciale:: x_ray(User adversaire){
     std::cout << "Voici le Deck de votre adversaire" << std::endl;
     adversaire.afficherDeck();
+}
+///////////////////////////////////////////:
+
+int Speciale::increaseIP(Creature C1){
+    int nouveau_point=0;
+    nouveau_point=C1.ajouterIp(2);
+    return nouveau_point;
+}
+int Speciale::destroyerIP(Creature C1){
+    int nouveau_point=0;
+    nouveau_point=C1.enleverIp(2);
+    return nouveau_point;
+}
+int Speciale::trainerPower(Attaque A1) {
+    int nouvelle_attaque=0;
+    nouvelle_attaque=A1.ajouterPV(1);
+    return nouvelle_attaque;
+}
+void Speciale::card_thief(User adversaire, Creature C){
+    int nouveau_point=0;
+    nouveau_point=C.enleverIp(3); //eneleve 3 IP a la carte
+    // Commment voler une carte a l'adversaire ????
 }
