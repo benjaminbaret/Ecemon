@@ -15,6 +15,7 @@
 #include "Classes/menu.h"
 #include "Classes/lectureEcritureDonnees.h"
 #include "Classes/initialisationJoueurs.h"
+#include "Classes/jouer.h"
 #include <time.h>
 
 
@@ -38,6 +39,7 @@ int main() {
 
         if (isEnd == 2){
             ajoutJoueurEnMemoire("../Classes/fichier.csv", donneesJoueurs);
+
         }
         else if (isEnd == 3) {
 
@@ -45,14 +47,17 @@ int main() {
                 initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
                 initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
+
                 initialisationDeckPiocheJoueur(joueur1);
                 initialisationDeckPiocheJoueur(joueur2);
 
 
                 // On lance la partie ici
+                jouer(joueur1, joueur2);
 
 
                 enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
+                donneesJoueurs.clear();
             }
             else {
                 std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;

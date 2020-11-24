@@ -14,6 +14,7 @@
 #include "Energie.h"
 #include "Speciale.h"
 #include "affichageEnConsole.h"
+#include "structures.h"
 
 
 User::User() {
@@ -235,6 +236,7 @@ int User::proposerCarte() {
 }
 
 void User::placer() {
+    int a = 0, b = 0;
     std::string name;
     int choix = 0;
     if (m_pioche.front()->getType() == "Creature") {
@@ -243,11 +245,34 @@ void User::placer() {
 
         std::cout << "Voulez vous attaquer ? " << std::endl;
         std::cin >> choix;
-        if(choix){
-           // if(m_energieDisponible==m_creatureActive.)
-        }
-        m_pioche.pop();
+        if (choix) {
+            if (m_creatureActive->getEnergie1() == m_energieDisponible) {
+                a = 1;
+            }
+            if(m_creatureActive->getEnergie2() == m_energieDisponible){
+                b=1;
+            }
+            if(a==1 && b==1){
+                std::cout << "2 attaques possibles " << std::endl;
+                m_creatureActive->getNomAttaque(1);
+                m_creatureActive->getNomAttaque(2);
 
+            }else if (a==1){
+                std::cout << "1 attaque possible (attaque 1) " << std::endl;
+                m_creatureActive->getNomAttaque(1);
+                // : On montre les attaques
+            }else if (b==1){
+                std::cout << "1 attaque possible (attaque 2) " << std::endl;
+                m_creatureActive->getNomAttaque(2);
+                // : On montre les attaques
+
+            }else {
+                std::cout << "Vous n'avez pas assez d'énergie pour attaquer" << std::endl;
+            }
+
+                m_pioche.pop();
+
+        }
     } else if (m_pioche.front()->getType() == "Energie") {
         m_energies.push_back(m_pioche.front());
         name = m_pioche.front()->getNom();

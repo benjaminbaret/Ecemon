@@ -9,10 +9,7 @@
 #include <iostream>
 #include <vector>
 #include "Carte.h"
-
-typedef struct {
-   int FPS, Adventure, RPG, SportRace;
-} StructureEnergie;
+#include "structures.h"
 
 class Energie : public Carte{
 private :

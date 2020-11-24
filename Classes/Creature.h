@@ -24,6 +24,10 @@ public:
     virtual void afficherCarte();
     std::string getType();
     std::string getNom();
+    StructureEnergie getEnergie1();
+    StructureEnergie getEnergie2();
+    void getNomAttaque(const int& numeroAttaque) ;
+
 
 
 

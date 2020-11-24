@@ -25,6 +25,14 @@ std::string Carte::getType(){
     return "Carte";
 }
 
+StructureEnergie Carte::getEnergie1(){
+    
+}
+StructureEnergie Carte::getEnergie2() {
+
+}
+void Carte::getNomAttaque(const int& numeroAttaque){}
+
 
 
 

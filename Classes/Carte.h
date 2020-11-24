@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <vector>
+#include "structures.h"
 
 
 class Carte {
@@ -27,6 +28,9 @@ public:
     virtual std::string getNom();
     virtual void afficherCarte();
     virtual std::string getType();
+    virtual StructureEnergie getEnergie1();
+    virtual StructureEnergie getEnergie2();
+    virtual void getNomAttaque(const int& numeroAttaque);
     //virtual StructureEnergie
     //void afficher()const;
 

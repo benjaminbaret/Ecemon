@@ -32,3 +32,16 @@ std::string Creature::getType() {
     return "Creature";
 }
 
+StructureEnergie Creature::getEnergie1(){
+    return m_attaque.getNRJAttaque1();
+}
+StructureEnergie Creature::getEnergie2(){
+    return m_attaque.getNRJAttaque2();
+}
+
+void Creature::getNomAttaque(const int &numeroAttaque){
+    std::cout <<  m_attaque.getNom(numeroAttaque) << std::endl;
+}
+
+
+

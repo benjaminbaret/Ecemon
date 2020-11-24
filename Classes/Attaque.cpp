@@ -13,9 +13,6 @@ Attaque::Attaque(std::string nomAttaque1, std::string nomAttaque2, int hpAttaque
           m_numeroAttaque(0), m_besoinNRJAttaque1(NRJAttaque1), m_besoinNRJAttaque2(NRJAttaque2){}
 
 
-int Attaque::getNumeroAttaque() const {
-    return m_numeroAttaque;
-}
 
 std::string Attaque::getNom(const int &numeroAttaque) const {
     if (numeroAttaque == 1) {
@@ -30,6 +27,10 @@ StructureEnergie Attaque::getNRJAttaque1(){
 }
 StructureEnergie Attaque::getNRJAttaque2(){
     return m_besoinNRJAttaque2;
+}
+
+int Attaque::getNumeroAttaque() const {
+    return m_numeroAttaque;
 }
 
 
