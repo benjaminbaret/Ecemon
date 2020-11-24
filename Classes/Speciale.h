@@ -19,6 +19,7 @@ public:
     ~Speciale()=default;
     std::string getType();
 
+
     ///
     void ressusiter_carte_cimetiere() const ;
     void jouer_deux_fois_de_suite() const;

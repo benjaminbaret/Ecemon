@@ -221,13 +221,59 @@ void User::enleverPointsVie(int nbHp) {
     m_pointsVie -= nbHp;
 }
 
+void User::tirerCarteEnjeu() {
+    m_carteEnjeu = m_pioche.front();
+    m_pioche.pop();
+}
+
+int User::proposerCarte() {
+    int choix = 0;
+    m_pioche.front()->afficherCarte();
+    std::cout << "Voulez vous jouer cette carte ? " << std::endl;
+    std::cin >> choix;
+    return choix;
+}
+
+void User::placer() {
+    std::string name;
+    int choix = 0;
+    if (m_pioche.front()->getType() == "Creature") {
+        m_creatureActive = m_pioche.front();
+
+
+        std::cout << "Voulez vous attaquer ? " << std::endl;
+        std::cin >> choix;
+        if(choix){
+           // if(m_energieDisponible==m_creatureActive.)
+        }
+        m_pioche.pop();
+
+    } else if (m_pioche.front()->getType() == "Energie") {
+        m_energies.push_back(m_pioche.front());
+        name = m_pioche.front()->getNom();
+        if (name == "FPS") {
+            m_energieDisponible.FPS += 1;
+        } else if (name == "RPG") {
+            m_energieDisponible.RPG += 1;
+        } else if (name == "Adventure") {
+            m_energieDisponible.Adventure += 1;
+        } else {
+            m_energieDisponible.SportRace += 1;
+        }
+        m_pioche.pop();
+
+    } else if (m_pioche.front()->getType() == "Speciale") {
+        std::cout << "A faire !" << std::endl;
+    }
+}
+
 
 ///
-std::vector<Carte*> User:: getDeck(){
+std::vector<Carte *> User::getDeck() {
     return m_deck;
 }
 
-std::vector<Carte*> User:: getCollection(){
+std::vector<Carte *> User::getCollection() {
     return m_collection;
 }
 ///

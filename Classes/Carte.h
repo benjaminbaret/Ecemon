@@ -10,8 +10,6 @@
 #include <vector>
 
 
-
-
 class Carte {
 protected :
    // User m_user;
@@ -29,6 +27,7 @@ public:
     virtual std::string getNom();
     virtual void afficherCarte();
     virtual std::string getType();
+    //virtual StructureEnergie
     //void afficher()const;
 
     ///

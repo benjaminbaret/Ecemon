@@ -9,9 +9,22 @@
 #include "Classes/Energie.h"
 #include "Classes/Speciale.h"
 #include "Classes/Creature.h"
+#include "Classes/Attaque.h"
 
 void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> &donneesJoueurs,
                           const std::string &nomJoueur) {
+
+    StructureEnergie zeldaAttaque1{0, 2, 1, 0};
+    StructureEnergie zeldaAttaque2{0, 2, 3, 0};
+    StructureEnergie sonicAttaque1{0, 1, 0, 1};
+    StructureEnergie sonicAttaque2{0, 1, 0, 2};
+    StructureEnergie nathanAttaque1{1, 1, 2, 0};
+    StructureEnergie nathanAttaque2{1, 2, 2, 0};
+    StructureEnergie marioAttaque1{0, 1, 0, 0};
+    StructureEnergie marioAttaque2{0, 1, 0, 2};
+    StructureEnergie cloudAttaque1{1, 2, 1, 0};
+    StructureEnergie cloudAttaque2{2, 1, 3, 0};
+
 
     for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) {
         if (it->pseudo == nomJoueur) {
@@ -20,19 +33,19 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
                         case 0:
-                            joueur.remplirCollection(new Creature(15, "Zelda", "nomAttaque1", "nomAttaque2", 10, 12));
+                            joueur.remplirCollection(new Creature(15, "Zelda", "Breath of wild", "Charge Attaque", 10, 12, zeldaAttaque1, zeldaAttaque2));
                             break;
                         case 1:
-                            joueur.remplirCollection(new Creature(16, "Nathan Drake", "nomAttaque1", "nomAttaque2", 10, 12));
+                            joueur.remplirCollection(new Creature(16, "Nathan Drake", "Knife throwin", "Gun shot", 10, 12, nathanAttaque1, nathanAttaque2));
                             break;
                         case 2:
-                            joueur.remplirCollection(new Creature(10, "Sony", "nomAttaque1", "nomAttaque2", 10, 12));
+                            joueur.remplirCollection(new Creature(10, "Sonic", "Homing attaque", "Spin dash", 10, 12, sonicAttaque1, sonicAttaque2));
                             break;
                         case 3:
-                            joueur.remplirCollection(new Creature(8, "Mario", "nomAttaque1", "nomAttaque2", 10, 12));
+                            joueur.remplirCollection(new Creature(8, "Mario", "Smash Meteor", "Fire Ball", 10, 12, marioAttaque1, marioAttaque2));
                             break;
                         case 4:
-                            joueur.remplirCollection(new Creature(8, "Cloud Strife", "nomAttaque1", "nomAttaque2", 10, 12));
+                            joueur.remplirCollection(new Creature(8, "Cloud Strife", "Ame Brave", "Meteorain", 10, 12, cloudAttaque1, cloudAttaque2));
                             break;
                         case 5:
                             joueur.remplirCollection(new Energie("Adventure", "Adventure"));

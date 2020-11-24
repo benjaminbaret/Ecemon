@@ -21,10 +21,12 @@ private:
     std::vector<Carte*> m_collection;
     std::queue<Carte *> m_pioche;
     std::vector<Creature *> m_cimetiere;
-    Carte* m_carteEnJeux;
+    std::vector<Carte *>m_energies;
+    Carte* m_carteEnjeu;
     std::vector<Carte*>m_deck;
     std::vector<int> nombreCartesCategories;
     Carte* m_creatureActive;
+    StructureEnergie m_energieDisponible;
 public:
     User();
     ~User();
@@ -34,8 +36,13 @@ public:
     void afficherDeck();
     void afficheCollection();
     std::vector<int> getInfoCartesJoueur();
+    void tirerCarteEnjeu();
+    int proposerCarte();
+    void placer();
 
-    void creerDeck();
+
+
+        void creerDeck();
 
     void creerPioche();
 
@@ -50,6 +57,7 @@ public:
     void remplirCollection(Carte* maCarte);
 
     void enleverPointsVie(int nbHp);
+
 
     ///
     std::vector<Carte*> getDeck();

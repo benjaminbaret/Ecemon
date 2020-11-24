@@ -1,8 +1,8 @@
 4 energy: 
-- Adventure
-- RPG : Role Playing Game
-- Sport / Race 
-- FPS : First Person Shooter
+- Adventure 1
+- RPG : Role Playing Game 3
+- Sport / Race 4
+- FPS : First Person Shooter 1
 
 
 Personnages: 

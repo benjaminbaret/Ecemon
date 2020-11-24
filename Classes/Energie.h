@@ -6,11 +6,13 @@
 #define ECEMON_ENERGIE_H
 #include <iostream>
 #include <vector>
-#include "Carte.h"
 #include <iostream>
 #include <vector>
+#include "Carte.h"
 
-
+typedef struct {
+   int FPS, Adventure, RPG, SportRace;
+} StructureEnergie;
 
 class Energie : public Carte{
 private :

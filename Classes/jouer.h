@@ -8,7 +8,7 @@
 #include "User.h"
 
 User adversaire, me;
-int tirageJoueur();
+int tirageJoueur(const User& joueur1, const User& joueur2);
 void comparecarte(Carte& carte1,Carte& carte2);
 
 

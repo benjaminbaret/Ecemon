@@ -48,6 +48,7 @@ int main() {
                 initialisationDeckPiocheJoueur(joueur1);
                 initialisationDeckPiocheJoueur(joueur2);
 
+
                 // On lance la partie ici
 
 
@@ -66,8 +67,7 @@ int main() {
 
 
 
-    joueur1.afficheCollection();
-    joueur2.afficheCollection();
+
 
     return 0;
 }
