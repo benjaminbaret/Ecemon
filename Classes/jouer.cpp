@@ -7,13 +7,6 @@
 #include "User.h"
 
 
-
-
-
-
-
-
-
 void jouer(User &joueur1, User &joueur2) {
 
     if (tirageJoueur(joueur1, joueur2)) { // tirage joueur vaut 1 donc JOUEUR 2 qui commence
@@ -21,7 +14,7 @@ void jouer(User &joueur1, User &joueur2) {
         joueur2.tirerCarteEnjeu();
 
         if (joueur2.proposerCarte()) {
-            joueur2.placer();
+            joueur2.placer(joueur1,joueur2);
 
 
         }
@@ -40,38 +33,3 @@ int tirageJoueur(const User& joueur1, const User& joueur2) {
     }
     return commence;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-///
-///
-void comparecarte(Carte& carte1,Carte& carte2)
-{
-    if(carte1.compare(carte2)==1)//la carte du joueur 1 est superiere que la carte du joueur 2
-    {
-        //me.setScore(1);
-
-
-    }
-    else if(carte1.compare(carte2)==2)//c'est a dire la carte du joueur 1 est inferieur que la carte du joueur 2
-    {
-        //adversaire.setScore(1);
-
-    }
-
-}
-///
-
-void choixJoueurs(){
-
-};

@@ -30,6 +30,7 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
         if (it->pseudo == nomJoueur) {
             joueur.setNom(it->pseudo);
             for (int i = 0; i < it->donnees.size(); i++) {
+                joueur.setScore(it->donnees[15]);
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
                         case 0:
@@ -76,9 +77,6 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
                             break;
                         case 14:
                             joueur.remplirCollection(new Speciale{"X-Ray", "Permet de voir intégralement la pioche de l'adversaire"});
-                            break;
-                        case 15:
-                            joueur.setScore(j);
                             break;
                         default:
                             std::cout << "Erreur d'initialisation des joueurs" << std::endl;

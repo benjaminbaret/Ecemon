@@ -38,7 +38,10 @@ public:
     std::vector<int> getInfoCartesJoueur();
     void tirerCarteEnjeu();
     int proposerCarte();
-    void placer();
+    void placer(User &joueur1, User &joueur2);
+    void enleverPvAdversaire(int hp);
+    int getIp();
+    void attaquer(User &joueurAdverse,int nbAttaque);
 
 
 

@@ -28,6 +28,7 @@ public:
     std::string getNom(const int& numeroAttaque) const;
     StructureEnergie getNRJAttaque1();
     StructureEnergie getNRJAttaque2();
+    int getHpAttaque(int nbAttaque);
 };
 
 

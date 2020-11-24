@@ -25,34 +25,25 @@ std::string Carte::getType(){
     return "Carte";
 }
 
-StructureEnergie Carte::getEnergie1(){
-    
+int Carte::compareAvecEnergie1(StructureEnergie comparant){
+    return 0;
 }
-StructureEnergie Carte::getEnergie2() {
 
+int Carte::compareAvecEnergie2(StructureEnergie comparant){
+    return 0;
 }
+
 void Carte::getNomAttaque(const int& numeroAttaque){}
 
-
-
-
-///
-
-/*std::string Carte::getRarete(){
-    return m_rarete;
-}
- */
-
-int Carte:: compare(Carte& ct)
-{
-    if(this->valeur > ct.valeur)
-        return 1;//si la premiere carte superieure a la 2 eme
-    else if(this->valeur < ct.valeur)
-        return 2;//si la premiere carte inferieure a la 2 eme
-    else
-        return 0;//ils sont egaux
+int Carte::getHpAttaquer(int nbAttaque){
+    return 0;
 }
 
-///
+int Carte::getIp() {
+    return 0;
+}
+
+void Carte::enleverIp(int nbHp){}
+
 
 

@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include "Carte.h"
+#include "User.h"
 
 Creature::Creature(int vie, std::string nom, std::string nomAttaque1, std::string nomAttaque2, int hpAttaque1, int hpAttaque2, StructureEnergie NRJAttaque1, StructureEnergie NRJAttaque2)
         : Carte{nom}, m_ip{vie}, m_attaque(nomAttaque1,nomAttaque2, hpAttaque1, hpAttaque2, NRJAttaque1, NRJAttaque2) {}
@@ -32,16 +33,28 @@ std::string Creature::getType() {
     return "Creature";
 }
 
-StructureEnergie Creature::getEnergie1(){
-    return m_attaque.getNRJAttaque1();
+int Creature::compareAvecEnergie1(StructureEnergie comparant) {
+    if(m_attaque.getNRJAttaque1()==comparant){
+        return 1;
+    } else
+        return 0;
 }
-StructureEnergie Creature::getEnergie2(){
-    return m_attaque.getNRJAttaque2();
+int Creature::compareAvecEnergie2(StructureEnergie comparant) {
+
+    if(m_attaque.getNRJAttaque2()==comparant){
+        return 1;
+    } else
+        return 0;
 }
 
 void Creature::getNomAttaque(const int &numeroAttaque){
     std::cout <<  m_attaque.getNom(numeroAttaque) << std::endl;
 }
+
+int Creature::getHpAttaquer(int nbAttaque) {
+    return m_attaque.getHpAttaque(nbAttaque);
+}
+
 
 
 

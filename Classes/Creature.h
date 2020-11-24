@@ -10,6 +10,8 @@
 #include "Attaque.h"
 
 
+
+
 class Creature : public Carte{
 private:
     std::string descritpion;
@@ -24,14 +26,20 @@ public:
     virtual void afficherCarte();
     std::string getType();
     std::string getNom();
-    StructureEnergie getEnergie1();
-    StructureEnergie getEnergie2();
+    int compareAvecEnergie1(StructureEnergie comparant);
+    int compareAvecEnergie2(StructureEnergie comparant);
     void getNomAttaque(const int& numeroAttaque) ;
+    int getHpAttaquer(int nbAttaque);
 
 
 
 
-};
+
+
+
+
+
+        };
 
 
 #endif //ECEMON_CREATURE_H

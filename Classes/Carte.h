@@ -13,7 +13,7 @@
 
 class Carte {
 protected :
-   // User m_user;
+    // User m_user;
     std::string m_rarete;
     std::string m_nom;
     std::string m_description;
@@ -22,23 +22,33 @@ protected :
     int valeur;
 
 public:
-    Carte(std::string& nom, bool actif= false);
-    Carte(std::string& nom, std::string& description, bool active);
-    virtual ~Carte()=default;
+    Carte(std::string &nom, bool actif = false);
+
+    Carte(std::string &nom, std::string &description, bool active);
+
+    virtual ~Carte() = default;
+
     virtual std::string getNom();
+
     virtual void afficherCarte();
+
     virtual std::string getType();
-    virtual StructureEnergie getEnergie1();
-    virtual StructureEnergie getEnergie2();
-    virtual void getNomAttaque(const int& numeroAttaque);
-    //virtual StructureEnergie
-    //void afficher()const;
 
-    ///
-    int compare(Carte& ct);
-    //  virtual std::string getRarete();
-    ///
+    virtual int compareAvecEnergie1(StructureEnergie comparant);
+
+    virtual int compareAvecEnergie2(StructureEnergie comparant);
+
+    virtual void getNomAttaque(const int &numeroAttaque);
+
+    virtual int getHpAttaquer(int nbAttaque);
+
+    virtual int getIp();
+
+   virtual void enleverIp(int nbHp);
+
+
+
+
 };
-
 
 #endif //ECEMON_CARTE_H

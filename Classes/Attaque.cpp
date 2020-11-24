@@ -34,5 +34,12 @@ int Attaque::getNumeroAttaque() const {
 }
 
 
+int Attaque::getHpAttaque(int nbAttaque) {
+    if(nbAttaque==1){
+        return m_hpAttaque1;
+    } else
+        return m_hpAttaque2;
+}
+
 
 

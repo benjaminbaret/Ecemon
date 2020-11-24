@@ -19,13 +19,10 @@
 #include <time.h>
 
 
-
 int main() {
 
     int isEnd = 1;
     int nbCartes = 0;
-    User joueur1;
-    User joueur2;
     std::string nomJoueurComparaison;
     std::vector<structureInfoJoueurs> donneesJoueurs;
     structureInfoJoueurs nouveauJoueur;
@@ -37,13 +34,14 @@ int main() {
         donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
         isEnd = gestionMenu(donneesJoueurs);
 
-        if (isEnd == 2){
+        if (isEnd == 2) {
             ajoutJoueurEnMemoire("../Classes/fichier.csv", donneesJoueurs);
 
-        }
-        else if (isEnd == 3) {
+        } else if (isEnd == 3) {
+            User joueur1;
+            User joueur2;
 
-            if (donneesJoueurs.size()>=2){
+            if (donneesJoueurs.size() >= 2) {
                 initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
                 initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
@@ -52,14 +50,14 @@ int main() {
                 initialisationDeckPiocheJoueur(joueur2);
 
 
-                // On lance la partie ici
+                //On lance la partie ici
                 jouer(joueur1, joueur2);
 
 
                 enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
                 donneesJoueurs.clear();
-            }
-            else {
+
+            } else {
                 std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;
             }
 
@@ -68,10 +66,6 @@ int main() {
         nomJoueurComparaison.clear();
 
     }
-
-
-
-
 
 
     return 0;

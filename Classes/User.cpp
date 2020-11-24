@@ -90,9 +90,10 @@ void User::creerDeck() {
     } else {
         std::cout << "Veuillez entrer les index des cartes que vous souhaitez sélectionner" << std::endl;
         for (int i = 0; i < 21; i++) {
-            std::cout << "Carte " << i << ") " << std::endl;
+            std::cout << "Carte " << i+1 << ") " << std::endl;
             std::cin >> index;
-            m_deck.push_back(m_collection[index - 1]);
+            index-=1;
+            m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
 
         }
@@ -166,6 +167,8 @@ void User::setScore(int score) {
 
 std::vector<int> User::getInfoCartesJoueur() {
 
+    nombreCartesCategories.clear();
+
     for (auto i = 0; i < m_collection.size(); i++) {
         if (m_collection[i]->getNom() == "Zelda") {
             nombreCartesCategories[0] += 1;
@@ -173,7 +176,7 @@ std::vector<int> User::getInfoCartesJoueur() {
         if (m_collection[i]->getNom() == "Nathan Drake") {
             nombreCartesCategories[1] += 1;
         }
-        if (m_collection[i]->getNom() == "Sony") {
+        if (m_collection[i]->getNom() == "Sonic") {
             nombreCartesCategories[2] += 1;
         }
         if (m_collection[i]->getNom() == "Mario") {
@@ -214,7 +217,7 @@ std::vector<int> User::getInfoCartesJoueur() {
         }
     }
 
-    nombreCartesCategories[16] = m_score;
+    nombreCartesCategories[15] = m_score;
     return nombreCartesCategories;
 }
 
@@ -235,35 +238,54 @@ int User::proposerCarte() {
     return choix;
 }
 
-void User::placer() {
+void User::attaquer(User &joueurAdverse, int nbAttaque) {
+    int a=0;
+    if(joueurAdverse.m_creatureActive->getIp()<=m_creatureActive->getHpAttaquer(nbAttaque)){ // si le nombre de points de vie de la carte est inférieur que le HP qde celle qui attaque
+        a = m_creatureActive->getHpAttaquer(nbAttaque)-joueurAdverse.m_creatureActive->getIp(); // Différence de points de vie
+        joueurAdverse.m_creatureActive->enleverIp(joueurAdverse.m_creatureActive->getIp());
+        joueurAdverse.enleverPointsVie(a);
+    } else if(joueurAdverse.m_creatureActive->getIp()>m_creatureActive->getHpAttaquer(nbAttaque)){
+        joueurAdverse.m_creatureActive->enleverIp(m_creatureActive->getHpAttaquer(nbAttaque));
+    }
+}
+
+
+void User::placer(User &joueur1, User &joueur2) {
     int a = 0, b = 0;
     std::string name;
     int choix = 0;
+    int nomAttaque=0;
     if (m_pioche.front()->getType() == "Creature") {
         m_creatureActive = m_pioche.front();
 
 
         std::cout << "Voulez vous attaquer ? " << std::endl;
+
         std::cin >> choix;
         if (choix) {
-            if (m_creatureActive->getEnergie1() == m_energieDisponible) {
+            if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
                 a = 1;
             }
-            if(m_creatureActive->getEnergie2() == m_energieDisponible){
+            if(m_creatureActive->compareAvecEnergie2(m_energieDisponible)){
                 b=1;
             }
             if(a==1 && b==1){
                 std::cout << "2 attaques possibles " << std::endl;
                 m_creatureActive->getNomAttaque(1);
                 m_creatureActive->getNomAttaque(2);
+                std::cout<<"Quelle attaque voulez vous utiliser ?"<<std::endl;
+                std::cin>>nomAttaque;
+                attaquer(joueur1, nomAttaque);
 
             }else if (a==1){
                 std::cout << "1 attaque possible (attaque 1) " << std::endl;
                 m_creatureActive->getNomAttaque(1);
+                attaquer(joueur1,1);
                 // : On montre les attaques
             }else if (b==1){
                 std::cout << "1 attaque possible (attaque 2) " << std::endl;
                 m_creatureActive->getNomAttaque(2);
+                attaquer(joueur1,2);
                 // : On montre les attaques
 
             }else {
@@ -291,6 +313,35 @@ void User::placer() {
         std::cout << "A faire !" << std::endl;
     }
 }
+
+void User::enleverPvAdversaire(int hp) {
+    m_pointsVie-=hp;
+}
+
+int User::getIp() {
+    return m_creatureActive->getIp();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ///
