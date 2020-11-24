@@ -20,6 +20,7 @@ protected :
     std::string m_description;
     bool m_active;
     int m_cycleVie;
+    int valeur;
 
 public:
     Carte(std::string& nom, bool actif= false);
@@ -29,6 +30,11 @@ public:
     virtual void afficherCarte();
     virtual std::string getType();
     //void afficher()const;
+
+    ///
+    int compare(Carte& ct);
+    //  virtual std::string getRarete();
+    ///
 };
 
 

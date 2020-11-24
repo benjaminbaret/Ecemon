@@ -51,6 +51,11 @@ public:
 
     void enleverPointsVie(int nbHp);
 
+    ///
+    std::vector<Carte*> getDeck();
+    std::vector<Carte*> getCollection();
+    ///
+
 };
 
 

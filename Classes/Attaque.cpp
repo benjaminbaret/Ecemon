@@ -20,7 +20,8 @@ int Attaque::getNumeroAttaque() const {
 std::string Attaque::getNom(const int &numeroAttaque) const {
     if (numeroAttaque == 1) {
         return m_nomAttaque1;
-    } else if(numeroAttaque == 2){
+    } else {
         return m_nomAttaque2;
     }
+
 }

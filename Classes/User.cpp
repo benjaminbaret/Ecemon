@@ -13,6 +13,7 @@
 #include "Creature.h"
 #include "Energie.h"
 #include "Speciale.h"
+#include "affichageEnConsole.h"
 
 
 User::User() {
@@ -219,3 +220,14 @@ std::vector<int> User::getInfoCartesJoueur() {
 void User::enleverPointsVie(int nbHp) {
     m_pointsVie -= nbHp;
 }
+
+
+///
+std::vector<Carte*> User:: getDeck(){
+    return m_deck;
+}
+
+std::vector<Carte*> User:: getCollection(){
+    return m_collection;
+}
+///

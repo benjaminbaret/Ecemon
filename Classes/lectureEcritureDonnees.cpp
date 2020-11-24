@@ -9,6 +9,7 @@
 
 #include "User.h"
 #include "menu.h"
+#include "affichageEnConsole.h"
 
 /// Pour utiliser readFile :
 /// vector = readFile('./pathToFile');
@@ -133,6 +134,7 @@ joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std:
             nomJoueurComparaison = joueur;
             isEnd = 0;
         }
+        clearConsole();
     }
     return joueur;
 }
@@ -162,6 +164,7 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
         if(nonUtilise==donneesJoueurs.size()){
             verification = 0;
         }
+        nonUtilise=0;
     }
 
     std::cout << "Piochage aléatoire de 30 cartes pour vous constituer une collection" << std::endl;

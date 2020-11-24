@@ -15,6 +15,7 @@
 #include "Classes/menu.h"
 #include "Classes/lectureEcritureDonnees.h"
 #include "Classes/initialisationJoueurs.h"
+#include <time.h>
 
 
 
@@ -27,7 +28,7 @@ int main() {
     std::string nomJoueurComparaison;
     std::vector<structureInfoJoueurs> donneesJoueurs;
     structureInfoJoueurs nouveauJoueur;
-
+    srand(time(NULL));
 
 
     while (isEnd) {

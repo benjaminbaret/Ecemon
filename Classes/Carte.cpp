@@ -27,3 +27,24 @@ std::string Carte::getType(){
 
 
 
+
+///
+
+/*std::string Carte::getRarete(){
+    return m_rarete;
+}
+ */
+
+int Carte:: compare(Carte& ct)
+{
+    if(this->valeur > ct.valeur)
+        return 1;//si la premiere carte superieure a la 2 eme
+    else if(this->valeur < ct.valeur)
+        return 2;//si la premiere carte inferieure a la 2 eme
+    else
+        return 0;//ils sont egaux
+}
+
+///
+
+

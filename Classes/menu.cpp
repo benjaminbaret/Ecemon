@@ -4,6 +4,8 @@
 
 #include "Classes/menu.h"
 #include <iostream>
+#include <sstream>
+#include "affichageEnConsole.h"
 
 
 #include "lectureEcritureDonnees.h"
@@ -36,8 +38,11 @@ void afficherJoueurs(const std::vector<structureInfoJoueurs>& donneesJoueurs){
 int gestionMenu(std::vector<structureInfoJoueurs>& donneesJoueurs) {
     int sortieBoucle = 0;
     int choix = 0;
+
+
     while (sortieBoucle==0) {
         choix = affichageMenu();
+        clearConsole();
         switch (choix) {
             case 0:{
                 sortieBoucle=1;
