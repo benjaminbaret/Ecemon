@@ -29,6 +29,9 @@ public:
     StructureEnergie getNRJAttaque1();
     StructureEnergie getNRJAttaque2();
     int getHpAttaque(int nbAttaque);
+    void changeHpAttaque(int hp);
+
+
 };
 
 

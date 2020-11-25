@@ -55,6 +55,13 @@ int Creature::getHpAttaquer(int nbAttaque) {
     return m_attaque.getHpAttaque(nbAttaque);
 }
 
+void Creature::setIp(int ip) {
+    m_ip+=ip;
+}
+
+void Creature::getChangeHpAttaque(int hp) {
+    m_attaque.changeHpAttaque(hp);
+}
 
 
 

@@ -8,7 +8,7 @@
 Personnages: 
 - Zelda 
 - Nathan Drake
-- Sony
+- Sonic
 - Mario 
 - Cloud Strife (Personnage avec Epée)
 
@@ -20,7 +20,7 @@ Attaques Zelda : Breath of wild
 Attaque Nathan Drake : Knife throwing
                      : Gun shot
 
-Attaque Sony : Homing attaque
+Attaque Sonic : Homing attaque
              : Spin dash
 
 Attaque Mario : Smash Meteor

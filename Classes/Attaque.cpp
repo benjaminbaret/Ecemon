@@ -41,5 +41,12 @@ int Attaque::getHpAttaque(int nbAttaque) {
         return m_hpAttaque2;
 }
 
+void Attaque::changeHpAttaque(int hp){
+    m_hpAttaque1+=hp;
+    m_hpAttaque2+=hp;
+}
+
+
+
 
 

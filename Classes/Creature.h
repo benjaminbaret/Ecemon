@@ -30,7 +30,8 @@ public:
     int compareAvecEnergie2(StructureEnergie comparant);
     void getNomAttaque(const int& numeroAttaque) ;
     int getHpAttaquer(int nbAttaque);
-
+    void setIp(int ip);
+    void getChangeHpAttaque(int hp);
 
 
 

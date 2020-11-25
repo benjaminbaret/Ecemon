@@ -53,6 +53,7 @@ void User::afficheCollection() {
     for (auto i = 0; i < m_collection.size(); i++) {
         std::cout << "Carte " << i + 1 << " ";
         m_collection[i]->afficherCarte();
+        std::cout << m_collection[i]->getActif() << std::endl;
     }
     std::cout << std::endl;
 }
@@ -60,8 +61,10 @@ void User::afficheCollection() {
 
 void User::afficherDeck() {
     for (int i = 0; i < m_deck.size(); i++) {
-        std::cout << "Carte " << i + 1 << ": " << std::endl;
-        m_deck[i]->afficherCarte();
+        if (m_deck[i]->getActif() == 0) {
+            std::cout << "Carte " << i + 1 << ": " << std::endl;
+            m_deck[i]->afficherCarte();
+        }
     }
 }
 
@@ -90,9 +93,9 @@ void User::creerDeck() {
     } else {
         std::cout << "Veuillez entrer les index des cartes que vous souhaitez sélectionner" << std::endl;
         for (int i = 0; i < 21; i++) {
-            std::cout << "Carte " << i+1 << ") " << std::endl;
+            std::cout << "Carte " << i + 1 << ") " << std::endl;
             std::cin >> index;
-            index-=1;
+            index -= 1;
             m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
 
@@ -155,7 +158,8 @@ void User::creerPioche() {
     ///https://en.cppreference.com/w/cpp/algorithm/random_shuffle
 
     for (int i = 0; i < m_deck.size(); i++) {
-        m_pioche.push(m_deck[i]);
+        if(m_deck[i]->getActif()==0)
+            m_pioche.push(m_deck[i]);
     }
     /// Ici on a copié le vecteur melangé dans une queue
 }
@@ -232,19 +236,32 @@ void User::tirerCarteEnjeu() {
 
 int User::proposerCarte() {
     int choix = 0;
+    Carte *tampon;
+
     m_pioche.front()->afficherCarte();
     std::cout << "Voulez vous jouer cette carte ? " << std::endl;
     std::cin >> choix;
+    if(choix==1) {
+        m_pioche.front()->setActif(1);
+    }else {
+        tampon = m_pioche.front();
+        m_pioche.push(tampon);
+        m_pioche.pop();
+    }
+
+
     return choix;
 }
 
 void User::attaquer(User &joueurAdverse, int nbAttaque) {
-    int a=0;
-    if(joueurAdverse.m_creatureActive->getIp()<=m_creatureActive->getHpAttaquer(nbAttaque)){ // si le nombre de points de vie de la carte est inférieur que le HP qde celle qui attaque
-        a = m_creatureActive->getHpAttaquer(nbAttaque)-joueurAdverse.m_creatureActive->getIp(); // Différence de points de vie
+    int a = 0;
+    if (joueurAdverse.m_creatureActive->getIp() <= m_creatureActive->getHpAttaquer(
+            nbAttaque)) { // si le nombre de points de vie de la carte est inférieur que le HP qde celle qui attaque
+        a = m_creatureActive->getHpAttaquer(nbAttaque) -
+            joueurAdverse.m_creatureActive->getIp(); // Différence de points de vie
         joueurAdverse.m_creatureActive->enleverIp(joueurAdverse.m_creatureActive->getIp());
         joueurAdverse.enleverPointsVie(a);
-    } else if(joueurAdverse.m_creatureActive->getIp()>m_creatureActive->getHpAttaquer(nbAttaque)){
+    } else if (joueurAdverse.m_creatureActive->getIp() > m_creatureActive->getHpAttaquer(nbAttaque)) {
         joueurAdverse.m_creatureActive->enleverIp(m_creatureActive->getHpAttaquer(nbAttaque));
     }
 }
@@ -252,9 +269,10 @@ void User::attaquer(User &joueurAdverse, int nbAttaque) {
 
 void User::placer(User &joueur1, User &joueur2) {
     int a = 0, b = 0;
+
     std::string name;
     int choix = 0;
-    int nomAttaque=0;
+    int numeroAttaque = 0;
     if (m_pioche.front()->getType() == "Creature") {
         m_creatureActive = m_pioche.front();
 
@@ -266,35 +284,34 @@ void User::placer(User &joueur1, User &joueur2) {
             if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
                 a = 1;
             }
-            if(m_creatureActive->compareAvecEnergie2(m_energieDisponible)){
-                b=1;
+            if (m_creatureActive->compareAvecEnergie2(m_energieDisponible)) {
+                b = 1;
             }
-            if(a==1 && b==1){
+            if (a == 1 && b == 1) {
                 std::cout << "2 attaques possibles " << std::endl;
                 m_creatureActive->getNomAttaque(1);
                 m_creatureActive->getNomAttaque(2);
-                std::cout<<"Quelle attaque voulez vous utiliser ?"<<std::endl;
-                std::cin>>nomAttaque;
-                attaquer(joueur1, nomAttaque);
+                std::cout << "Quelle attaque voulez vous utiliser ?" << std::endl;
+                std::cin >> numeroAttaque;
+                attaquer(joueur1, numeroAttaque);
 
-            }else if (a==1){
+            } else if (a == 1) {
                 std::cout << "1 attaque possible (attaque 1) " << std::endl;
                 m_creatureActive->getNomAttaque(1);
-                attaquer(joueur1,1);
+                attaquer(joueur1, 1);
                 // : On montre les attaques
-            }else if (b==1){
+            } else if (b == 1) {
                 std::cout << "1 attaque possible (attaque 2) " << std::endl;
                 m_creatureActive->getNomAttaque(2);
-                attaquer(joueur1,2);
+                attaquer(joueur1, 2);
                 // : On montre les attaques
 
-            }else {
+            } else {
                 std::cout << "Vous n'avez pas assez d'énergie pour attaquer" << std::endl;
             }
-
-                m_pioche.pop();
-
         }
+        m_pioche.pop();
+
     } else if (m_pioche.front()->getType() == "Energie") {
         m_energies.push_back(m_pioche.front());
         name = m_pioche.front()->getNom();
@@ -310,38 +327,88 @@ void User::placer(User &joueur1, User &joueur2) {
         m_pioche.pop();
 
     } else if (m_pioche.front()->getType() == "Speciale") {
-        std::cout << "A faire !" << std::endl;
+        name = m_pioche.front()->getNom();
+
+        if (name == "Increase IP") {
+            if (m_creatureActive == nullptr) {             // On verifie qu'il y a une creacture sur la table
+                m_pointsVie += 3;
+
+            } else
+                m_creatureActive->setIp(3);
+
+        } else if (name == "Destroyer") {
+
+            joueur1.enleverIpCarteOuJoueur(2);
+
+        } else if (name == "Trainer Power") {
+            if (m_creatureActive == nullptr) {
+                std::cout << "Votre carte ne peut pas être utilisé car vous n'avez pas de créature sur le plateau"
+                          << std::endl;
+            } else
+                m_creatureActive->getChangeHpAttaque(1);
+
+        } else if (name == "Recover") {
+            std::cout << "Cimetiere a creer" << std::endl;
+
+        } else if (name == "Carde thief") {
+
+           enleverIpCarteOuJoueur(3);
+            volerCarte(joueur1);
+
+        } else
+            joueur1.afficherDeck();
     }
 }
 
 void User::enleverPvAdversaire(int hp) {
-    m_pointsVie-=hp;
+    m_pointsVie -= hp;
 }
 
 int User::getIp() {
     return m_creatureActive->getIp();
 }
 
+int User::getCreatureActive() {
+    if (m_creatureActive == nullptr) {
+        return 0;
+    } else
+        return 0;
+}
+
+void User::volerCarte(User &joueurAdverse) {
+    Carte *tampon;
+    int aleatoir = 0;
+    aleatoir = rand() % joueurAdverse.m_deck.size();
+    tampon = joueurAdverse.m_deck[aleatoir];
+    m_deck.push_back(tampon);
+    joueurAdverse.m_deck.erase(joueurAdverse.m_deck.cbegin() + aleatoir);
+    joueurAdverse.creerPioche();
+    creerPioche();
+
+}
+
+void User::enleverIpCarteOuJoueur(int hp){
+
+    int diff=0;
+
+    if (m_creatureActive == nullptr || m_creatureActive->getIp() <= hp) {
+        if (m_creatureActive == nullptr) {
+            m_pointsVie -= hp;
+
+        } else {
+            diff = hp - m_creatureActive->getIp();
+            if (diff == 0) {
+                m_creatureActive->enleverIp(hp);
+            } else {
+                m_creatureActive->enleverIp(m_creatureActive->getIp());
+                enleverPvAdversaire(diff);
+            }
+        }
+    } else
+        m_creatureActive->enleverIp(hp);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 
 ///

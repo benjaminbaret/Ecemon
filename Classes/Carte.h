@@ -17,14 +17,14 @@ protected :
     std::string m_rarete;
     std::string m_nom;
     std::string m_description;
-    bool m_active;
+    int m_active;
     int m_cycleVie;
     int valeur;
 
 public:
-    Carte(std::string &nom, bool actif = false);
+    Carte(std::string &nom);
 
-    Carte(std::string &nom, std::string &description, bool active);
+    Carte(std::string &nom, std::string &description);
 
     virtual ~Carte() = default;
 
@@ -44,9 +44,15 @@ public:
 
     virtual int getIp();
 
-   virtual void enleverIp(int nbHp);
+    virtual void enleverIp(int nbHp);
 
+    virtual void setIp(int ip);
 
+    virtual void getChangeHpAttaque(int hp);
+
+    int getActif();
+
+    void setActif(int actif);
 
 
 };

@@ -42,10 +42,7 @@ public:
     void enleverPvAdversaire(int hp);
     int getIp();
     void attaquer(User &joueurAdverse,int nbAttaque);
-
-
-
-        void creerDeck();
+    void creerDeck();
 
     void creerPioche();
 
@@ -60,6 +57,13 @@ public:
     void remplirCollection(Carte* maCarte);
 
     void enleverPointsVie(int nbHp);
+
+    int getCreatureActive();
+
+    void volerCarte(User &joueurAdverse);
+
+    void enleverIpCarteOuJoueur(int hp);
+
 
 
     ///

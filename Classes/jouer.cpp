@@ -8,20 +8,42 @@
 
 
 void jouer(User &joueur1, User &joueur2) {
-
+    int isEnd=1;
     if (tirageJoueur(joueur1, joueur2)) { // tirage joueur vaut 1 donc JOUEUR 2 qui commence
         joueur1.tirerCarteEnjeu();
         joueur2.tirerCarteEnjeu();
-
-        if (joueur2.proposerCarte()) {
-            joueur2.placer(joueur1,joueur2);
+        do {
 
 
-        }
+            std::cout << "Au tour de " << joueur2.getNom() << " de jouer" << std::endl;
+            if (joueur2.proposerCarte()) {
+                joueur2.placer(joueur1, joueur2);
+            }
+
+            std::cout << "Au tour de " << joueur1.getNom() << " de jouer" << std::endl;
+            if (joueur1.proposerCarte()) {
+                joueur1.placer(joueur1, joueur2);
+            }
+        }while (isEnd);
 
     } else {
-        // On a 0 renvoyé ici
+        joueur1.tirerCarteEnjeu();
+        joueur2.tirerCarteEnjeu();
+        do {
+
+            std::cout << "Au tour de " << joueur1.getNom() << " de jouer" << std::endl;
+            if (joueur1.proposerCarte()) {
+                joueur1.placer(joueur1, joueur2);
+            }
+            std::cout << "Au tour de " << joueur2.getNom() << " de jouer" << std::endl;
+            if (joueur2.proposerCarte()) {
+                joueur2.placer(joueur1, joueur2);
+            }
+        }while (isEnd);
+
     }
+    // On a 0 renvoyé ici
+
 }
 int tirageJoueur(const User& joueur1, const User& joueur2) {
     int commence;

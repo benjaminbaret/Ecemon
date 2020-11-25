@@ -6,12 +6,12 @@
 #include <iostream>
 #include <vector>
 
-Carte::Carte(std::string& nom, bool active)
-        :m_nom{nom}
+Carte::Carte(std::string& nom)
+        :m_nom{nom},m_active{0}
 {}
 
-Carte::Carte(std::string& nom, std::string& description, bool active)
-        :m_nom{nom}, m_description(description)
+Carte::Carte(std::string& nom, std::string& description)
+        :m_nom{nom}, m_description(description),m_active{0}
 {}
 
 std::string Carte::getNom() {
@@ -45,5 +45,14 @@ int Carte::getIp() {
 
 void Carte::enleverIp(int nbHp){}
 
+void Carte::setIp(int ip) {}
 
+void Carte::getChangeHpAttaque(int hp){}
 
+int Carte::getActif() {
+    return m_active;
+}
+
+void Carte::setActif(int actif) {
+    m_active=actif;
+}
