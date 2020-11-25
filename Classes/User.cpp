@@ -18,6 +18,7 @@
 
 
 User::User() {
+
     for (int i = 0; i < 16; i++) {
         nombreCartesCategories.push_back(0);
     }
@@ -29,7 +30,14 @@ User::~User() {
     }
 }
 
-User::User(std::string nom) : m_nom(nom), m_creatureActive(nullptr), m_pointsVie(20) {}
+User::User(std::string nom) : m_nom(nom){
+    m_energieDisponible.SportRace =0;
+    m_energieDisponible.FPS =0;
+    m_energieDisponible.RPG =0;
+    m_energieDisponible.Adventure =0;
+    m_pointsVie=20;
+    m_creatureActive = nullptr;
+}
 
 
 std::string User::getNom() const {
@@ -238,7 +246,9 @@ int User::proposerCarte() {
     int choix = 0;
     Carte *tampon;
 
-    m_pioche.front()->afficherCarte();
+    std::cout << "Carte piochee : " << std::endl;
+    m_pioche.front()->afficherResumeCarte();
+    //m_pioche.front()->afficherCarte();
     std::cout << "Voulez vous jouer cette carte ? " << std::endl;
     std::cin >> choix;
     if (choix == 1) {
@@ -373,6 +383,10 @@ void User::enleverPvAdversaire(int hp) {
     m_pointsVie -= hp;
 }
 
+int User::getIpJoueur(){
+    return m_pointsVie;
+}
+
 int User::getIp() {
     return m_creatureActive->getIp();
 }
@@ -445,3 +459,15 @@ int User ::verificationFinJeu() {
 
 }
 
+
+
+void User::afficherResume(){
+    std::cout << "Au tour de : " << getNom()<< ", vie :  " << getIpJoueur() << std::endl;
+    std::cout << m_pioche.size()<< " cartes dans la pioche" << std::endl;
+    if(m_creatureActive== nullptr)
+        std::cout << "Creature active : ", m_creatureActive->afficherResumeCarte();
+    else
+        std::cout << "Aucune creature active" << std::endl;
+    std::cout << " Energies disponibles : ", afficherEnergiesNecessaires(m_energieDisponible);
+    std::cout << "Nb cartes au cimetiere : " << m_cimetiere.size() << std::endl;
+}

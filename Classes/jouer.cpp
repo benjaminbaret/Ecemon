@@ -13,16 +13,13 @@ void jouer(User &joueur1, User &joueur2) {
         joueur1.tirerCarteEnjeu();
         joueur2.tirerCarteEnjeu();
         do {
-
-
-            std::cout << "Au tour de " << joueur2.getNom() << " de jouer" << std::endl;
+            joueur2.afficherResume();
             if (joueur2.proposerCarte()) {
                 joueur2.placer(joueur1, joueur2);
                 joueur2.verificationIpCreature();
                 isEnd=joueur2.verificationFinJeu();
             }
-
-            std::cout << "Au tour de " << joueur1.getNom() << " de jouer" << std::endl;
+            joueur1.afficherResume();
             if (joueur1.proposerCarte()) {
                 joueur1.placer(joueur1, joueur2);
                 joueur1.verificationIpCreature();
@@ -35,15 +32,14 @@ void jouer(User &joueur1, User &joueur2) {
         joueur1.tirerCarteEnjeu();
         joueur2.tirerCarteEnjeu();
         do {
-
-            std::cout << "Au tour de " << joueur1.getNom() << " de jouer" << std::endl;
+            joueur1.afficherResume();
             if (joueur1.proposerCarte()) {
                 joueur1.placer(joueur1, joueur2);
                 joueur1.verificationIpCreature();
                 isEnd=joueur1.verificationFinJeu();
 
             }
-            std::cout << "Au tour de " << joueur2.getNom() << " de jouer" << std::endl;
+            joueur2.afficherResume();
             if (joueur2.proposerCarte()) {
                 joueur2.placer(joueur1, joueur2);
                 joueur2.verificationIpCreature();

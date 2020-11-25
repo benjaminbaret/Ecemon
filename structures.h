@@ -10,6 +10,8 @@ typedef struct {
     int FPS, Adventure, RPG, SportRace;
 } StructureEnergie;
 
+void afficherEnergiesNecessaires(StructureEnergie energies);
+
 bool operator == (StructureEnergie energieJoueur, StructureEnergie energieCarte);
 
 #endif //ECEMON_STRUCTURES_H

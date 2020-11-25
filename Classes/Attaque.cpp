@@ -6,6 +6,7 @@
 #include <iostream>
 #include <vector>
 #include "Energie.h"
+#include "structures.h"
 
 
 Attaque::Attaque(std::string nomAttaque1, std::string nomAttaque2, int hpAttaque1, int hpAttaque2, StructureEnergie NRJAttaque1, StructureEnergie NRJAttaque2)
@@ -45,6 +46,16 @@ void Attaque::changeHpAttaque(int hp){
     m_hpAttaque1+=hp;
     m_hpAttaque2+=hp;
 }
+
+
+
+void Attaque::afficherResumeAttaque() {
+    std::cout << "Attaques : -" << m_nomAttaque1 << ", HP = "<< m_hpAttaque1, afficherEnergiesNecessaires(m_besoinNRJAttaque1);
+    std::cout << "           -" << m_nomAttaque2 << ", HP = "<< m_hpAttaque2, afficherEnergiesNecessaires(m_besoinNRJAttaque2);
+
+}
+
+
 
 
 

@@ -62,6 +62,16 @@ void Creature::setIp(int ip) {
 void Creature::getChangeHpAttaque(int hp) {
     m_attaque.changeHpAttaque(hp);
 }
+#include <stdio.h>
 
+void Creature::afficherResumeCarte() {
+
+
+    std::cout << "---------------------------------------------------------------------------------" << std::endl;
+    std::cout << "Creature : " << m_nom << " Ip =" << m_ip << std::endl;
+    m_attaque.afficherResumeAttaque();
+    std::cout << "---------------------------------------------------------------------------------" << std::endl;
+
+}
 
 

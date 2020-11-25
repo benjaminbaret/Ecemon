@@ -14,3 +14,10 @@ std::string  Speciale::getType() {
     return "Speciale";
 }
 
+void Speciale::afficherResumeCarte(){
+    std::cout << "Carte Spécial :" << m_nom << std::endl;
+    std::cout << "Description: " << m_description << std::endl;
+}
+
+
+
