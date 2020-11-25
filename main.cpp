@@ -31,6 +31,7 @@ int main() {
 
     while (isEnd) {
 
+
         donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
         isEnd = gestionMenu(donneesJoueurs);
 
@@ -40,6 +41,7 @@ int main() {
         } else if (isEnd == 3) {
             User joueur1;
             User joueur2;
+
 
             if (donneesJoueurs.size() >= 2) {
                 std::cout << joueur1.getIpJoueur() << std::endl;
