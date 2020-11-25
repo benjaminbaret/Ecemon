@@ -82,7 +82,7 @@ void User::creerDeck() {
     std::cout << "Votre collection :" << std::endl;
     afficheCollection();
     std::cout << "Voulez vous générer un deck aléatoire ? 1 pour oui, 0 pou non" << std::endl;
-    std::cin >> choix;
+    choix = getint();
 
     if (choix) {
         for (int i = 0; i < 21; i++) {
@@ -94,7 +94,7 @@ void User::creerDeck() {
         std::cout << "Veuillez entrer les index des cartes que vous souhaitez sélectionner" << std::endl;
         for (int i = 0; i < 21; i++) {
             std::cout << "Carte " << i + 1 << ") " << std::endl;
-            std::cin >> index;
+            index = getint();
             index -= 1;
             m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
@@ -104,12 +104,12 @@ void User::creerDeck() {
     do {
         std::cout << "Voici votre Deck, voulez vous le modifier ? 1 pour oui, 0 pour non" << std::endl;
         afficherDeck();
-        std::cin >> choix;
+        choix = getint();
         if (choix) {
 
             do {
                 std::cout << "Quelle carte voulez voulez vous echanger ?" << std::endl;
-                std::cin >> index;
+                index = getint();
                 index -= 1;
 
                 if (index > m_deck.size() || index < 0) {
@@ -125,7 +125,7 @@ void User::creerDeck() {
                 efface = true;
                 std::cout << "Par quelle carte voulez vous la remplacer ? (voir collection pour l'index)"
                           << std::endl;
-                std::cin >> index2;
+                index2 = getint();
                 index2 -= 1;
 
                 if (index2 > m_collection.size() || index2 < 0) {
@@ -240,7 +240,7 @@ int User::proposerCarte() {
 
     m_pioche.front()->afficherCarte();
     std::cout << "Voulez vous jouer cette carte ? " << std::endl;
-    std::cin >> choix;
+    choix = getint();
     if (choix == 1) {
         m_pioche.front()->setActif(1);
         for(auto i=0; i < m_deck.size(); i++){
@@ -284,7 +284,7 @@ void User::placer(User &joueur1, User &joueur2) {
 
         std::cout << "Voulez vous attaquer ? " << std::endl;
 
-        std::cin >> choix;
+        choix = getint();
         if (choix) {
             if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
                 a = 1;
@@ -297,7 +297,7 @@ void User::placer(User &joueur1, User &joueur2) {
                 m_creatureActive->getNomAttaque(1);
                 m_creatureActive->getNomAttaque(2);
                 std::cout << "Quelle attaque voulez vous utiliser ?" << std::endl;
-                std::cin >> numeroAttaque;
+                numeroAttaque = getint();
                 attaquer(joueur1, numeroAttaque);
 
             } else if (a == 1) {

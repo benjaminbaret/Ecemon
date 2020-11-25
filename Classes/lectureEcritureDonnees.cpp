@@ -179,6 +179,29 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
     donneesJoueurs = lectureDonnees("../Classes/fichier.csv");
 }
 
+int getint()
+{
+    std::string str;
+    bool done = true;
+
+    do
+    {
+        done = true;
+        std::cin >> str;
+        if (str[0] == 0)
+        {
+            std::cout << std::endl;
+            done = false;
+            continue ;
+        }
+
+        for (int i = 0; str[i]; i++)
+            if (!isdigit(str[i]))
+                done = false;
+    } while (!done);
+    return (std::stoi(str));
+}
+
 
 /*void initialisationJoueurs(std::vector<structureInfoJoueurs>& infoJoueurs, User& joueur1, User& joueur2){
    std::string nomJoueur1;

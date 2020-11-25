@@ -27,6 +27,6 @@ std::string joueursCombattants(const std::vector<structureInfoJoueurs>& infoJoue
 
 void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoueurs>& donneesJoueurs);
 
-
+int getint();
 
 #endif //ESSAISDIVERS_LECTUREECRITUREDONNEES_H

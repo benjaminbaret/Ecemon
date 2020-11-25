@@ -19,7 +19,7 @@ int affichageMenu() {
     std::cout << "3) Lancer un combat" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 
-    std::cin >> choix;
+    choix = getint();
     return choix;
 }
 
