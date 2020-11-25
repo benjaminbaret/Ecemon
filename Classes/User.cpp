@@ -29,7 +29,7 @@ User::~User() {
     }
 }
 
-User::User(std::string nom) : m_nom(nom) {}
+User::User(std::string nom) : m_nom(nom), m_creatureActive(nullptr), m_pointsVie(20) {}
 
 
 std::string User::getNom() const {
@@ -158,7 +158,7 @@ void User::creerPioche() {
     ///https://en.cppreference.com/w/cpp/algorithm/random_shuffle
 
     for (int i = 0; i < m_deck.size(); i++) {
-        if(m_deck[i]->getActif()==0)
+        if (m_deck[i]->getActif() == 0)
             m_pioche.push(m_deck[i]);
     }
     /// Ici on a copié le vecteur melangé dans une queue
@@ -241,9 +241,14 @@ int User::proposerCarte() {
     m_pioche.front()->afficherCarte();
     std::cout << "Voulez vous jouer cette carte ? " << std::endl;
     std::cin >> choix;
-    if(choix==1) {
+    if (choix == 1) {
         m_pioche.front()->setActif(1);
-    }else {
+        for(auto i=0; i < m_deck.size(); i++){
+            if(m_deck[i]==m_pioche.front()){
+                m_deck.erase(m_deck.begin()+i);
+            }
+        }
+    } else {
         tampon = m_pioche.front();
         m_pioche.push(tampon);
         m_pioche.pop();
@@ -274,8 +279,8 @@ void User::placer(User &joueur1, User &joueur2) {
     int choix = 0;
     int numeroAttaque = 0;
     if (m_pioche.front()->getType() == "Creature") {
-        m_creatureActive = m_pioche.front();
 
+        m_creatureActive = m_pioche.front();
 
         std::cout << "Voulez vous attaquer ? " << std::endl;
 
@@ -348,15 +353,19 @@ void User::placer(User &joueur1, User &joueur2) {
                 m_creatureActive->getChangeHpAttaque(1);
 
         } else if (name == "Recover") {
-            std::cout << "Cimetiere a creer" << std::endl;
+            std::cout << "Decide ce qu'on fait si on récupère une carte créature" << std::endl;
 
         } else if (name == "Carde thief") {
 
-           enleverIpCarteOuJoueur(3);
+            enleverIpCarteOuJoueur(3);
             volerCarte(joueur1);
 
-        } else
+        } else if (name == "X-Ray")
             joueur1.afficherDeck();
+
+        m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
+        m_cimetiere.push_back(m_pioche.front()); // On ajoute la carte dans le cimetiere
+        m_pioche.pop(); // On enleve la carte de la pioche
     }
 }
 
@@ -377,19 +386,18 @@ int User::getCreatureActive() {
 
 void User::volerCarte(User &joueurAdverse) {
     Carte *tampon;
-    int aleatoir = 0;
-    aleatoir = rand() % joueurAdverse.m_deck.size();
-    tampon = joueurAdverse.m_deck[aleatoir];
-    m_deck.push_back(tampon);
-    joueurAdverse.m_deck.erase(joueurAdverse.m_deck.cbegin() + aleatoir);
-    joueurAdverse.creerPioche();
-    creerPioche();
-
+    int aleatoire = 0;
+    aleatoire = rand() % joueurAdverse.m_deck.size(); // On prend la position d'une des cartes du joueur adverse
+    tampon = joueurAdverse.m_deck[aleatoire]; // On retient l'adresse dans une variable tampon
+    m_deck.push_back(tampon); // Ajout au deck
+    joueurAdverse.m_deck.erase(joueurAdverse.m_deck.begin() + aleatoire);
+    joueurAdverse.creerPioche(); // On enlever la carte de la pioche en la regénérant
+    creerPioche(); // On ajoute à la pioche la nouvelle carte en regénérant la pioche
 }
 
-void User::enleverIpCarteOuJoueur(int hp){
+void User::enleverIpCarteOuJoueur(int hp) {
 
-    int diff=0;
+    int diff = 0;
 
     if (m_creatureActive == nullptr || m_creatureActive->getIp() <= hp) {
         if (m_creatureActive == nullptr) {
@@ -411,12 +419,29 @@ void User::enleverIpCarteOuJoueur(int hp){
 }
 
 
-///
-std::vector<Carte *> User::getDeck() {
-    return m_deck;
+void User::verificationIpCreature(){
+    if(m_creatureActive->getActif()==1){
+        if(m_creatureActive->getIp()<=0){ // Si n'a plus de points de vie
+            m_creatureActive->setActif(2); // Mise au cimetiere (cimetiere =2)
+            m_cimetiere.push_back(m_creatureActive); // Mise au cimetiere
+            m_creatureActive= nullptr; // plus de carte créature active pour le joueur
+            std::cout << "Votre creature a ete mise au cimetiere" << std::endl;
+        }
+    }
 }
 
-std::vector<Carte *> User::getCollection() {
-    return m_collection;
+int User ::verificationFinJeu() {
+    int nb=0;
+
+    for(int i=0; i<m_deck.size(); i++){
+        if(m_deck[i]->getType()=="Creature")
+            nb+=1;
+    }
+    if(nb==0){
+        std::cout << "Fin du jeu, plus de cartes créature" << std::endl;
+        return 0;
+    }else
+        return 1;
+
 }
-///
+

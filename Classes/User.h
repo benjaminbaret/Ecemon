@@ -20,7 +20,7 @@ private:
     int m_score;
     std::vector<Carte*> m_collection;
     std::queue<Carte *> m_pioche;
-    std::vector<Creature *> m_cimetiere;
+    std::vector<Carte *> m_cimetiere;
     std::vector<Carte *>m_energies;
     Carte* m_carteEnjeu;
     std::vector<Carte*>m_deck;
@@ -63,6 +63,16 @@ public:
     void volerCarte(User &joueurAdverse);
 
     void enleverIpCarteOuJoueur(int hp);
+
+    //Verifications
+
+    void verificationIpCreature();
+
+    int verificationFinJeu();
+
+
+    //Verification finJeu (on regarde que créature dans pioche ==> dans deck)
+
 
 
 

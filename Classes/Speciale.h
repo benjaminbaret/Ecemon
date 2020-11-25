@@ -20,14 +20,6 @@ public:
     std::string getType();
 
 
-    ///
-    void ressusiter_carte_cimetiere() const ;
-    void jouer_deux_fois_de_suite() const;
-    void voir_les_cartes_adverses(User adversaire);
-    void echange(User adversaire, User me);
-    void choisir_carte_picohe() const;
-        ///
-
 
 };
 
