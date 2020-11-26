@@ -34,49 +34,49 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
                         case 0:
-                            joueur.remplirCollection(new Creature(15, "Zelda", "Breath of wild", "Charge Attaque", 10, 12, zeldaAttaque1, zeldaAttaque2));
+                            joueur.remplirCollection(new Creature(15, "Zelda", "Breath of wild", "Charge Attaque", 10, 12, zeldaAttaque1, zeldaAttaque2,20));
                             break;
                         case 1:
-                            joueur.remplirCollection(new Creature(16, "Nathan Drake", "Knife throwin", "Gun shot", 10, 12, nathanAttaque1, nathanAttaque2));
+                            joueur.remplirCollection(new Creature(16, "Nathan Drake", "Knife throwin", "Gun shot", 10, 12, nathanAttaque1, nathanAttaque2,30));
                             break;
                         case 2:
-                            joueur.remplirCollection(new Creature(10, "Sonic", "Homing attaque", "Spin dash", 10, 12, sonicAttaque1, sonicAttaque2));
+                            joueur.remplirCollection(new Creature(10, "Sonic", "Homing attaque", "Spin dash", 10, 12, sonicAttaque1, sonicAttaque2,15));
                             break;
                         case 3:
-                            joueur.remplirCollection(new Creature(8, "Mario", "Smash Meteor", "Fire Ball", 10, 12, marioAttaque1, marioAttaque2));
+                            joueur.remplirCollection(new Creature(8, "Mario", "Smash Meteor", "Fire Ball", 10, 12, marioAttaque1, marioAttaque2,12));
                             break;
                         case 4:
-                            joueur.remplirCollection(new Creature(8, "Cloud Strife", "Ame Brave", "Meteorain", 10, 12, cloudAttaque1, cloudAttaque2));
+                            joueur.remplirCollection(new Creature(25, "Cloud Strife", "Ame Brave", "Meteorain", 10, 12, cloudAttaque1, cloudAttaque2,25));
                             break;
                         case 5:
-                            joueur.remplirCollection(new Energie("Adventure", "Adventure"));
+                            joueur.remplirCollection(new Energie("Adventure", "Adventure",5));
                             break;
                         case 6:
-                            joueur.remplirCollection(new Energie("RPG", "RPG"));
+                            joueur.remplirCollection(new Energie("RPG", "RPG",5));
                             break;
                         case 7:
-                            joueur.remplirCollection(new Energie("Sport / Race", "Sport / Race"));
+                            joueur.remplirCollection(new Energie("Sport / Race", "Sport / Race",5));
                             break;
                         case 8:
-                            joueur.remplirCollection(new Energie("FPS", "FPS"));
+                            joueur.remplirCollection(new Energie("FPS", "FPS",5));
                             break;
                         case 9:
-                            joueur.remplirCollection(new Speciale{"Increase IP", "Augmente x IP de la carte posée"});
+                            joueur.remplirCollection(new Speciale{"Increase IP", "Augmente x IP de la carte posée",10});
                             break;
                         case 10:
-                            joueur.remplirCollection(new Speciale{"Destroyer", "Enleve x IP¨adversaire"});
+                            joueur.remplirCollection(new Speciale{"Destroyer", "Enleve x IP¨adversaire",12});
                             break;
                         case 11:
-                            joueur.remplirCollection(new Speciale{"Trainer Power", "Augmente x PV de l'attaque en cours"});
+                            joueur.remplirCollection(new Speciale{"Trainer Power", "Augmente x PV de l'attaque en cours",12});
                             break;
                         case 12:
-                            joueur.remplirCollection(new Speciale{"Recover", "Récupere la derniere carte du cimetiere"});
+                            joueur.remplirCollection(new Speciale{"Recover", "Récupere la derniere carte du cimetiere",10});
                             break;
                         case 13:
-                            joueur.remplirCollection(new Speciale{"Card thief", "Vole une carte a l'adversaire mais enleve 3 IP à la carte posée"});
+                            joueur.remplirCollection(new Speciale{"Card thief", "Vole une carte a l'adversaire mais enleve 3 IP à la carte posée",15});
                             break;
                         case 14:
-                            joueur.remplirCollection(new Speciale{"X-Ray", "Permet de voir intégralement la pioche de l'adversaire"});
+                            joueur.remplirCollection(new Speciale{"X-Ray", "Permet de voir intégralement la pioche de l'adversaire",15});
                             break;
                         default:
                             std::cout << "Erreur d'initialisation des joueurs" << std::endl;

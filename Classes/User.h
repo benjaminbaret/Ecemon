@@ -27,6 +27,7 @@ private:
     std::vector<int> nombreCartesCategories;
     Carte* m_creatureActive;
     StructureEnergie m_energieDisponible;
+    int m_argent;
 public:
     User();
     ~User();
@@ -66,16 +67,17 @@ public:
 
     void enleverIpCarteOuJoueur(int hp);
 
-    //Verifications
-
     void verificationIpCreature();
 
     int verificationFinJeu();
 
     void afficherResume();
 
+    int getArgent();
 
-    //Verification finJeu (on regarde que créature dans pioche ==> dans deck)
+    void setArgent(int argent);
+
+
 
 
 

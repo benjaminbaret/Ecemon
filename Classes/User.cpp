@@ -26,6 +26,7 @@ User::User() {
     m_energieDisponible=StructureEnergie {0,0,0,0};
     m_pointsVie=20;
     m_score=0;
+    m_argent=20;
 
 }
 
@@ -67,7 +68,6 @@ void User::afficheCollection() {
     for (auto i = 0; i < m_collection.size(); i++) {
         std::cout << "Carte " << i + 1 << " ";
         m_collection[i]->afficherCarte();
-        std::cout << m_collection[i]->getActif() << std::endl;
     }
     std::cout << std::endl;
 }
@@ -398,6 +398,7 @@ void User::placer(User &joueur1, User &joueur2) {
             volerCarte(joueur1);
 
         } else if (name == "X-Ray")
+            std::cout<<"Voici la pioche de "<<joueur1.getNom()<<std::endl;
             joueur1.afficherDeck();
 
         m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
@@ -488,6 +489,7 @@ int User ::verificationFinJeu() {
 
 
 void User::afficherResume(){
+    std::cout<<"\n\n"<<std::endl;
     std::cout << "Au tour de : " << getNom()<< ", vie :  " << getIpJoueur() << std::endl;
     std::cout << m_pioche.size()<< " cartes dans la pioche" << std::endl;
     if(m_creatureActive!=nullptr)
@@ -496,4 +498,13 @@ void User::afficherResume(){
         std::cout << "Aucune creature active" << std::endl;
     std::cout << " Energies disponibles : ", afficherEnergiesNecessaires(m_energieDisponible);
     std::cout << "Nb cartes au cimetiere : " << m_cimetiere.size() << std::endl;
+    std::cout<<"\n"<<std::endl;
+}
+
+int User::getArgent(){
+    return m_argent;
+}
+
+void User::setArgent(int argent){
+    m_argent+=argent;
 }

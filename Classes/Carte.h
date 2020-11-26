@@ -13,18 +13,17 @@
 
 class Carte {
 protected :
-    // User m_user;
     std::string m_rarete;
     std::string m_nom;
     std::string m_description;
     int m_active;
     int m_cycleVie;
-    int valeur;
+    int m_valeur;
 
 public:
-    Carte(std::string &nom);
+    Carte(std::string &nom,int valeur);
 
-    Carte(std::string &nom, std::string &description);
+    Carte(std::string &nom, std::string &description, int valeur);
 
     virtual ~Carte() = default;
 
@@ -55,6 +54,10 @@ public:
     void setActif(int actif);
 
     virtual void afficherResumeCarte();
+
+    virtual void afficherResumeCarteBoutique();
+
+    virtual int getPrix();
 
 
 };

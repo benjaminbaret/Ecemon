@@ -15,10 +15,13 @@ class Speciale : public Carte{
 private:
 
 public:
-    Speciale(std::string nom, std::string description);
+    Speciale(std::string nom, std::string description, int valeur);
     ~Speciale()=default;
     std::string getType();
     void afficherResumeCarte();
+    void afficherResumeCarteBoutique();
+
+
 
 
 

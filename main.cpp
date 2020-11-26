@@ -16,13 +16,13 @@
 #include "Classes/lectureEcritureDonnees.h"
 #include "Classes/initialisationJoueurs.h"
 #include "Classes/jouer.h"
+#include "Classes/affichageEnConsole.h"
 #include <time.h>
 
 
 int main() {
 
     int isEnd = 1;
-    int nbCartes = 0;
     std::string nomJoueurComparaison;
     std::vector<structureInfoJoueurs> donneesJoueurs;
     structureInfoJoueurs nouveauJoueur;
@@ -41,17 +41,12 @@ int main() {
         } else if (isEnd == 3) {
             User joueur1;
             User joueur2;
-
-
             if (donneesJoueurs.size() >= 2) {
-                std::cout << joueur1.getIpJoueur() << std::endl;
-                std::cout << joueur2.getIpJoueur() << std::endl;
 
                 initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
                 initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
-                std::cout << joueur1.getIpJoueur() << std::endl;
-                std::cout << joueur2.getIpJoueur() << std::endl;
+
 
                 initialisationDeckPiocheJoueur(joueur1);
                 initialisationDeckPiocheJoueur(joueur2);
@@ -64,9 +59,18 @@ int main() {
                 enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
                 donneesJoueurs.clear();
 
+
             } else {
                 std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;
             }
+
+        } else if(isEnd==4){
+            User essai1;
+            User essai2;
+
+            essai1.setNom("nico");
+            essai2.setNom("ben");
+            acheter(essai1,essai2);
 
         }
 

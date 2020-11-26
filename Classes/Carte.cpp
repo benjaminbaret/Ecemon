@@ -6,12 +6,12 @@
 #include <iostream>
 #include <vector>
 
-Carte::Carte(std::string& nom)
-        :m_nom{nom},m_active{0}
+Carte:: Carte(std::string& nom,int valeur)
+        :m_nom{nom},m_active{0},m_valeur{valeur}
 {}
 
-Carte::Carte(std::string& nom, std::string& description)
-        :m_nom{nom}, m_description(description),m_active{0}
+Carte::Carte(std::string& nom, std::string& description, int valeur)
+        :m_nom{nom}, m_description(description),m_active{0},m_valeur{valeur}
 {}
 
 std::string Carte::getNom() {
@@ -60,4 +60,10 @@ int Carte::getActif() {
 
 void Carte::setActif(int actif) {
     m_active=actif;
+}
+void Carte::afficherResumeCarteBoutique(){
+}
+
+int  Carte::getPrix() {
+    return m_valeur;
 }

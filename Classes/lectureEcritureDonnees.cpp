@@ -74,7 +74,6 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
     return infoJoueurs;
 }
 
-
 /// Fonction qui sera utilisés dans une méthode de User pour écrire les données car accès en private aux données du User
 
 void writeFile(const std::string &path, const std::vector<structureInfoJoueurs> &donneesJoueurs) {

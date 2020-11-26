@@ -18,7 +18,7 @@ private:
     int m_ip;
     Attaque m_attaque;
 public:
-    Creature(int vie, std::string nom, std::string nomAttaque1, std::string nomAttaque2, int hpAttaque1, int hpAttaque2, StructureEnergie NRJAttaque1, StructureEnergie NRJAttaque2);
+    Creature(int vie, std::string nom, std::string nomAttaque1, std::string nomAttaque2, int hpAttaque1, int hpAttaque2, StructureEnergie NRJAttaque1, StructureEnergie NRJAttaque2,int valeur);
     ~Creature()=default;
     void afficherDescription();
     void enleverIp(int nbHp);
@@ -33,6 +33,7 @@ public:
     void setIp(int ip);
     void getChangeHpAttaque(int hp);
     void afficherResumeCarte();
+    void afficherResumeCarteBoutique();
 
 
 
@@ -41,7 +42,9 @@ public:
 
 
 
-        };
+
+
+};
 
 
 #endif //ECEMON_CREATURE_H

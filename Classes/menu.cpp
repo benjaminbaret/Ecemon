@@ -17,15 +17,14 @@ int affichageMenu() {
     std::cout << "1) Afficher les joueurs existants" << std::endl;
     std::cout << "2) Ajouter un joueur" << std::endl;
     std::cout << "3) Lancer un combat" << std::endl;
+    std::cout << "4) Boutique" << std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 
     std::cin >> choix;
     return choix;
 }
 
-void lancerCombat(){
 
-}
 
 void afficherJoueurs(const std::vector<structureInfoJoueurs>& donneesJoueurs){
     for(auto it = donneesJoueurs.cbegin(); it!=donneesJoueurs.cend(); it++){
@@ -57,6 +56,10 @@ int gestionMenu(std::vector<structureInfoJoueurs>& donneesJoueurs) {
                 break;
             }
             case 3: {
+                sortieBoucle=1;
+                break;
+            }
+            case 4:{
                 sortieBoucle=1;
                 break;
             }

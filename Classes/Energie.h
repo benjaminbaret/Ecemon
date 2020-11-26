@@ -15,11 +15,17 @@ class Energie : public Carte{
 private :
     std::string m_element;
 public :
-    Energie(std::string element, std::string nom);
+    Energie(std::string element, std::string nom, int valeur);
     virtual void afficherCarte();
     std::string getNom();
     std::string getType();
     ~Energie()=default;
+    void afficherResumeCarte();
+    void afficherResumeCarteBoutique();
+
+
+
+
 };
 
 

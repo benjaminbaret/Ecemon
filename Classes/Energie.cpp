@@ -8,8 +8,8 @@
 #include "Carte.h"
 
 
-Energie::Energie(std::string element,std::string nom)
-        :m_element{std::move(element)},Carte(nom)
+Energie::Energie(std::string element,std::string nom,int valeur)
+        :m_element{std::move(element)},Carte(nom,valeur)
 {}
 
 void Energie::afficherCarte() {
@@ -23,3 +23,15 @@ std::string Energie::getNom() {
 std::string Energie::getType() {
     return "Energie";
 }
+
+void Energie::afficherResumeCarte(){
+    std::cout<<std::endl;
+    afficherCarte();
+}
+
+void Energie::afficherResumeCarteBoutique() {
+    afficherResumeCarte();
+    std::cout << "-------Cout de la carte : " << m_valeur << "-------" << std::endl;
+}
+
+
