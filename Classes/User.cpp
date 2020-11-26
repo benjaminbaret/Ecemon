@@ -476,15 +476,23 @@ void User::verificationIpCreature() {
 int User ::verificationFinJeu() {
     int nb=0;
 
-    for(int i=0; i<m_deck.size(); i++){
-        if(m_deck[i]->getType()=="Creature")
-            nb+=1;
+    if(!m_deck.empty()){
+        for(int i=0; i<m_deck.size(); i++){
+            if(m_deck[i]->getType()=="Creature")
+                nb+=1;
+        }
+        if(nb==0){
+            std::cout << "Fin du jeu, plus de cartes creature " << std::endl;
+            return 0;
+        }else
+            return 1;
     }
-    if(nb==0){
-        std::cout << "Fin du jeu, plus de cartes créature" << std::endl;
+    else {
+        std::cout << "Fin du jeu, plus de cartes cartes " << std::endl;
         return 0;
-    }else
-        return 1;
+    }
+
+
 
 }
 
@@ -519,7 +527,7 @@ void User::affichagePlateau(User &joueurAdverse){
         b = "Pas de creature";
 
 
-Color(10,0);
+//Color(10,0);
     std::cout<<"                     Plateau de "<<getNom()<<"                                         Plateau de "<<joueurAdverse.getNom()<<std::endl;
     std::cout<<"+-----------------------------------------------------------+----------------------------------------------------------+"
                "|                                                           |                                                          |"
@@ -545,9 +553,11 @@ Color(10,0);
                "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
                "|                            "<<m_pioche.size()<<"                "<<m_cimetiere.size()<<"            |                          "<<joueurAdverse.m_pioche.size()<<"                 "<<joueurAdverse.m_cimetiere.size()<<"           |"<<std::endl;
     std::cout<<"+-----------------------------------------------------------+----------------------------------------------------------+ "<<std::endl;
-    Color(11,0);
+//    Color(11,0);
 
 }
+
+
 
 
 

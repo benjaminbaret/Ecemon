@@ -8,18 +8,18 @@
 #include "Creature.h"
 #include "Speciale.h"
 #include "lectureEcritureDonnees.h"
-#include "windows.h"
+//#include "windows.h"
 
 
 void clearConsole() {
     std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
 }
 
-void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de couleurs
+/*void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de couleurs
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
-}
+}*/
 
 
 void afficherBoutique(structureInfoJoueurs& joueur) {
@@ -80,9 +80,9 @@ void afficherBoutique(structureInfoJoueurs& joueur) {
             << "------------------------------------------------------------------------------------------------------"
             << "\n" << std::endl;
     for (int i = 0; i < boutique.size(); i++) {
-        Color(12,0);
+        //Color(12,0);
         std::cout << "Carte " << i + 1 << std::endl;
-        Color(11,0);
+      //  Color(11,0);
         boutique[i]->afficherResumeCarteBoutique();
         std::cout << "\n" << std::endl;
     }

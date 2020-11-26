@@ -45,39 +45,23 @@ public:
     void attaquer(User &joueurAdverse,int nbAttaque);
     void creerDeck();
     int getIpJoueur();
-
-
     void creerPioche();
-
     void setNom(std::string nom);
-
-    void verifierFile();
-
     void afficherNom();
-
     void setScore(int score);
-
     void remplirCollection(Carte* maCarte);
-
     void enleverPointsVie(int nbHp);
-
     int getCreatureActive();
-
     void volerCarte(User &joueurAdverse);
-
     void enleverIpCarteOuJoueur(int hp);
-
     void verificationIpCreature();
-
     int verificationFinJeu();
-
     void afficherResume();
-
     int getArgent();
-
     void setArgent(int argent);
-
     void affichagePlateau(User &joueurAdverse);
+
+    void verifierFinPartie();
 
 
 

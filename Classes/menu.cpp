@@ -27,8 +27,10 @@ int affichageMenu() {
 
 
 void afficherJoueurs(const std::vector<structureInfoJoueurs>& donneesJoueurs){
+    std::cout << "Joueurs : " << std::endl;
+
     for(auto it = donneesJoueurs.cbegin(); it!=donneesJoueurs.cend(); it++){
-        std::cout << "Joueur : " << it->pseudo << std::endl;
+        std::cout<< "- " << it->pseudo << ", argent : " << it->donnees[16]<<std::endl;
     }
     std::cout << std::endl;
 }
