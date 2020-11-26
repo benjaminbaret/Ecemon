@@ -21,6 +21,11 @@ std::string Carte::getNom() {
 void Carte::afficherCarte() {
     std::cout<<m_nom<<std::endl;
 }
+
+void Carte::afficherResumeCarte() {
+    std::cout << m_nom << std::endl;
+}
+
 std::string Carte::getType(){
     return "Carte";
 }

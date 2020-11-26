@@ -43,6 +43,8 @@ public:
     int getIp();
     void attaquer(User &joueurAdverse,int nbAttaque);
     void creerDeck();
+    int getIpJoueur();
+
 
     void creerPioche();
 
@@ -69,6 +71,8 @@ public:
     void verificationIpCreature();
 
     int verificationFinJeu();
+
+    void afficherResume();
 
 
     //Verification finJeu (on regarde que créature dans pioche ==> dans deck)

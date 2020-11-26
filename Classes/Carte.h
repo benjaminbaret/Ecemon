@@ -54,6 +54,8 @@ public:
 
     void setActif(int actif);
 
+    virtual void afficherResumeCarte();
+
 
 };
 

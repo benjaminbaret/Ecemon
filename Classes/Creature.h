@@ -32,6 +32,7 @@ public:
     int getHpAttaquer(int nbAttaque);
     void setIp(int ip);
     void getChangeHpAttaque(int hp);
+    void afficherResumeCarte();
 
 
 

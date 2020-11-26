@@ -31,6 +31,7 @@ int main() {
 
     while (isEnd) {
 
+
         donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
         isEnd = gestionMenu(donneesJoueurs);
 
@@ -41,10 +42,16 @@ int main() {
             User joueur1;
             User joueur2;
 
+
             if (donneesJoueurs.size() >= 2) {
+                std::cout << joueur1.getIpJoueur() << std::endl;
+                std::cout << joueur2.getIpJoueur() << std::endl;
+
                 initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
                 initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
+                std::cout << joueur1.getIpJoueur() << std::endl;
+                std::cout << joueur2.getIpJoueur() << std::endl;
 
                 initialisationDeckPiocheJoueur(joueur1);
                 initialisationDeckPiocheJoueur(joueur2);
