@@ -8,11 +8,19 @@
 #include "Creature.h"
 #include "Speciale.h"
 #include "lectureEcritureDonnees.h"
+#include "windows.h"
 
 
 void clearConsole() {
-    std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
+    std::cout << "\n\n\n\n\n\n\n\n\n\n\n\n\n" << std::endl;
 }
+
+void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de couleurs
+{
+    HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);
+}
+
 
 void afficherBoutique(structureInfoJoueurs& joueur) {
     int choix = 0;
@@ -72,14 +80,14 @@ void afficherBoutique(structureInfoJoueurs& joueur) {
             << "------------------------------------------------------------------------------------------------------"
             << "\n" << std::endl;
     for (int i = 0; i < boutique.size(); i++) {
-
+        Color(12,0);
         std::cout << "Carte " << i + 1 << std::endl;
-
+        Color(11,0);
         boutique[i]->afficherResumeCarteBoutique();
         std::cout << "\n" << std::endl;
     }
 
-    std::cout << joueur.pseudo << "Tapez 1 pour ajouter une ou des cartes" << std::endl;
+    std::cout << joueur.pseudo << ": Tapez 1 pour ajouter une ou des cartes" << std::endl;
     std::cin >> choix;
     if (choix) {
 
@@ -87,13 +95,17 @@ void afficherBoutique(structureInfoJoueurs& joueur) {
             std::cout << "Vous avez " << joueur.donnees[16] << " pieces a disposition" << std::endl;
             std::cout << "Quelle carte voulez vous acheter ?" << std::endl;
             std::cin >> carte;
-            carte -= 1;
-            if (boutique[carte]->getPrix() > joueur.donnees[16]) {
-                std::cout << "Vous ne pouvez pas acheter cette carte vous n'avez pas assez d'argent" << std::endl;
+            if( carte<=0||carte>15){
+                std::cout<<"La carte n'est pas disonible dans la boutique"<<std::endl;
             } else {
-                std::cout << "Ajout de la carte " << boutique[carte]->getNom() << " a votre collection" << std::endl;
-                joueur.donnees[16] = (joueur.donnees[16] - boutique[carte]->getPrix());
-                joueur.donnees[carte] +=1 ;
+                if (boutique[carte]->getPrix() > joueur.donnees[16]) {
+                    std::cout << "Vous ne pouvez pas acheter cette carte vous n'avez pas assez d'argent" << std::endl;
+                } else {
+                    std::cout << "Ajout de la carte " << boutique[carte]->getNom() << " a votre collection"
+                              << std::endl;
+                    joueur.donnees[16] = (joueur.donnees[16] - boutique[carte]->getPrix());
+                    joueur.donnees[carte] += 1;
+                }
             }
             std::cout << "Voulez vous achter une autre carte ?" << std::endl;
             std::cin >> choix;

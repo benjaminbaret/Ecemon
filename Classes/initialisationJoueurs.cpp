@@ -29,9 +29,9 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
     for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) {
         if (it->pseudo == nomJoueur) {
             joueur.setNom(it->pseudo);
-            for (int i = 0; i < it->donnees.size(); i++) {
-                joueur.setScore(it->donnees[15]);
-                joueur.setArgent(it->donnees[16]);
+            joueur.setScore(it->donnees[15]);
+            joueur.setArgent(it->donnees[16]);
+            for (int i = 0; i < 15; i++) {
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
                         case 0:

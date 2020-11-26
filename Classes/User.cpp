@@ -398,9 +398,10 @@ void User::placer(User &joueur1, User &joueur2) {
             enleverIpCarteOuJoueur(3);
             volerCarte(joueur1);
 
-        } else if (name == "X-Ray")
+        } else if (name == "X-Ray"){
             std::cout<<"Voici la pioche de "<<joueur1.getNom()<<std::endl;
             joueur1.afficherDeck();
+        }
 
         m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
         m_cimetiere.push_back(m_pioche.front()); // On ajoute la carte dans le cimetiere
@@ -492,13 +493,7 @@ int User ::verificationFinJeu() {
 void User::afficherResume(){
     std::cout<<"\n\n"<<std::endl;
     std::cout << "Au tour de : " << getNom()<< ", vie :  " << getIpJoueur() << std::endl;
-    std::cout << m_pioche.size()<< " cartes dans la pioche" << std::endl;
-    if(m_creatureActive!=nullptr)
-        std::cout << "Creature active : ", m_creatureActive->afficherResumeCarte();
-    else
-        std::cout << "Aucune creature active" << std::endl;
-    std::cout << " Energies disponibles : ", afficherEnergiesNecessaires(m_energieDisponible);
-    std::cout << "Nb cartes au cimetiere : " << m_cimetiere.size() << std::endl;
+    std::cout << "Energies disponibles : ", afficherEnergiesNecessaires(m_energieDisponible);
     std::cout<<"\n"<<std::endl;
 }
 
@@ -509,3 +504,54 @@ int User::getArgent(){
 void User::setArgent(int argent){
     m_argent=argent;
 }
+
+void User::affichagePlateau(User &joueurAdverse){
+
+    std::string a;
+    std::string b;
+    if(m_creatureActive!=nullptr)
+        a=m_creatureActive->getNom();
+    else
+        a = "Pas de creature";
+    if(joueurAdverse.m_creatureActive!= nullptr){
+     b=joueurAdverse.m_creatureActive->getNom();
+    } else
+        b = "Pas de creature";
+
+
+Color(10,0);
+    std::cout<<"                     Plateau de "<<getNom()<<"                                         Plateau de "<<joueurAdverse.getNom()<<std::endl;
+    std::cout<<"+-----------------------------------------------------------+----------------------------------------------------------+"
+               "|                                                           |                                                          |"
+               "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |  Energie |       | Creature |      | Speciale |      |     | Energie  |       | Creature |      | Speciale |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
+               "|         " << m_energies.size() <<"           "<<a<<"                       |           "<<joueurAdverse.m_energies.size()<<        "          "<<b<<  "                    |"<<std::endl;
+    std::cout<<"|                                                           |                                                          |"
+               "|                                                           |                                                          |"
+               "|                                                           |                                                          |"
+               "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |  Enjeux  |       |  Pioche  |      | Cimetiere|      |     | Enjeux   |       |  Pioche  |      |Cimetiere |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
+               "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
+               "|                            "<<m_pioche.size()<<"                "<<m_cimetiere.size()<<"            |                          "<<joueurAdverse.m_pioche.size()<<"                 "<<joueurAdverse.m_cimetiere.size()<<"           |"<<std::endl;
+    std::cout<<"+-----------------------------------------------------------+----------------------------------------------------------+ "<<std::endl;
+    Color(11,0);
+
+}
+
+
+
+
+
+
+

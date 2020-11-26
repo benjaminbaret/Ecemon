@@ -77,6 +77,9 @@ public:
 
     void setArgent(int argent);
 
+    void affichagePlateau(User &joueurAdverse);
+
+
 
 
 

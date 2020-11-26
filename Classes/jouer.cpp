@@ -13,12 +13,14 @@ void jouer(User &joueur1, User &joueur2) {
         joueur1.tirerCarteEnjeu();
         joueur2.tirerCarteEnjeu();
         do {
+            joueur2.affichagePlateau(joueur1);
             joueur2.afficherResume();
             if (joueur2.proposerCarte()) {
                 joueur2.placer(joueur1, joueur2);
                 joueur2.verificationIpCreature();
                 isEnd=joueur2.verificationFinJeu();
             }
+            joueur1.affichagePlateau(joueur2);
             joueur1.afficherResume();
             if (joueur1.proposerCarte()) {
                 joueur1.placer(joueur1, joueur2);
@@ -32,6 +34,7 @@ void jouer(User &joueur1, User &joueur2) {
         joueur1.tirerCarteEnjeu();
         joueur2.tirerCarteEnjeu();
         do {
+            joueur1.affichagePlateau(joueur2);
             joueur1.afficherResume();
             if (joueur1.proposerCarte()) {
                 joueur1.placer(joueur1, joueur2);
@@ -39,6 +42,7 @@ void jouer(User &joueur1, User &joueur2) {
                 isEnd=joueur1.verificationFinJeu();
 
             }
+            joueur2.affichagePlateau(joueur1);
             joueur2.afficherResume();
             if (joueur2.proposerCarte()) {
                 joueur2.placer(joueur1, joueur2);

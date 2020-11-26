@@ -11,6 +11,8 @@
 
 void clearConsole();
 
+void Color(int couleurDuTexte,int couleurDeFond);
+
 void afficherBoutique(structureInfoJoueurs& joueur);
 void acheter(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs);
 
