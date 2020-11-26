@@ -297,7 +297,7 @@ void User::placer(User &joueur1, User &joueur2) {
     int choix = 0;
     int remplacer = 0;
     int numeroAttaque = 0;
-    Carte * tampon;
+    Carte *tampon;
     if (m_pioche.front()->getType() == "Creature") {
         if (m_creatureActive != nullptr) {
             std::cout << "Vous avez deja une creature active voulez vous la remplacer ?" << std::endl;
@@ -313,93 +313,94 @@ void User::placer(User &joueur1, User &joueur2) {
         if (remplacer || m_creatureActive == nullptr) {
             m_creatureActive = m_pioche.front();
 
-        choix = getint();
-        if (choix) {
-            if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
-                a = 1;
-            }
-            if (m_creatureActive->compareAvecEnergie2(m_energieDisponible)) {
-                b = 1;
-            }
-            if (a == 1 && b == 1) {
-                std::cout << "2 attaques possibles " << std::endl;
-                m_creatureActive->getNomAttaque(1);
-                m_creatureActive->getNomAttaque(2);
-                std::cout << "Quelle attaque voulez vous utiliser ?" << std::endl;
-                numeroAttaque = getint();
-                attaquer(joueur1, numeroAttaque);
+            choix = getint();
+            if (choix) {
+                if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
+                    a = 1;
+                }
+                if (m_creatureActive->compareAvecEnergie2(m_energieDisponible)) {
+                    b = 1;
+                }
+                if (a == 1 && b == 1) {
+                    std::cout << "2 attaques possibles " << std::endl;
+                    m_creatureActive->getNomAttaque(1);
+                    m_creatureActive->getNomAttaque(2);
+                    std::cout << "Quelle attaque voulez vous utiliser ?" << std::endl;
+                    numeroAttaque = getint();
+                    attaquer(joueur1, numeroAttaque);
 
-            } else if (a == 1) {
-                std::cout << "1 attaque possible (attaque 1) " << std::endl;
-                m_creatureActive->getNomAttaque(1);
-                attaquer(joueur1, 1);
-                // : On montre les attaques
-            } else if (b == 1) {
-                std::cout << "1 attaque possible (attaque 2) " << std::endl;
-                m_creatureActive->getNomAttaque(2);
-                attaquer(joueur1, 2);
-                // : On montre les attaques
+                } else if (a == 1) {
+                    std::cout << "1 attaque possible (attaque 1) " << std::endl;
+                    m_creatureActive->getNomAttaque(1);
+                    attaquer(joueur1, 1);
+                    // : On montre les attaques
+                } else if (b == 1) {
+                    std::cout << "1 attaque possible (attaque 2) " << std::endl;
+                    m_creatureActive->getNomAttaque(2);
+                    attaquer(joueur1, 2);
+                    // : On montre les attaques
+
+                } else {
+                    std::cout << "Vous n'avez pas assez d'énergie pour attaquer" << std::endl;
+                }
+                m_pioche.pop();
 
             } else {
-                std::cout << "Vous n'avez pas assez d'énergie pour attaquer" << std::endl;
+                tampon = m_pioche.front();
+                m_pioche.pop();
+                m_pioche.push(tampon);
+            }
+
+        } else if (m_pioche.front()->getType() == "Energie") {
+            m_energies.push_back(m_pioche.front());
+            name = m_pioche.front()->getNom();
+            if (name == "FPS") {
+                m_energieDisponible.FPS += 1;
+            } else if (name == "RPG") {
+                m_energieDisponible.RPG += 1;
+            } else if (name == "Adventure") {
+                m_energieDisponible.Adventure += 1;
+            } else {
+                m_energieDisponible.SportRace += 1;
             }
             m_pioche.pop();
 
-        }else {
-            tampon = m_pioche.front();
-            m_pioche.pop();
-            m_pioche.push(tampon);
+        } else if (m_pioche.front()->getType() == "Speciale") {
+            name = m_pioche.front()->getNom();
+
+            if (name == "Increase IP") {
+                if (m_creatureActive == nullptr) {             // On verifie qu'il y a une creacture sur la table
+                    m_pointsVie += 3;
+
+                } else
+                    m_creatureActive->setIp(3);
+
+            } else if (name == "Destroyer") {
+
+                joueur1.enleverIpCarteOuJoueur(2);
+
+            } else if (name == "Trainer Power") {
+                if (m_creatureActive == nullptr) {
+                    std::cout << "Votre carte ne peut pas être utilisé car vous n'avez pas de créature sur le plateau"
+                              << std::endl;
+                } else
+                    m_creatureActive->getChangeHpAttaque(1);
+
+            } else if (name == "Recover") {
+                std::cout << "Decide ce qu'on fait si on récupère une carte créature" << std::endl;
+
+            } else if (name == "Card thief") {
+
+                enleverIpCarteOuJoueur(3);
+                volerCarte(joueur1);
+
+            } else if (name == "X-Ray")
+                joueur1.afficherDeck();
+
+            m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
+            m_cimetiere.push_back(m_pioche.front()); // On ajoute la carte dans le cimetiere
+            m_pioche.pop(); // On enleve la carte de la pioche
         }
-
-    } else if (m_pioche.front()->getType() == "Energie") {
-        m_energies.push_back(m_pioche.front());
-        name = m_pioche.front()->getNom();
-        if (name == "FPS") {
-            m_energieDisponible.FPS += 1;
-        } else if (name == "RPG") {
-            m_energieDisponible.RPG += 1;
-        } else if (name == "Adventure") {
-            m_energieDisponible.Adventure += 1;
-        } else {
-            m_energieDisponible.SportRace += 1;
-        }
-        m_pioche.pop();
-
-    } else if (m_pioche.front()->getType() == "Speciale") {
-        name = m_pioche.front()->getNom();
-
-        if (name == "Increase IP") {
-            if (m_creatureActive == nullptr) {             // On verifie qu'il y a une creacture sur la table
-                m_pointsVie += 3;
-
-            } else
-                m_creatureActive->setIp(3);
-
-        } else if (name == "Destroyer") {
-
-            joueur1.enleverIpCarteOuJoueur(2);
-
-        } else if (name == "Trainer Power") {
-            if (m_creatureActive == nullptr) {
-                std::cout << "Votre carte ne peut pas être utilisé car vous n'avez pas de créature sur le plateau"
-                          << std::endl;
-            } else
-                m_creatureActive->getChangeHpAttaque(1);
-
-        } else if (name == "Recover") {
-            std::cout << "Decide ce qu'on fait si on récupère une carte créature" << std::endl;
-
-        } else if (name == "Card thief") {
-
-            enleverIpCarteOuJoueur(3);
-            volerCarte(joueur1);
-
-        } else if (name == "X-Ray")
-            joueur1.afficherDeck();
-
-        m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
-        m_cimetiere.push_back(m_pioche.front()); // On ajoute la carte dans le cimetiere
-        m_pioche.pop(); // On enleve la carte de la pioche
     }
 }
 

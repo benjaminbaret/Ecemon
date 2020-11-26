@@ -95,7 +95,8 @@ void writeFile(const std::string &path, const std::vector<structureInfoJoueurs> 
     ofs.close();
 }
 
-void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
+void
+enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
                              User &joueur2) {
 
     std::vector<int> vecteurTransition;
@@ -128,13 +129,20 @@ joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std:
         std::cout << "Veuillez entrer le nom du Joueur que vous souhaitez séléctionner : " << std::endl;
         std::cin >> joueur;
         std::cout << std::endl;
+        clearConsole();
         if (nomJoueurComparaison == joueur) {
             std::cout << "Vous avez déjà sélectionné ce joueur," << std::endl;
         } else {
-            nomJoueurComparaison = joueur;
-            isEnd = 0;
+            for (const auto & donneesJoueur : donneesJoueurs) {
+                if (donneesJoueur.pseudo == joueur) {
+                    nomJoueurComparaison = joueur;
+                    isEnd = 0;
+                    break;
+                }
+            }
+            if (isEnd)
+                std::cout << "Le joueur " << joueur << " n'existe pas." << std::endl;
         }
-        clearConsole();
     }
     return joueur;
 }
@@ -155,16 +163,15 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
         std::cin >> nouveauJoueur.pseudo;
         for (int i = 0; i < donneesJoueurs.size(); i++) {
             if (donneesJoueurs[i].pseudo != nouveauJoueur.pseudo) {
-                nonUtilise+=1;
-            }
-            else{
+                nonUtilise += 1;
+            } else {
                 std::cout << "Pseudo déjà utilisé" << std::endl;
             }
         }
-        if(nonUtilise==donneesJoueurs.size()){
+        if (nonUtilise == donneesJoueurs.size()) {
             verification = 0;
         }
-        nonUtilise=0;
+        nonUtilise = 0;
     }
 
     std::cout << "Piochage aléatoire de 30 cartes pour vous constituer une collection" << std::endl;
@@ -179,27 +186,20 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
     donneesJoueurs = lectureDonnees("../Classes/fichier.csv");
 }
 
-int getint()
-{
+int getint() {
     std::string str;
-    bool done = true;
+    int nb;
 
-    do
-    {
-        done = true;
+    while (true) {
         std::cin >> str;
-        if (str[0] == 0)
-        {
-            std::cout << std::endl;
-            done = false;
-            continue ;
+        if (std::find_if(std::begin(str), std::end(str), [](unsigned char c) { return !std::isdigit(c); }) == std::end(str)) {
+            try {
+                nb = std::stoi(str);
+                return nb;
+            } catch (std::out_of_range e) {
+            }
         }
-
-        for (int i = 0; str[i]; i++)
-            if (!isdigit(str[i]))
-                done = false;
-    } while (!done);
-    return (std::stoi(str));
+    }
 }
 
 
