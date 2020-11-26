@@ -18,6 +18,7 @@ int affichageMenu() {
     std::cout << "2) Ajouter un joueur" << std::endl;
     std::cout << "3) Lancer un combat" << std::endl;
     std::cout << "4) Boutique" << std::endl;
+    std::cout << "5) Description des cartes (graphique)"<<std::endl;
     std::cout << "-------------------------------------------" << std::endl;
 
     std::cin >> choix;
@@ -62,6 +63,10 @@ int gestionMenu(std::vector<structureInfoJoueurs>& donneesJoueurs) {
                 break;
             }
             case 4:{
+                sortieBoucle=1;
+                break;
+            }
+            case 5:{
                 sortieBoucle=1;
                 break;
             }

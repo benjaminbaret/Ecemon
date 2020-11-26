@@ -15,12 +15,13 @@
 #include "Classes/menu.h"
 #include "Classes/lectureEcritureDonnees.h"
 #include "Classes/initialisationJoueurs.h"
+#include "Classes/affichageGraphique.h"
 #include "Classes/jouer.h"
 #include "Classes/affichageEnConsole.h"
 #include <time.h>
 
 
-int main() {
+int main(int argc, char **argv) {
 
     int isEnd = 1, verification = 0, debutJeu = 0;
     std::string nomJoueurComparaison;
@@ -85,6 +86,9 @@ int main() {
 
         } else if(isEnd==4){
             acheter(path, donneesJoueurs);
+        }
+        else if(isEnd==5){
+           affichageGraphique();
         }
 
         nomJoueurComparaison.clear();

@@ -39,7 +39,7 @@ public:
     std::vector<int> getInfoCartesJoueur();
     void tirerCarteEnjeu();
     int proposerCarte();
-    void placer(User &joueur1, User &joueur2);
+    void placer(User &joueurAdverse);
     void enleverPvAdversaire(int hp);
     int getIp();
     void attaquer(User &joueurAdverse,int nbAttaque);
@@ -60,19 +60,12 @@ public:
     int getArgent();
     void setArgent(int argent);
     void affichagePlateau(User &joueurAdverse);
-
-    void verifierFinPartie();
-
+    void echangeEnjeu(User &perdant);
 
 
 
 
 
-
-    ///
-    std::vector<Carte*> getDeck();
-    std::vector<Carte*> getCollection();
-    ///
 
 };
 

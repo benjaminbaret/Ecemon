@@ -16,9 +16,13 @@ void jouer(User &joueur1, User &joueur2) {
             joueur2.affichagePlateau(joueur1);
             joueur2.afficherResume();
             if (joueur2.proposerCarte()) {
-                joueur2.placer(joueur1, joueur2);
                 isEnd = joueur2.verificationFinJeu();
-                joueur2.verificationIpCreature();
+                if(isEnd!=0){
+                    joueur2.placer(joueur1);
+                    joueur2.verificationIpCreature();
+
+                }else
+                    joueur1.echangeEnjeu(joueur2);
             }
 
             if (isEnd != 0) {
@@ -26,9 +30,11 @@ void jouer(User &joueur1, User &joueur2) {
                 joueur1.afficherResume();
                 if (joueur1.proposerCarte()) {
                     isEnd = joueur1.verificationFinJeu();
-                    joueur1.placer(joueur1, joueur2);
-                    joueur1.verificationIpCreature();
-
+                    if(isEnd!=0){
+                        joueur1.placer(joueur2);
+                        joueur1.verificationIpCreature();
+                    }else
+                        joueur2.echangeEnjeu(joueur1);
                 }
             }
         } while (isEnd);
@@ -41,22 +47,30 @@ void jouer(User &joueur1, User &joueur2) {
             joueur1.afficherResume();
             if (joueur1.proposerCarte()) {
                 isEnd = joueur1.verificationFinJeu();
-                joueur1.placer(joueur1, joueur2);
-                joueur1.verificationIpCreature();
-
+                if(isEnd!=0){
+                    joueur1.placer(joueur2);
+                    joueur1.verificationIpCreature();
+                }else
+                    joueur2.echangeEnjeu(joueur1);
             }
 
             if (isEnd != 0) {
                 joueur2.affichagePlateau(joueur1);
                 joueur2.afficherResume();
+
                 if (joueur2.proposerCarte()) {
-                    joueur2.placer(joueur1, joueur2);
-                    joueur2.verificationIpCreature();
                     isEnd = joueur2.verificationFinJeu();
+                    if(isEnd!=0){
+                        joueur2.placer(joueur1);
+                        joueur2.verificationIpCreature();
+                    }else
+                        joueur1.echangeEnjeu(joueur2);
+
                 }
             }
 
         } while (isEnd);
+
 
     }
     // On a 0 renvoyé ici
