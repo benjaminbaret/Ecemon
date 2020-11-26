@@ -7,12 +7,12 @@
 
 #include <string>
 #include "User.h"
+#include "lectureEcritureDonnees.h"
 
 void clearConsole();
 
-void afficherBoutique(User &joueur1);
-void acheter(User &joueur1,User &joueur2);
-
+void afficherBoutique(structureInfoJoueurs& joueur);
+void acheter(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs);
 
 
 

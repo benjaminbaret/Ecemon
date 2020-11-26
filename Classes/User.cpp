@@ -238,6 +238,7 @@ std::vector<int> User::getInfoCartesJoueur() {
     }
 
     nombreCartesCategories[15] = m_score;
+    nombreCartesCategories[16] = m_pointsVie;
     return nombreCartesCategories;
 }
 
@@ -506,5 +507,5 @@ int User::getArgent(){
 }
 
 void User::setArgent(int argent){
-    m_argent+=argent;
+    m_argent=argent;
 }

@@ -31,6 +31,7 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
             joueur.setNom(it->pseudo);
             for (int i = 0; i < it->donnees.size(); i++) {
                 joueur.setScore(it->donnees[15]);
+                joueur.setArgent(it->donnees[16]);
                 for (int j = 0; j < it->donnees[i]; j++) {
                     switch (i) {
                         case 0:

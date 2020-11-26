@@ -22,21 +22,22 @@
 
 int main() {
 
-    int isEnd = 1;
+    int isEnd = 1, verification = 0;
     std::string nomJoueurComparaison;
     std::vector<structureInfoJoueurs> donneesJoueurs;
     structureInfoJoueurs nouveauJoueur;
     srand(time(NULL));
+    std::string path = "../Classes/fichier.csv";
 
 
     while (isEnd) {
 
 
-        donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
+        donneesJoueurs = lectureDonnees(path); // Gestion d'erreur en cas d'echec de lecture ?
         isEnd = gestionMenu(donneesJoueurs);
 
         if (isEnd == 2) {
-            ajoutJoueurEnMemoire("../Classes/fichier.csv", donneesJoueurs);
+            ajoutJoueurEnMemoire(path, donneesJoueurs);
 
         } else if (isEnd == 3) {
             User joueur1;
@@ -46,32 +47,22 @@ int main() {
                 initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
                 initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
-
-
                 initialisationDeckPiocheJoueur(joueur1);
                 initialisationDeckPiocheJoueur(joueur2);
 
-
                 //On lance la partie ici
-                jouer(joueur1, joueur2);
+                //jouer(joueur1, joueur2);
 
 
-                enregistrementDonneesJoueurs("../Classes/fichier.csv", donneesJoueurs, joueur1, joueur2);
+                enregistrementDonneesJoueurs(path, donneesJoueurs, joueur1, joueur2);
                 donneesJoueurs.clear();
-
 
             } else {
                 std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;
             }
 
         } else if(isEnd==4){
-            User essai1;
-            User essai2;
-
-            essai1.setNom("nico");
-            essai2.setNom("ben");
-            acheter(essai1,essai2);
-
+            acheter(path, donneesJoueurs);
         }
 
         nomJoueurComparaison.clear();
