@@ -62,13 +62,15 @@ public:
     void affichagePlateau(User &joueurAdverse);
     void echangeEnjeu(User &perdant);
     void proposerAttaque(User &joueurAdverse);
+    void reinitialiser();
 
 
 
 
 
 
-};
+
+    };
 
 
 #endif //ECEMON_USER_H

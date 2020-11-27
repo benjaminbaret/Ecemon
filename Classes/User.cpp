@@ -19,13 +19,13 @@
 
 
 User::User() {
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 17; i++) {
         nombreCartesCategories.push_back(0);
     }
     m_creatureActive = (nullptr);
     m_carteEnjeu = (nullptr);
     m_energieDisponible = StructureEnergie{5, 5, 5, 5};
-    m_pointsVie = 11;
+    m_pointsVie = 30;
     m_score = 0;
     m_argent = 20;
 
@@ -42,7 +42,7 @@ User::User(std::string nom) {
     m_energieDisponible.FPS = 5;
     m_energieDisponible.RPG = 5;
     m_energieDisponible.Adventure = 5;
-    m_pointsVie = 11;
+    m_pointsVie = 30;
     m_nom = nom;
     m_carteEnjeu = nullptr;
 }
@@ -99,8 +99,19 @@ void User::creerDeck() {
     std::cin >> choix;
 
     if (choix) {
+        int repiocher = 0;
         for (int i = 0; i < 21; i++) {
-            index = rand() % (m_collection.size());
+            do {
+                repiocher = 0;
+                index = rand() % (m_collection.size() - 1);
+                for (int j = 0; j < indexMemoire.size(); j++) {
+                    if (indexMemoire[j] == index) {
+                        repiocher = 1;
+                    }
+                }
+            } while (repiocher);
+
+
             m_deck.push_back(m_collection[index]);
             indexMemoire.push_back(index);
         }
@@ -168,7 +179,11 @@ void User::creerPioche() {
 
     shuffle(m_deck.begin(), m_deck.end(), std::mt19937(std::random_device()()));
 
-    for(int i=0; i<m_deck.size(); i++){
+    for (auto i = 0; i < m_pioche.size(); i++) {
+        m_pioche.pop();
+    }
+
+    for (int i = 0; i < m_deck.size(); i++) {
         m_pioche.push(m_deck[i]);
     }
 
@@ -181,7 +196,7 @@ void User::setScore(int score) {
 
 std::vector<int> User::getInfoCartesJoueur() {
 
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 17; i++) {
         nombreCartesCategories[i] = 0;
     }
 
@@ -235,7 +250,8 @@ std::vector<int> User::getInfoCartesJoueur() {
     }
 
     nombreCartesCategories[15] = m_score;
-    nombreCartesCategories[16] = m_pointsVie;
+    nombreCartesCategories[16] = m_argent;
+
     return nombreCartesCategories;
 }
 
@@ -311,8 +327,7 @@ void User::placer(User &joueurAdverse) {
             if (remplacer) {
                 //m_creatureActive->setActif(2);
                 m_cimetiere.push_back(m_creatureActive);
-            }
-            else{
+            } else {
                 tampon = m_pioche.front();
                 m_deck.push_back(tampon);
                 m_pioche.pop();
@@ -356,7 +371,7 @@ void User::placer(User &joueurAdverse) {
 
         } else if (name == "Trainer Power") {
             if (m_creatureActive == nullptr) {
-                std::cout << "Votre carte ne peut pas être utilisé car vous n'avez pas de créature sur le plateau"
+                std::cout << "Votre carte ne peut pas être utilise car vous n'avez pas de creature sur le plateau"
                           << std::endl;
             } else
                 m_creatureActive->getChangeHpAttaque(1);
@@ -367,7 +382,7 @@ void User::placer(User &joueurAdverse) {
                 //m_pioche.back()->setActif(0);
                 m_cimetiere.erase(m_cimetiere.cbegin() + m_cimetiere.size() - 1);
                 m_deck.push_back(m_pioche.back());
-                std::cout << "Vous avez rercupere " << m_pioche.back()->getNom() << std::endl;
+                std::cout << "Vous avez recuperer " << m_pioche.back()->getNom() << std::endl;
             } else {
                 std::cout << "Vous n'avez recupere aucune carte car le cimetiere est vide" << std::endl;
             }
@@ -557,6 +572,8 @@ void User::echangeEnjeu(User &perdant) {
               << perdant.m_carteEnjeu->getNom() << " !" << std::endl;
     std::cout << "Votre carte enjeu et celle de  " << perdant.getNom() << " ont ete mise dans votre collection"
               << std::endl;
+    m_argent += 10;
+    m_score += 1;
 
     m_collection.push_back(perdant.m_carteEnjeu);
 
@@ -610,6 +627,28 @@ void User::proposerAttaque(User &joueurAdverse) {
         }
     }
 
+}
+
+
+void User::reinitialiser() {
+
+    m_creatureActive = nullptr;
+    m_pointsVie = 30;
+    m_energies.clear();
+    m_cimetiere.clear();
+    m_deck.clear();
+    int i = 0;
+
+
+
+    m_carteEnjeu = nullptr;
+    m_energieDisponible = {5, 5, 5, 5};
+    m_nom.clear();
+    if (!m_pioche.empty()) {
+        do {
+            m_pioche.pop();
+        } while (!m_pioche.empty());
+    }
 }
 
 

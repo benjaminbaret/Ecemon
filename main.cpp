@@ -30,33 +30,33 @@ int main(int argc, char **argv) {
     srand(time(NULL));
     std::string path = "../Classes/fichier.csv";
 
+    nouveauJoueur.positionFichier=0;
+
+
 
     while (isEnd) {
+        Color(1,0);
+        std::cout<<"______  _                                                     _                     \n"
+                   "| ___ \\(_)                                                   | |                    \n"
+                   "| |_/ / _   ___  _ __ __   __ ___  _ __   _   _   ___      __| |  __ _  _ __   ___  \n"
+                   "| ___ \\| | / _ \\| '_ \\\\ \\ / // _ \\| '_ \\ | | | | / _ \\    / _` | / _` || '_ \\ / __| \n"
+                   "| |_/ /| ||  __/| | | |\\ V /|  __/| | | || |_| ||  __/   | (_| || (_| || | | |\\__ \\ \n"
+                   "\\____/ |_| \\___||_| |_| \\_/  \\___||_| |_| \\__,_| \\___|    \\__,_| \\__,_||_| |_||___/ \n"
+                   "                                                                                    \n"
+                   "                                                                                    "<<"\n"<<std::endl;
+        Color(14,0);
+        std::cout<<" (     (    (     (           (          (     (                )          \n"
+                   " )\\ )  )\\ ) )\\ )  )\\ )        )\\ )       )\\ )  )\\ )  (       ( /(   *   )  \n"
+                   "(()/( (()/((()/( (()/(    (  (()/( (    (()/( (()/(  )\\ )    )\\())` )  /(  \n"
+                   " /(_)) /(_))/(_)) /(_))   )\\  /(_)))\\    /(_)) /(_))(()/(   ((_)\\  ( )(_)) \n"
+                   "(_))_ (_)) (_))_|(_))_|_ ((_)(_)) ((_)  (_))_|(_))   /(_))_  _((_)(_(_())  \n"
+                   " |   \\|_ _|| |_  | |_ | | | |/ __|| __| | |_  |_ _| (_)) __|| || ||_   _|  \n"
+                   " | |) || | | __| | __|| |_| |\\__ \\| _|  | __|  | |    | (_ || __ |  | |    \n"
+                   " |___/|___||_|   |_|   \\___/ |___/|___| |_|   |___|    \\___||_||_|  |_|    \n"
+                   "                                                                           "<<std::endl;
 
+        Color(11,0);
 
-        if(debutJeu==0){
-            //Color(1,0);
-            std::cout<<"______  _                                                     _                     \n"
-                       "| ___ \\(_)                                                   | |                    \n"
-                       "| |_/ / _   ___  _ __ __   __ ___  _ __   _   _   ___      __| |  __ _  _ __   ___  \n"
-                       "| ___ \\| | / _ \\| '_ \\\\ \\ / // _ \\| '_ \\ | | | | / _ \\    / _` | / _` || '_ \\ / __| \n"
-                       "| |_/ /| ||  __/| | | |\\ V /|  __/| | | || |_| ||  __/   | (_| || (_| || | | |\\__ \\ \n"
-                       "\\____/ |_| \\___||_| |_| \\_/  \\___||_| |_| \\__,_| \\___|    \\__,_| \\__,_||_| |_||___/ \n"
-                       "                                                                                    \n"
-                       "                                                                                    "<<"\n"<<std::endl;
-            //Color(14,0);
-            std::cout<<" (     (    (     (           (          (     (                )          \n"
-                       " )\\ )  )\\ ) )\\ )  )\\ )        )\\ )       )\\ )  )\\ )  (       ( /(   *   )  \n"
-                       "(()/( (()/((()/( (()/(    (  (()/( (    (()/( (()/(  )\\ )    )\\())` )  /(  \n"
-                       " /(_)) /(_))/(_)) /(_))   )\\  /(_)))\\    /(_)) /(_))(()/(   ((_)\\  ( )(_)) \n"
-                       "(_))_ (_)) (_))_|(_))_|_ ((_)(_)) ((_)  (_))_|(_))   /(_))_  _((_)(_(_())  \n"
-                       " |   \\|_ _|| |_  | |_ | | | |/ __|| __| | |_  |_ _| (_)) __|| || ||_   _|  \n"
-                       " | |) || | | __| | __|| |_| |\\__ \\| _|  | __|  | |    | (_ || __ |  | |    \n"
-                       " |___/|___||_|   |_|   \\___/ |___/|___| |_|   |___|    \\___||_||_|  |_|    \n"
-                       "                                                                           "<<std::endl;
-            //Color(11,0);
-            debutJeu=1;
-        }
 
         donneesJoueurs = lectureDonnees(path); // Gestion d'erreur en cas d'echec de lecture ?
         isEnd = gestionMenu(donneesJoueurs);
@@ -65,25 +65,33 @@ int main(int argc, char **argv) {
             ajoutJoueurEnMemoire(path, donneesJoueurs);
 
         } else if (isEnd == 3) {
+            User* joueur1 = new User();
+            User* joueur2 = new User();
+
 
             if (donneesJoueurs.size() >= 2) {
-                User joueur1;
-                User joueur2;
 
+                reinitialiserJoueurs(*joueur1, *joueur2);
 
-                initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
-                initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
+                initialisationJoueur(*joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
+                initialisationJoueur(*joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
 
-                initialisationDeckPiocheJoueur(joueur1);
-                initialisationDeckPiocheJoueur(joueur2);
+                initialisationDeckPiocheJoueur(*joueur1);
+                initialisationDeckPiocheJoueur(*joueur2);
 
                 //On lance la partie ici
-                jouer(joueur1, joueur2);
+                jouer(*joueur1, *joueur2);
 
 
-                enregistrementDonneesJoueurs(path, donneesJoueurs, joueur1, joueur2);
+                enregistrementDonneesJoueurs(path, donneesJoueurs, *joueur1, *joueur2);
+
                 donneesJoueurs.clear();
-                isEnd=0;
+
+
+
+                delete joueur1;
+                delete joueur2;
+
 
             } else {
                 std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;
@@ -99,7 +107,12 @@ int main(int argc, char **argv) {
         nomJoueurComparaison.clear();
 
     }
+    std::cout<<"Merci d'avoir joue a Diffuse Fight !"<<std::endl;
+
 
 
     return 0;
+
+
+
 }

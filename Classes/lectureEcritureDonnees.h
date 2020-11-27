@@ -17,7 +17,7 @@ struct structureInfoJoueurs {
     int positionFichier;
 };
 
-void writeFile(const std::string &path, const std::vector<structureInfoJoueurs>& donneesJoueurs);
+void writeFile(const std::string &path, std::vector<structureInfoJoueurs>& donneesJoueurs);
 
 void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,User &joueur2);
 

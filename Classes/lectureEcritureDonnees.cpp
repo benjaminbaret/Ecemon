@@ -56,7 +56,7 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
             tamponInfoJoueurs.pseudo = name;
             tamponInfoJoueurs.donnees = donnees;
 
-            tamponInfoJoueurs.positionFichier = j;
+            tamponInfoJoueurs.positionFichier = 0;
 
             infoJoueurs.push_back(tamponInfoJoueurs);
 
@@ -76,10 +76,12 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
 /// Fonction qui sera utilisés dans une méthode de User pour écrire les données car accès en private aux données du User
 
-void writeFile(const std::string &path, const std::vector<structureInfoJoueurs> &donneesJoueurs) {
+void writeFile(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs) {
+
 
     // pour le mode append, utiliser std::ios::app
     std::ofstream ofs(path.c_str(), std::ios::out);
+
     if (ofs) {
         // Ecriture dans le fichier
         ofs.clear();
@@ -104,7 +106,11 @@ void enregistrementDonneesJoueurs(const std::string &path, std::vector<structure
             vecteurTransition = joueur1.getInfoCartesJoueur();
             for (int i = 0; i < vecteurTransition.size(); i++) {
                 it->donnees[i] = vecteurTransition[i];
+
             }
+
+
+
 
         } else if (it->pseudo == joueur2.getNom()) {
             vecteurTransition = joueur2.getInfoCartesJoueur();
@@ -148,6 +154,7 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
     int nonUtilise = 0;
 
     structureInfoJoueurs nouveauJoueur;
+    nouveauJoueur.positionFichier=0;
 
     std::cout << "Création d'un nouveau joueur" << std::endl;
 
@@ -176,7 +183,7 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
     }
 
     nouveauJoueur.donnees.push_back(0); // score de 0 à la création
-    nouveauJoueur.donnees.push_back(20); // Ajout de 0 argent à la création
+    nouveauJoueur.donnees.push_back(20); // Ajout de 20 argent à la création
     donneesJoueurs.push_back(nouveauJoueur);
     writeFile(path, donneesJoueurs);
     donneesJoueurs = lectureDonnees("../Classes/fichier.csv");

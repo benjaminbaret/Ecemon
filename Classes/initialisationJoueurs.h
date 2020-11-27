@@ -9,6 +9,8 @@
 #include "Classes/User.h"
 #include "lectureEcritureDonnees.h"
 
+void reinitialiserJoueurs(User& joueur1, User& joueur2);
+
 void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> &donneesJoueurs,
                           const std::string& nomJoueur);
 

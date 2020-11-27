@@ -11,6 +11,15 @@
 #include "Classes/Creature.h"
 #include "Classes/Attaque.h"
 
+
+
+void reinitialiserJoueurs(User& joueur1, User& joueur2){
+
+    joueur1.reinitialiser();
+    joueur2.reinitialiser();
+
+}
+
 void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> &donneesJoueurs,
                           const std::string &nomJoueur) {
 

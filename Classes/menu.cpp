@@ -48,6 +48,7 @@ int gestionMenu(std::vector<structureInfoJoueurs>& donneesJoueurs) {
         switch (choix) {
             case 0:{
                 sortieBoucle=1;
+                break;
             }
             case 1: {
                 afficherJoueurs(donneesJoueurs);
