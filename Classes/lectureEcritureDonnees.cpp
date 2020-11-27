@@ -17,7 +17,7 @@
 /// vector[i].donnees[j] --> donnees j du joueur i avec j correspondant à (ordre non défini pour l'instant)
 
 
-std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
+std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) { // On lit dans le fichier texte
     std::ifstream fichier(path.c_str());
     std::vector<structureInfoJoueurs> infoJoueurs;
 
@@ -35,16 +35,19 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
         while (std::getline(fichier, line)) // lecture ligne par ligne
         {
-            for (auto i = 0; i < line.size(); i++) {
+            for (auto i = 0; i < line.size(); i++) { // On parcout chaque caractère de la ligne
                 if (char(line[i]) != ',') {
                     if (nbIterations == 0) {
-                        name.push_back(line[i]);
+                        name.push_back(
+                                line[i]); // recuperation des caractères du pseudo (lors de la première lecture car on a pas encore rencontré le marsqueur ","
                     } else {
-                        donneesString.push_back(line[i]);
+                        donneesString.push_back(
+                                line[i]); // Sinon, c'est une donnee, on la retient dans une chaine de caractère
                     }
                 } else {
                     if (nbIterations == 1) {
-                        donnees.push_back(stoi(donneesString));
+                        donnees.push_back(
+                                stoi(donneesString)); // on convertie la chaine de caractère de chiffres en nombre que l'on retient dans un vecteur
                         donneesString.clear();
                     }
                     nbIterations = 1;
@@ -58,7 +61,7 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
 
             tamponInfoJoueurs.positionFichier = 0;
 
-            infoJoueurs.push_back(tamponInfoJoueurs);
+            infoJoueurs.push_back(tamponInfoJoueurs); // on retient tou ça dans une vecteur de structure
 
             name.clear();
             donnees.clear();
@@ -66,7 +69,7 @@ std::vector<structureInfoJoueurs> lectureDonnees(const std::string &path) {
             nbIterations = 0;
         }
         fichier.close(); // fermeture du flux
-    } else // en cas d'erreur...
+    } else // gestion d'erreur
     {
         std::cout << "Erreur de lecture des données" << std::endl;
     }
@@ -86,9 +89,10 @@ void writeFile(const std::string &path, std::vector<structureInfoJoueurs> &donne
         // Ecriture dans le fichier
         ofs.clear();
         for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) {
-            ofs << it->pseudo;
+            ofs << it->pseudo; // on commence par écrire le pseudo
             for (int i = 0; i < it->donnees.size(); i++) {
-                ofs << "," << it->donnees[i];
+                ofs << ","
+                    << it->donnees[i];  // on écrit ensuite les données les une après les autres dans la forme décidée pour pouvoir être relue
             }
             ofs << std::endl;
         }
@@ -96,23 +100,22 @@ void writeFile(const std::string &path, std::vector<structureInfoJoueurs> &donne
     ofs.close();
 }
 
-void enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
+void
+enregistrementDonneesJoueurs(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs, User &joueur1,
                              User &joueur2) {
 
     std::vector<int> vecteurTransition;
 
     for (auto it = donneesJoueurs.begin(); it != donneesJoueurs.end(); it++) {
-        if (it->pseudo == joueur1.getNom()) {
-            vecteurTransition = joueur1.getInfoCartesJoueur();
+        if (it->pseudo == joueur1.getNom()) { // on retrouve les donnees correspondant au joueur
+            vecteurTransition = joueur1.getInfoCartesJoueur(); // on récupère les informations du joueur (donnees)
             for (int i = 0; i < vecteurTransition.size(); i++) {
-                it->donnees[i] = vecteurTransition[i];
+                it->donnees[i] = vecteurTransition[i]; // On retient les informations dans le vecteur de structure retenant toutes les donnees de chaque joueur
 
             }
 
 
-
-
-        } else if (it->pseudo == joueur2.getNom()) {
+        } else if (it->pseudo == joueur2.getNom()) { // de même pour le joueur 2
             vecteurTransition = joueur2.getInfoCartesJoueur();
             for (int i = 0; i < vecteurTransition.size(); i++) {
                 it->donnees[i] = vecteurTransition[i];
@@ -121,32 +124,9 @@ void enregistrementDonneesJoueurs(const std::string &path, std::vector<structure
     }
 
 
-    writeFile(path, donneesJoueurs);
+    writeFile(path, donneesJoueurs); // On réécrit toutes les données mises à jour dans le fichier texte
 
 }
-
-
-std::string
-joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
-    int isEnd = 1;
-    std::string joueur;
-
-    while (isEnd) {
-        afficherJoueurs(donneesJoueurs);
-        std::cout << "Veuillez entrer le nom du Joueur que vous souhaitez séléctionner : " << std::endl;
-        std::cin >> joueur;
-        std::cout << std::endl;
-        if (nomJoueurComparaison == joueur) {
-            std::cout << "Vous avez déjà sélectionné ce joueur," << std::endl;
-        } else {
-            nomJoueurComparaison = joueur;
-            isEnd = 0;
-        }
-        clearConsole();
-    }
-    return joueur;
-}
-
 
 void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs) {
 
@@ -154,7 +134,7 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
     int nonUtilise = 0;
 
     structureInfoJoueurs nouveauJoueur;
-    nouveauJoueur.positionFichier=0;
+    nouveauJoueur.positionFichier = 0;
 
     std::cout << "Création d'un nouveau joueur" << std::endl;
 
@@ -163,17 +143,17 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
         std::cout << "Veuillez entrer le pseudo du joueur" << std::endl;
         std::cin >> nouveauJoueur.pseudo;
         for (int i = 0; i < donneesJoueurs.size(); i++) {
-            if (donneesJoueurs[i].pseudo != nouveauJoueur.pseudo) {
-                nonUtilise+=1;
-            }
-            else{
+            if (donneesJoueurs[i].pseudo !=
+                nouveauJoueur.pseudo) { // on verifie que pseudo n'est pas utilisé en parcourant la BDD
+                nonUtilise += 1;
+            } else {
                 std::cout << "Pseudo déjà utilisé" << std::endl;
             }
         }
-        if(nonUtilise==donneesJoueurs.size()){
+        if (nonUtilise == donneesJoueurs.size()) { // Ok pour utiliser le pseudo
             verification = 0;
         }
-        nonUtilise=0;
+        nonUtilise = 0;
     }
 
     std::cout << "Piochage aléatoire de 30 cartes pour vous constituer une collection" << std::endl;
@@ -190,20 +170,22 @@ void ajoutJoueurEnMemoire(const std::string &path, std::vector<structureInfoJoue
 }
 
 
-/*void initialisationJoueurs(std::vector<structureInfoJoueurs>& infoJoueurs, User& joueur1, User& joueur2){
-   std::string nomJoueur1;
-   std::string nomJoueur2;
+std::string joueursCombattants(const std::vector<structureInfoJoueurs> &donneesJoueurs, std::string &nomJoueurComparaison) {
+    int isEnd = 1;
+    std::string joueur;
 
-   nomJoueur1 = joueurCombattants(infoJoueurs);
-   nomJoueur2 = joueurCombattants(infoJoueurs);
-
-   for(auto it=infoJoueurs.cbegin(); it!=infoJoueurs.cend(); it++){
-       if(nomJoueur1==it->pseudo){
-           joueur1.setNom(nomJoueur1);
-           joueur1.remplirCollection()
-       }
-   }
-
-
-
-}*/
+    while (isEnd) {
+        afficherJoueurs(donneesJoueurs);
+        std::cout << "Veuillez entrer le nom du Joueur que vous souhaitez séléctionner : " << std::endl;
+        std::cin >> joueur; // on recupere le nom du joueur qui veut jouer
+        std::cout << std::endl;
+        if (nomJoueurComparaison == joueur) { // on verifie que on appelle pas deux fois le même joueur
+            std::cout << "Vous avez déjà sélectionné ce joueur," << std::endl;
+        } else {
+            nomJoueurComparaison = joueur;
+            isEnd = 0;
+        }
+        clearConsole();
+    }
+    return joueur;
+}

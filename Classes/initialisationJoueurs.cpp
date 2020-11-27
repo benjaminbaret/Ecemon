@@ -15,13 +15,15 @@
 
 void reinitialiserJoueurs(User& joueur1, User& joueur2){
 
-    joueur1.reinitialiser();
+    joueur1.reinitialiser(); // Appel de la méthode permettant de rendre les Objets joueurs "réutilisables" pour les initialiser avec d'autres cartes (pour jouer avec d'autres utilisateurs)
     joueur2.reinitialiser();
 
 }
 
 void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> &donneesJoueurs,
                           const std::string &nomJoueur) {
+
+    // On créé les structures énergie de chaque attaque
 
     StructureEnergie zeldaAttaque1{0, 2, 1, 0};
     StructureEnergie zeldaAttaque2{0, 2, 3, 0};
@@ -35,8 +37,9 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
     StructureEnergie cloudAttaque2{2, 1, 3, 0};
 
 
-    for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) {
-        if (it->pseudo == nomJoueur) {
+    for (auto it = donneesJoueurs.cbegin(); it != donneesJoueurs.cend(); it++) { // Parcout de tous les joueurs
+        if (it->pseudo == nomJoueur) { // Si on trouve un joueur dont le nom correspond a celui qui est demandé pour jouer ...
+            //... On fait l'initialisation
             joueur.setNom(it->pseudo);
             joueur.setScore(it->donnees[15]);
             joueur.setArgent(it->donnees[16]);
@@ -99,6 +102,6 @@ void initialisationJoueur(User &joueur, const std::vector<structureInfoJoueurs> 
 
 void initialisationDeckPiocheJoueur(User& joueur){
     std::cout << joueur.getNom() << " veuillez prendre l'ordinateur" << std::endl;
-    joueur.creerDeck();
-    joueur.creerPioche();
+    joueur.creerDeck(); // On appeler methode permettant de créer le deck
+    joueur.creerPioche(); // on appelle la méthode permettant de tirer aléatoirement une pioche a partir du deck selectionne
 }
