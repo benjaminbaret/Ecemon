@@ -483,7 +483,7 @@ int User::verificationFinJeu() {
         return 0;
     }
     if (m_pointsVie <= 0) {
-        std::cout << "Fin du jeu, plus de point vie pour " << getNom() << std::endl;         // Le joueur n'a plus de point de vie le jeu s'arrete
+        std::cout << "Fin du jeu, plus de point vie pour " << getNom() << std::endl;         // Le joueur n'a plus de point de vie le jeu s'arrete !
         m_pointsVie = 0;
         return 0;
     }
