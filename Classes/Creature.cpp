@@ -34,14 +34,14 @@ std::string Creature::getType() {
 }
 
 int Creature::compareAvecEnergie1(StructureEnergie comparant) {
-    if(m_attaque.getNRJAttaque1()==comparant){
+    if(m_attaque.getNRJAttaque1()<=comparant){
         return 1;
     } else
         return 0;
 }
 int Creature::compareAvecEnergie2(StructureEnergie comparant) {
 
-    if(m_attaque.getNRJAttaque2()==comparant){
+    if(m_attaque.getNRJAttaque2()<=comparant){
         return 1;
     } else
         return 0;
@@ -79,6 +79,15 @@ void Creature::afficherResumeCarteBoutique() {
     std::cout<<"                   -------Cout de la carte : "<<m_valeur<<"-------"<<std::endl;
 
 }
+
+StructureEnergie Creature::getEnergieAttaque(int nbAttaque){
+    if(nbAttaque==1){
+        return m_attaque.getNRJAttaque1();
+    } else
+        return m_attaque.getNRJAttaque2();
+
+}
+
 
 
 

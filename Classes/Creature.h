@@ -14,7 +14,6 @@
 
 class Creature : public Carte{
 private:
-    std::string descritpion;
     int m_ip;
     Attaque m_attaque;
 public:
@@ -34,6 +33,7 @@ public:
     void getChangeHpAttaque(int hp);
     void afficherResumeCarte();
     void afficherResumeCarteBoutique();
+    StructureEnergie getEnergieAttaque(int nbAttaque);
 
 
 

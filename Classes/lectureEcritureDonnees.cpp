@@ -105,6 +105,7 @@ void enregistrementDonneesJoueurs(const std::string &path, std::vector<structure
             for (int i = 0; i < vecteurTransition.size(); i++) {
                 it->donnees[i] = vecteurTransition[i];
             }
+
         } else if (it->pseudo == joueur2.getNom()) {
             vecteurTransition = joueur2.getInfoCartesJoueur();
             for (int i = 0; i < vecteurTransition.size(); i++) {
@@ -113,7 +114,9 @@ void enregistrementDonneesJoueurs(const std::string &path, std::vector<structure
         }
     }
 
+
     writeFile(path, donneesJoueurs);
+
 }
 
 

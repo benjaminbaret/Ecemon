@@ -12,6 +12,8 @@ typedef struct {
 
 void afficherEnergiesNecessaires(StructureEnergie energies);
 
-bool operator == (StructureEnergie energieJoueur, StructureEnergie energieCarte);
+bool operator <= (StructureEnergie energieCarte, StructureEnergie energieJoueur);
+StructureEnergie operator -(StructureEnergie &energieJoueur,StructureEnergie& energieCarte);
+StructureEnergie differenceStructureEnergie(StructureEnergie energieJoueur, StructureEnergie energieCarte);
 
 #endif //ECEMON_STRUCTURES_H

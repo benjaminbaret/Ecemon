@@ -32,6 +32,8 @@ int main(int argc, char **argv) {
 
 
     while (isEnd) {
+
+
         if(debutJeu==0){
             //Color(1,0);
             std::cout<<"______  _                                                     _                     \n"
@@ -63,9 +65,11 @@ int main(int argc, char **argv) {
             ajoutJoueurEnMemoire(path, donneesJoueurs);
 
         } else if (isEnd == 3) {
-            User joueur1;
-            User joueur2;
+
             if (donneesJoueurs.size() >= 2) {
+                User joueur1;
+                User joueur2;
+
 
                 initialisationJoueur(joueur1, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
                 initialisationJoueur(joueur2, donneesJoueurs, joueursCombattants(donneesJoueurs, nomJoueurComparaison));
@@ -79,6 +83,7 @@ int main(int argc, char **argv) {
 
                 enregistrementDonneesJoueurs(path, donneesJoueurs, joueur1, joueur2);
                 donneesJoueurs.clear();
+                isEnd=0;
 
             } else {
                 std::cout << "Veuillez enregistrer au miniumum deux joueurs" << std::endl;

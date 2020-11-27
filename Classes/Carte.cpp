@@ -67,3 +67,7 @@ void Carte::afficherResumeCarteBoutique(){
 int  Carte::getPrix() {
     return m_valeur;
 }
+
+StructureEnergie Carte::getEnergieAttaque(int nbAttaque){
+    return{0, 0, 0, 0};
+}

@@ -4,6 +4,7 @@
 
 #include "User.h"
 #include <iostream>
+#include <random>
 #include <string>
 #include "Carte.h"
 #include "lectureEcritureDonnees.h"
@@ -21,29 +22,29 @@ User::User() {
     for (int i = 0; i < 16; i++) {
         nombreCartesCategories.push_back(0);
     }
-    m_creatureActive= (nullptr);
-    m_carteEnjeu=(nullptr);
-    m_energieDisponible=StructureEnergie {0,0,0,0};
-    m_pointsVie=20;
-    m_score=0;
-    m_argent=20;
+    m_creatureActive = (nullptr);
+    m_carteEnjeu = (nullptr);
+    m_energieDisponible = StructureEnergie{5, 5, 5, 5};
+    m_pointsVie = 11;
+    m_score = 0;
+    m_argent = 20;
 
 }
 
 User::~User() {
-    for (auto it = m_collection.cbegin(); it != m_collection.cend(); it++) {
+    for (auto it = m_collection.begin(); it != m_collection.end(); it++) {
         delete *it;
     }
 }
 
-User::User(std::string nom)  {
-    m_energieDisponible.SportRace =0;
-    m_energieDisponible.FPS =0;
-    m_energieDisponible.RPG =0;
-    m_energieDisponible.Adventure =0;
-    m_pointsVie=20;
-    m_nom=nom;
-    m_carteEnjeu= nullptr;
+User::User(std::string nom) {
+    m_energieDisponible.SportRace = 5;
+    m_energieDisponible.FPS = 5;
+    m_energieDisponible.RPG = 5;
+    m_energieDisponible.Adventure = 5;
+    m_pointsVie = 11;
+    m_nom = nom;
+    m_carteEnjeu = nullptr;
 }
 
 
@@ -75,12 +76,11 @@ void User::afficheCollection() {
 
 void User::afficherDeck() {
     for (int i = 0; i < m_deck.size(); i++) {
-        if (m_deck[i]->getActif() == 0) {
-            std::cout << "Carte " << i + 1 << ": " << std::endl;
-            m_deck[i]->afficherCarte();
-        }
+        std::cout << "Carte " << i + 1 << ": " << std::endl;
+        m_deck[i]->afficherCarte();
     }
 }
+
 
 void User::creerDeck() {
     bool choix = false;
@@ -165,19 +165,13 @@ void User::creerDeck() {
 }
 
 void User::creerPioche() {
-    std::random_device randomDevice;
-    std::mt19937 mt19937(
-            randomDevice());                                 //Code permettant de melanger le vector du deck il ne manque plus qu'a copier chaque case puisque le vector est aleatoir maintenant
-    std::shuffle(m_deck.begin(), m_deck.end(), mt19937);
-    ///https://en.cppreference.com/w/cpp/algorithm/random_shuffle
-    while(!m_pioche.empty()){
-        m_pioche.pop();
+
+    shuffle(m_deck.begin(), m_deck.end(), std::mt19937(std::random_device()()));
+
+    for(int i=0; i<m_deck.size(); i++){
+        m_pioche.push(m_deck[i]);
     }
-    for (int i = 0; i < m_deck.size(); i++) {
-        if (m_deck[i]->getActif() == 0)
-            m_pioche.push(m_deck[i]);
-    }
-    /// Ici on a copié le vecteur melangé dans une queue
+
 }
 
 void User::setScore(int score) {
@@ -187,7 +181,10 @@ void User::setScore(int score) {
 
 std::vector<int> User::getInfoCartesJoueur() {
 
-    nombreCartesCategories.clear();
+    for (int i = 0; i < 16; i++) {
+        nombreCartesCategories[i] = 0;
+    }
+
 
     for (auto i = 0; i < m_collection.size(); i++) {
         if (m_collection[i]->getNom() == "Zelda") {
@@ -248,29 +245,36 @@ void User::enleverPointsVie(int nbHp) {
 
 void User::tirerCarteEnjeu() {
     m_carteEnjeu = m_pioche.front();
+    for (int i = 0; i < m_deck.size(); i++) {
+        if (m_deck[i] == m_carteEnjeu) {
+            m_deck.erase(m_deck.begin() + i);
+        }
+    }
     m_pioche.pop();
 }
 
 int User::proposerCarte() {
     int choix = 0;
     Carte *tampon;
-
-    std::cout << "Carte piochee : " << std::endl;
-    m_pioche.front()->afficherResumeCarte();
-    std::cout << "Voulez vous jouer cette carte ? " << std::endl;
-    std::cin >> choix;
-    if (choix == 1) {
-        m_pioche.front()->setActif(1);
-        for(auto i=0; i < m_deck.size(); i++){
-            if(m_deck[i]==m_pioche.front()){
-                m_deck.erase(m_deck.begin()+i);
+    if (!m_pioche.empty()) {
+        std::cout << "Carte piochee : " << std::endl;
+        m_pioche.front()->afficherResumeCarte();
+        std::cout << "Voulez vous jouer cette carte ? " << std::endl;
+        std::cin >> choix;
+        if (choix == 1) {
+            //m_pioche.front()->setActif(1);
+            for (auto i = 0; i < m_deck.size(); i++) {
+                if (m_deck[i] == m_pioche.front()) {
+                    m_deck.erase(m_deck.begin() + i);
+                }
             }
+        } else {
+            tampon = m_pioche.front();
+            m_pioche.push(tampon);
+            m_pioche.pop();
         }
-    } else {
-        tampon = m_pioche.front();
-        m_pioche.push(tampon);
-        m_pioche.pop();
-    }
+    } else
+        std::cout << "On ne peux pas piocher une carte car la pioche est vide" << std::endl;
 
 
     return choix;
@@ -278,80 +282,48 @@ int User::proposerCarte() {
 
 void User::attaquer(User &joueurAdverse, int nbAttaque) {
     int a = 0;
-    if (joueurAdverse.m_creatureActive->getIp() <= m_creatureActive->getHpAttaquer(
-            nbAttaque)) { // si le nombre de points de vie de la carte est inférieur que le HP qde celle qui attaque
-        a = m_creatureActive->getHpAttaquer(nbAttaque) -
-            joueurAdverse.m_creatureActive->getIp(); // Différence de points de vie
-        joueurAdverse.m_creatureActive->enleverIp(joueurAdverse.m_creatureActive->getIp());
-        joueurAdverse.enleverPointsVie(a);
-    } else if (joueurAdverse.m_creatureActive->getIp() > m_creatureActive->getHpAttaquer(nbAttaque)) {
-        joueurAdverse.m_creatureActive->enleverIp(m_creatureActive->getHpAttaquer(nbAttaque));
-    }
+    if (joueurAdverse.m_creatureActive != nullptr) {
+        if (joueurAdverse.m_creatureActive->getIp() <= m_creatureActive->getHpAttaquer(
+                nbAttaque)) { // si le nombre de points de vie de la carte est inférieur que le HP qde celle qui attaque
+            a = m_creatureActive->getHpAttaquer(nbAttaque) -
+                joueurAdverse.m_creatureActive->getIp(); // Différence de points de vie
+            joueurAdverse.m_creatureActive->enleverIp(joueurAdverse.m_creatureActive->getIp());
+            joueurAdverse.enleverPointsVie(a);
+        } else if (joueurAdverse.m_creatureActive->getIp() > m_creatureActive->getHpAttaquer(nbAttaque)) {
+            joueurAdverse.m_creatureActive->enleverIp(m_creatureActive->getHpAttaquer(nbAttaque));
+        }
+    } else
+        joueurAdverse.enleverPointsVie(m_creatureActive->getHpAttaquer(nbAttaque));
+    m_energieDisponible = differenceStructureEnergie(m_energieDisponible,
+                                                     m_creatureActive->getEnergieAttaque(nbAttaque));
 }
 
 
-void User::placer(User &joueur1) {
-    int a = 0, b = 0;
+void User::placer(User &joueurAdverse) {
 
     std::string name;
-    int choix = 0;
     int remplacer = 0;
-    int numeroAttaque = 0;
-    Carte * tampon;
+    Carte *tampon;
     if (m_pioche.front()->getType() == "Creature") {
         if (m_creatureActive != nullptr) {
             std::cout << "Vous avez deja une creature active voulez vous la remplacer ?" << std::endl;
             std::cin >> remplacer;
             if (remplacer) {
-                m_creatureActive->setActif(2);
+                //m_creatureActive->setActif(2);
                 m_cimetiere.push_back(m_creatureActive);
-                m_creatureActive = nullptr;
             }
-
+            else{
+                tampon = m_pioche.front();
+                m_deck.push_back(tampon);
+                m_pioche.pop();
+                m_pioche.push(tampon);
+            }
         }
 
         if (remplacer || m_creatureActive == nullptr) {
             m_creatureActive = m_pioche.front();
-
-            std::cout << "Voulez vous attaquer ? " << std::endl;
-
-            std::cin >> choix;
-            if (choix) {
-                if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
-                    a = 1;
-                }
-                if (m_creatureActive->compareAvecEnergie2(m_energieDisponible)) {
-                    b = 1;
-                }
-                if (a == 1 && b == 1) {
-                    std::cout << "2 attaques possibles " << std::endl;
-                    m_creatureActive->getNomAttaque(1);
-                    m_creatureActive->getNomAttaque(2);
-                    std::cout << "Quelle attaque voulez vous utiliser ?" << std::endl;
-                    std::cin >> numeroAttaque;
-                    attaquer(joueur1, numeroAttaque);
-
-                } else if (a == 1) {
-                    std::cout << "1 attaque possible (attaque 1) " << std::endl;
-                    m_creatureActive->getNomAttaque(1);
-                    attaquer(joueur1, 1);
-                    // : On montre les attaques
-                } else if (b == 1) {
-                    std::cout << "1 attaque possible (attaque 2) " << std::endl;
-                    m_creatureActive->getNomAttaque(2);
-                    attaquer(joueur1, 2);
-                    // : On montre les attaques
-
-                } else {
-                    std::cout << "Vous n'avez pas assez d'énergie pour attaquer" << std::endl;
-                }
-            }
+            proposerAttaque(joueurAdverse);
             m_pioche.pop();
-
-        }else {
-            tampon = m_pioche.front();
-            m_pioche.pop();
-            m_pioche.push(tampon);
         }
 
     } else if (m_pioche.front()->getType() == "Energie") {
@@ -380,7 +352,7 @@ void User::placer(User &joueur1) {
 
         } else if (name == "Destroyer") {
 
-            joueur1.enleverIpCarteOuJoueur(2);
+            joueurAdverse.enleverIpCarteOuJoueur(2);
 
         } else if (name == "Trainer Power") {
             if (m_creatureActive == nullptr) {
@@ -390,28 +362,27 @@ void User::placer(User &joueur1) {
                 m_creatureActive->getChangeHpAttaque(1);
 
         } else if (name == "Recover") {
-            if(!m_cimetiere.empty()){
+            if (!m_cimetiere.empty()) {
                 m_pioche.push(m_cimetiere.back());
-                m_pioche.back()->setActif(0);
-                m_cimetiere.erase(m_cimetiere.cbegin()+m_cimetiere.size()-1);
+                //m_pioche.back()->setActif(0);
+                m_cimetiere.erase(m_cimetiere.cbegin() + m_cimetiere.size() - 1);
                 m_deck.push_back(m_pioche.back());
-                std::cout<<"Vous avez rercupere "<<m_pioche.back()->getNom()<<std::endl;
-            }
-            else{
-                std::cout<<"Vous n'avez recupere aucune carte car le cimetiere est vide"<<std::endl;
+                std::cout << "Vous avez rercupere " << m_pioche.back()->getNom() << std::endl;
+            } else {
+                std::cout << "Vous n'avez recupere aucune carte car le cimetiere est vide" << std::endl;
             }
 
-        } else if (name=="Card thief") {
+        } else if (name == "Card thief") {
 
             enleverIpCarteOuJoueur(3);
-            volerCarte(joueur1);
+            volerCarte(joueurAdverse);
 
-        } else if (name == "X-Ray"){
-            std::cout<<"Voici la pioche de "<<joueur1.getNom()<<std::endl;
-            joueur1.afficherDeck();
+        } else if (name == "X-Ray") {
+            std::cout << "Voici la pioche de " << joueurAdverse.getNom() << std::endl;
+            joueurAdverse.afficherDeck();
         }
 
-        m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
+        //m_pioche.front()->setActif(2); // On dit que carte est dans cimetiere (cimetiere = 2)
         m_cimetiere.push_back(m_pioche.front()); // On ajoute la carte dans le cimetiere
         m_pioche.pop(); // On enleve la carte de la pioche
     }
@@ -421,7 +392,7 @@ void User::enleverPvAdversaire(int hp) {
     m_pointsVie -= hp;
 }
 
-int User::getIpJoueur(){
+int User::getIpJoueur() {
     return m_pointsVie;
 }
 
@@ -437,15 +408,15 @@ int User::getCreatureActive() {
 }
 
 void User::volerCarte(User &joueurAdverse) {
-    Carte *tampon= nullptr;
+    Carte *tampon = nullptr;
     int aleatoire = 0;
-    aleatoire = rand() % (joueurAdverse.m_deck.size()-1); // On prend la position d'une des cartes du joueur adverse
+    aleatoire = rand() % (joueurAdverse.m_deck.size() - 1); // On prend la position d'une des cartes du joueur adverse
     tampon = joueurAdverse.m_deck[aleatoire]; // On retient l'adresse dans une variable tampon
     m_deck.push_back(tampon); // Ajout au deck
     joueurAdverse.m_deck.erase(joueurAdverse.m_deck.begin() + aleatoire);
     joueurAdverse.creerPioche(); // On enlever la carte de la pioche en la regénérant
     joueurAdverse.afficherDeck();
-    std::cout<<"\n\n"<<std::endl;
+    std::cout << "\n\n" << std::endl;
     afficherDeck();
     creerPioche(); // On ajoute à la pioche la nouvelle carte en regénérant la pioche
 }
@@ -484,66 +455,69 @@ void User::verificationIpCreature() {
     }
 }
 
-int User ::verificationFinJeu() {
-    int nb=0;
+int User::verificationFinJeu() {
+    int nb = 0;
 
-    if(!m_deck.empty()){
-        for(int i=0; i<m_deck.size(); i++){
-            if(m_deck[i]->getType()=="Creature")
-                nb+=1;
+    if (!m_deck.empty()) {
+        for (int i = 0; i < m_deck.size(); i++) {
+            if (m_deck[i]->getType() == "Creature")
+                nb += 1;
         }
-        if(nb==0){
+        if (nb == 0) {
             std::cout << "Fin du jeu, plus de cartes creature " << std::endl;
             return 0;
-        }else
-            return 1;
+        }
+    } else if (m_deck.empty()) {
+        std::cout << "Fin du jeu, plus de cartes dans le deck " << std::endl;
+        return 0;
     }
-    else {
-        std::cout << "Fin du jeu, plus de cartes cartes " << std::endl;
+    if (m_pointsVie <= 0) {
+        std::cout << "Fin du jeu, plus de point vie pour " << getNom() << std::endl;
+        m_pointsVie = 0;
         return 0;
     }
 
-
-
+    return 1;
 }
 
 
-
-void User::afficherResume(){
-    std::cout<<"\n\n"<<std::endl;
-    std::cout << "Au tour de : " << getNom()<< ", vie :  " << getIpJoueur() << std::endl;
+void User::afficherResume() {
+    std::cout << "\n\n" << std::endl;
+    std::cout << "Au tour de : " << getNom() << ", vie :  " << getIpJoueur() << std::endl;
     std::cout << "Energies disponibles : ", afficherEnergiesNecessaires(m_energieDisponible);
-    if(m_creatureActive!= nullptr){
-        std::cout << "Vie de "<<m_creatureActive->getNom()<<" : "<<m_creatureActive->getIp()<<std::endl;
+    if (m_creatureActive != nullptr) {
+        std::cout << "Vie de " << m_creatureActive->getNom() << " : " << m_creatureActive->getIp() << std::endl;
     }
-    std::cout<<"\n"<<std::endl;
+    std::cout << "\n" << std::endl;
 }
 
-int User::getArgent(){
+int User::getArgent() {
     return m_argent;
 }
 
-void User::setArgent(int argent){
-    m_argent=argent;
+void User::setArgent(int argent) {
+    m_argent = argent;
 }
 
-void User::affichagePlateau(User &joueurAdverse){
+void User::affichagePlateau(User &joueurAdverse) {
 
     std::string a;
     std::string b;
-    if(m_creatureActive!=nullptr)
-        a=m_creatureActive->getNom();
+    if (m_creatureActive != nullptr)
+        a = m_creatureActive->getNom();
     else
         a = "Pas de creature";
-    if(joueurAdverse.m_creatureActive!= nullptr){
-     b=joueurAdverse.m_creatureActive->getNom();
+    if (joueurAdverse.m_creatureActive != nullptr) {
+        b = joueurAdverse.m_creatureActive->getNom();
     } else
         b = "Pas de creature";
 
 
 //Color(10,0);
-    std::cout<<"                     Plateau de "<<getNom()<<"                                         Plateau de "<<joueurAdverse.getNom()<<std::endl;
-    std::cout<<"+-----------------------------------------------------------+----------------------------------------------------------+"
+    std::cout << "                     Plateau de " << getNom()
+              << "                                         Plateau de " << joueurAdverse.getNom() << std::endl;
+    std::cout
+            << "+-----------------------------------------------------------+----------------------------------------------------------+"
                "|                                                           |                                                          |"
                "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
                "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
@@ -553,8 +527,10 @@ void User::affichagePlateau(User &joueurAdverse){
                "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
                "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
                "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
-               "|         " << m_energies.size() <<"           "<<a<<"                       |           "<<joueurAdverse.m_energies.size()<<        "          "<<b<<std::endl;
-    std::cout<<"|                                                           |                                                          |"
+               "|         " << m_energies.size() << "           " << a << "                       |           "
+            << joueurAdverse.m_energies.size() << "          " << b << std::endl;
+    std::cout
+            << "|                                                           |                                                          |"
                "|                                                           |                                                          |"
                "|                                                           |                                                          |"
                "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
@@ -565,25 +541,75 @@ void User::affichagePlateau(User &joueurAdverse){
                "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
                "|    |          |       |          |      |          |      |     |          |       |          |      |          |    |"
                "|    +----------+       +----------+      +----------+      |     +----------+       +----------+      +----------+    |"
-               "|                            "<<m_pioche.size()<<"                "<<m_cimetiere.size()<<"            |                          "<<joueurAdverse.m_pioche.size()<<"                 "<<joueurAdverse.m_cimetiere.size()<<std::endl;
-    std::cout<<"+-----------------------------------------------------------+----------------------------------------------------------+ "<<std::endl;
+               "|                            " << m_pioche.size() << "                " << m_cimetiere.size()
+            << "            |                          " << joueurAdverse.m_pioche.size() << "                 "
+            << joueurAdverse.m_cimetiere.size() << std::endl;
+    std::cout
+            << "+-----------------------------------------------------------+----------------------------------------------------------+ "
+            << std::endl;
 //    Color(11,0);
 
 }
 
-void User::echangeEnjeu(User &perdant){
+void User::echangeEnjeu(User &perdant) {
 
-    std::cout << getNom() << " a gagné la carte enjeu de " << perdant.getNom() << " qui était ..." << perdant.m_carteEnjeu->getNom() << " !" << std::endl;
-    std::cout << "Votre carte enjeu et celle de  "<<perdant.getNom()<<" ont ete mise dans votre collection"<<std::endl;
-    std::cout << "Vous allez etre redirige vers le menu principal"<<std::endl;
+    std::cout << getNom() << " a gagné la carte enjeu de " << perdant.getNom() << " qui etait ..."
+              << perdant.m_carteEnjeu->getNom() << " !" << std::endl;
+    std::cout << "Votre carte enjeu et celle de  " << perdant.getNom() << " ont ete mise dans votre collection"
+              << std::endl;
 
     m_collection.push_back(perdant.m_carteEnjeu);
 
     for (int i = 0; i < perdant.m_collection.size(); i++) {
         if (perdant.m_collection[i] == perdant.m_carteEnjeu) {
-            perdant.m_collection.erase(perdant.m_collection.begin()+ i);
+            perdant.m_collection.erase(perdant.m_collection.begin() + i);
         }
     }
+    std::cout << "Vous allez etre redirige vers le menu principal" << std::endl;
+
+}
+
+void User::proposerAttaque(User &joueurAdverse) {
+    int choix;
+    int a = 0, b = 0;
+    int numeroAttaque = 0;
+
+    if (m_creatureActive != nullptr) {
+        std::cout << "Voulez vous attaquer ? " << std::endl;
+        std::cin >> choix;
+
+        if (choix) {
+            if (m_creatureActive->compareAvecEnergie1(m_energieDisponible)) {
+                a = 1;
+            }
+            if (m_creatureActive->compareAvecEnergie2(m_energieDisponible)) {
+                b = 1;
+            }
+            if (a == 1 && b == 1) {
+                std::cout << "2 attaques possibles " << std::endl;
+                m_creatureActive->getNomAttaque(1);
+                m_creatureActive->getNomAttaque(2);
+                std::cout << "Quelle attaque voulez vous utiliser ?" << std::endl;
+                std::cin >> numeroAttaque;
+                attaquer(joueurAdverse, numeroAttaque);
+
+            } else if (a == 1) {
+                std::cout << "1 attaque possible (attaque 1) " << std::endl;
+                m_creatureActive->getNomAttaque(1);
+                attaquer(joueurAdverse, 1);
+                // : On montre les attaques
+            } else if (b == 1) {
+                std::cout << "1 attaque possible (attaque 2) " << std::endl;
+                m_creatureActive->getNomAttaque(2);
+                attaquer(joueurAdverse, 2);
+                // : On montre les attaques
+
+            } else {
+                std::cout << "Vous n'avez pas assez d'énergie pour attaquer" << std::endl;
+            }
+        }
+    }
+
 }
 
 

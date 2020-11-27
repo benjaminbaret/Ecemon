@@ -12,6 +12,7 @@ int tirageJoueur(const User& joueur1, const User& joueur2);
 void comparecarte(Carte& carte1,Carte& carte2);
 
 void jouer(User &joueur1, User &joueur2);
+void boucleJeux(User &premierJoueurPioche,User &secondJoueurPioche);
 
 
 

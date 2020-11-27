@@ -13,11 +13,9 @@
 
 class Carte {
 protected :
-    std::string m_rarete;
     std::string m_nom;
     std::string m_description;
     int m_active;
-    int m_cycleVie;
     int m_valeur;
 
 public:
@@ -58,6 +56,9 @@ public:
     virtual void afficherResumeCarteBoutique();
 
     virtual int getPrix();
+
+   virtual StructureEnergie getEnergieAttaque(int nbAttaque);
+
 
 
 };

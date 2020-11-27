@@ -61,6 +61,7 @@ public:
     void setArgent(int argent);
     void affichagePlateau(User &joueurAdverse);
     void echangeEnjeu(User &perdant);
+    void proposerAttaque(User &joueurAdverse);
 
 
 

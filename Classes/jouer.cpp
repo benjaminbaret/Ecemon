@@ -8,73 +8,12 @@
 
 
 void jouer(User &joueur1, User &joueur2) {
-    int isEnd = 1;
-    if (tirageJoueur(joueur1, joueur2)) { // tirage joueur vaut 1 donc JOUEUR 2 qui commence
-        joueur1.tirerCarteEnjeu();
-        joueur2.tirerCarteEnjeu();
-        do {
-            joueur2.affichagePlateau(joueur1);
-            joueur2.afficherResume();
-            if (joueur2.proposerCarte()) {
-                isEnd = joueur2.verificationFinJeu();
-                if(isEnd!=0){
-                    joueur2.placer(joueur1);
-                    joueur2.verificationIpCreature();
-
-                }else
-                    joueur1.echangeEnjeu(joueur2);
-            }
-
-            if (isEnd != 0) {
-                joueur1.affichagePlateau(joueur2);
-                joueur1.afficherResume();
-                if (joueur1.proposerCarte()) {
-                    isEnd = joueur1.verificationFinJeu();
-                    if(isEnd!=0){
-                        joueur1.placer(joueur2);
-                        joueur1.verificationIpCreature();
-                    }else
-                        joueur2.echangeEnjeu(joueur1);
-                }
-            }
-        } while (isEnd);
+    if (tirageJoueur(joueur1, joueur2)) {
+        boucleJeux(joueur1, joueur2);
 
     } else {
-        joueur1.tirerCarteEnjeu();
-        joueur2.tirerCarteEnjeu();
-        do {
-            joueur1.affichagePlateau(joueur2);
-            joueur1.afficherResume();
-            if (joueur1.proposerCarte()) {
-                isEnd = joueur1.verificationFinJeu();
-                if(isEnd!=0){
-                    joueur1.placer(joueur2);
-                    joueur1.verificationIpCreature();
-                }else
-                    joueur2.echangeEnjeu(joueur1);
-            }
-
-            if (isEnd != 0) {
-                joueur2.affichagePlateau(joueur1);
-                joueur2.afficherResume();
-
-                if (joueur2.proposerCarte()) {
-                    isEnd = joueur2.verificationFinJeu();
-                    if(isEnd!=0){
-                        joueur2.placer(joueur1);
-                        joueur2.verificationIpCreature();
-                    }else
-                        joueur1.echangeEnjeu(joueur2);
-
-                }
-            }
-
-        } while (isEnd);
-
-
+        boucleJeux(joueur2, joueur1);
     }
-    // On a 0 renvoyé ici
-
 }
 
 int tirageJoueur(const User &joueur1, const User &joueur2) {
@@ -86,4 +25,47 @@ int tirageJoueur(const User &joueur1, const User &joueur2) {
         std::cout << "C'est le joueur : " << joueur2.getNom() << " qui commence" << std::endl;
     }
     return commence;
+}
+
+
+void boucleJeux(User &premierJoueurPioche,User &secondJoueurPioche){
+    int isEnd = 1;
+
+    premierJoueurPioche.tirerCarteEnjeu();
+    secondJoueurPioche.tirerCarteEnjeu();
+
+    do {
+        secondJoueurPioche.verificationIpCreature();
+        secondJoueurPioche.affichagePlateau(premierJoueurPioche);
+        secondJoueurPioche.afficherResume();
+        isEnd = secondJoueurPioche.verificationFinJeu();
+        if (isEnd != 0) {
+            if (secondJoueurPioche.proposerCarte()) {
+                secondJoueurPioche.placer(premierJoueurPioche);
+            } else
+                secondJoueurPioche.proposerAttaque(premierJoueurPioche);
+
+        } else
+            premierJoueurPioche.echangeEnjeu(secondJoueurPioche);
+
+
+        if (isEnd != 0) {
+            premierJoueurPioche.verificationIpCreature();
+            premierJoueurPioche.affichagePlateau(secondJoueurPioche);
+            premierJoueurPioche.afficherResume();
+            isEnd = premierJoueurPioche.verificationFinJeu();
+            if (isEnd != 0) {
+                if (premierJoueurPioche.proposerCarte()) {
+
+                    premierJoueurPioche.placer(secondJoueurPioche);
+
+                } else
+                    premierJoueurPioche.proposerAttaque(secondJoueurPioche);
+
+            } else
+                secondJoueurPioche.echangeEnjeu(premierJoueurPioche);
+
+        }
+    } while (isEnd);
+
 }
