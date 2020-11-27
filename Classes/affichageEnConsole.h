@@ -9,13 +9,13 @@
 #include "User.h"
 #include "lectureEcritureDonnees.h"
 
-void clearConsole();
+void clearConsole(); // "nettoyer" le terminal
 
-void Color(int couleurDuTexte,int couleurDeFond);
+void Color(int couleurDuTexte, int couleurDeFond); // Affichage couleur sous windows
 
-void afficherBoutique(structureInfoJoueurs& joueur);
-void acheter(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs);
+void afficherBoutique(structureInfoJoueurs &joueur); // Affichage boutique (achat cartes avec argent)
 
+void acheter(const std::string &path, std::vector<structureInfoJoueurs> &donneesJoueurs);  // Fonction appelee pour acheter de nouvelles cartes
 
 
 #endif //ECEMON_AFFICHAGEENCONSOLE_H

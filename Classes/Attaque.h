@@ -9,6 +9,9 @@
 #include <vector>
 #include "Energie.h"
 
+
+// Classe d'Attaque
+
 class Attaque {
 private:
     std::string m_nomAttaque1;
@@ -21,16 +24,13 @@ private:
 public:
     Attaque(std::string nomAttaque1, std::string nomAttaque2, int hpAttaque1, int hpAttaque2, StructureEnergie NRJAttaque1,StructureEnergie NRJAttaque2);
     ~Attaque()=default;
-    void verificationEnergie();
-    int lancerAttaque();
-    void choixAttaque();
-    int getNumeroAttaque() const;
+    int getNumeroAttaque() const; // Connaitre le numero de l'attaque
     std::string getNom(const int& numeroAttaque) const;
-    StructureEnergie getNRJAttaque1();
-    StructureEnergie getNRJAttaque2();
-    int getHpAttaque(int nbAttaque);
-    void changeHpAttaque(int hp);
-    void afficherResumeAttaque();
+    StructureEnergie getNRJAttaque1(); // Renvoi les besoins en énergie de l'attaque
+    StructureEnergie getNRJAttaque2(); // Idem que getNRJAttaque1()
+    int getHpAttaque(int nbAttaque); // Connaitre HP Attaque utilisée
+    void changeHpAttaque(int hp); // Methode utilisée par carte spéciale pour augmenter HP
+    void afficherResumeAttaque(); // ..
 
 
 };
