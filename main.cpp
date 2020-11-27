@@ -20,8 +20,8 @@
 
 
 int main() {
-
-    int isEnd = 1;
+    int choice = 1;
+    bool end = false;
     int nbCartes = 0;
     std::string nomJoueurComparaison;
     std::vector<structureInfoJoueurs> donneesJoueurs;
@@ -29,16 +29,19 @@ int main() {
     srand(time(NULL));
 
 
-    while (isEnd) {
-
+    while (!end) {
 
         donneesJoueurs = lectureDonnees("../Classes/fichier.csv"); // Gestion d'erreur en cas d'echec de lecture ?
-        isEnd = gestionMenu(donneesJoueurs);
 
-        if (isEnd == 2) {
+        afficherMenu(choice, end);
+
+        if (choice == 2) {
+            afficherJoueurs(donneesJoueurs);
+        }
+        else if (choice == 3) {
             ajoutJoueurEnMemoire("../Classes/fichier.csv", donneesJoueurs);
 
-        } else if (isEnd == 3) {
+        } else if (choice == 1) {
             User joueur1;
             User joueur2;
 

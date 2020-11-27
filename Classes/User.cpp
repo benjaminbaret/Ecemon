@@ -15,7 +15,7 @@
 #include "Speciale.h"
 #include "affichageEnConsole.h"
 #include "structures.h"
-
+#include "menu.h"
 
 User::User() {
     for (int i = 0; i < 16; i++) {
@@ -94,7 +94,7 @@ void User::creerDeck() {
 
     std::cout << getNom() << " nous allons créer vôtre deck" << std::endl;
     std::cout << "Votre collection :" << std::endl;
-    afficheCollection();
+    afficherCartes(getNom(), m_collection);
     std::cout << "Voulez vous générer un deck aléatoire ? 1 pour oui, 0 pou non" << std::endl;
     choix = getint();
 
@@ -487,7 +487,7 @@ int User ::verificationFinJeu() {
 
 void User::afficherResume(){
     std::cout << "Au tour de : " << getNom()<< ", vie :  " << getIpJoueur() << std::endl;
-    std::cout << m_pioche.size()<< " cartes dans la pioche" << std::endl;
+    std::cout << m_pioche.size() << " cartes dans la pioche" << std::endl;
     if(m_creatureActive!=nullptr)
         std::cout << "Creature active : ", m_creatureActive->afficherResumeCarte();
     else

@@ -10,6 +10,7 @@
 void afficherJoueurs(const std::vector<structureInfoJoueurs>& donneesJoueurs);
 int affichageMenu();
 int gestionMenu(std::vector<structureInfoJoueurs>& donneesJoueurs);
-
+void afficherCartes(std::string joueur, std::vector<Carte *>& vec_deck);
+void afficherMenu(int &choice, bool &end);
 
 #endif //ECEMON_MENU_H
